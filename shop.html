@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | KickStart</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">KickStart</div>
+        <ul>
+            <li><a href="shop.html">Shop</a></li>
+            <li><a href="collections.html">Collections</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="cart.html">Cart</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h1 class="page-title">Shop by Brands</h1>
+        <div class="products">
+            <div class="product">
+                <a href="https://www.nike.com/in/" target="_blank" class="brand-link">
+                    <img class="brand-logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" alt="Nike Logo">
+                </a>
+                <img src="https://images.unsplash.com/photo-1517260911205-8a3bfa7c7d97?auto=format&fit=crop&w=400&q=80" alt="Nike Air Max">
+                <h3>Nike Air Max</h3>
+                <p>₹7,999</p>
+                <a href="https://www.nike.com/in/t/air-max-shoes" target="_blank" class="brand-link">View on Nike</a>
+                <button onclick="addToCart('Nike Air Max', 7999)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <a href="https://shop.adidas.co.in/" target="_blank" class="brand-link">
+                    <img class="brand-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg" alt="Adidas Logo">
+                </a>
+                <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80" alt="Adidas Ultraboost">
+                <h3>Adidas Ultraboost</h3>
+                <p>₹8,499</p>
+                <a href="https://shop.adidas.co.in/ultraboost" target="_blank" class="brand-link">View on Adidas</a>
+                <button onclick="addToCart('Adidas Ultraboost', 8499)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <a href="https://in.puma.com/" target="_blank" class="brand-link">
+                    <img class="brand-logo" src="https://upload.wikimedia.org/wikipedia/commons/f/fd/Puma_logo.svg" alt="Puma Logo">
+                </a>
+                <img src="https://images.unsplash.com/photo-1528701800484-905dffb7c6b4?auto=format&fit=crop&w=400&q=80" alt="Puma RS-X">
+                <h3>Puma RS-X</h3>
+                <p>₹6,299</p>
+                <a href="https://in.puma.com/in/en/pd/rs-x" target="_blank" class="brand-link">View on Puma</a>
+                <button onclick="addToCart('Puma RS-X', 6299)">Add to Cart</button>
+            </div>
+            <div class="product">
+                <a href="https://www.converse.com/" target="_blank" class="brand-link">
+                    <img class="brand-logo" src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Converse_logo.svg" alt="Converse Logo">
+                </a>
+                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=400&q=80" alt="Converse Chuck Taylor">
+                <h3>Converse Chuck Taylor</h3>
+                <p>₹4,499</p>
+                <a href="https://www.converse.com/shop/chuck-taylor" target="_blank" class="brand-link">View on Converse</a>
+                <button onclick="addToCart('Converse Chuck Taylor', 4499)">Add to Cart</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2025 KickStart. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
