@@ -9,8 +9,8 @@
   <h2>📁 Planned Structure</h2>
   <ul>
     <li><code>index.html</code> - Home page with featured shoes</li>
-    <li><code>products.html</code> - All products listed</li>
-    <li><code>product.html</code> - Detailed view for each shoe</li>
+    <li><code>collections.html</code> - All products listed</li>
+    <li><code>about.html</code> - About the developer and the website</li>
     <li><code>cart.html</code> - Shopping cart system</li>
     <li><code>styles.css</code> - Main styling</li>
     <li><code>script.js</code> - JS for interactivity</li>
