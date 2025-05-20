@@ -47,7 +47,13 @@ resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
 function randomColor() {
-    const colors = ['#f72585', '#7209b7', '#3a0ca3', '#4361ee', '#4cc9f0'];
+    const colors = [
+        '#38bdf8', // Sky Blue
+        '#0ea5e9', // Wave Blue
+        '#155e75', // Deep Sea Blue
+        '#bae6fd', // Foam Blue
+        '#ffe5b4'  // Sand
+    ];
     return colors[Math.floor(Math.random() * colors.length)];
 }
 

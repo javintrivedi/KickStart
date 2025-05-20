@@ -1,50 +1,124 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 
 :root {
-    --primary: #22223b;
-    --accent: #f72585;
-    --bg: #fff; /* Set to white for best bubble visibility */
-    --text: #22223b;
+    --primary: #114e60;      /* Deep Sea Blue */
+    --accent: #38bdf8;       /* Bright Sky Blue */
+    --bg: #e0f7fa;           /* Light Aqua */
+    --text: #114e60;         /* Deep Sea Blue */
     --white: #fff;
+    --sand: #ffe5b4;         /* Sand */
+    --wave: #0ea5e9;         /* Wave Blue */
+    --foam: #bae6fd;         /* Foam Blue */
+    --sun: #fff3b0;          /* Sunlight (optional accent) */
 }
-body {
-    background: var(--bg);
-}
-
-* {
+html, body {
+    width: 100%;
+    height: 100%;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    font-family: 'Montserrat', Arial, sans-serif;
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    padding: 0 0 0 0;
+    padding: 0;
 }
 
-/* Animated gradient background */
-body::before {
-    content: "";
-    position: fixed;
-    z-index: -1;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: linear-gradient(120deg, #f72585 0%, #7209b7 50%, #3a0ca3 100%);
-    background-size: 200% 200%;
-    animation: moveBg 12s ease-in-out infinite;
-    opacity: 0.13;
+main.hero-main {
+    padding: 0;
+    margin: 0;
 }
 
-@keyframes moveBg {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+.hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+    background: none;
+}
+
+.hero-bg-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: 0;
+    border-radius: 0;
+}
+
+.hero-center {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.hero-text-box {
+    background: rgba(255,255,255,0.82);
+    border-radius: 1.5rem;
+    padding: 2.5rem 3rem;
+    box-shadow: 0 8px 32px rgba(17,78,96,0.10);
+    text-align: center;
+    max-width: 450px;
+    width: 90vw;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+}
+
+.hero-text-box h1 {
+    color: var(--primary);
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+
+.hero-text-box p {
+    color: var(--primary);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+
+.cta-btn {
+    background: var(--accent);
+    color: #fff;
+    padding: 1rem 2.5rem;
+    border: none;
+    border-radius: 2rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    text-decoration: none;
+    box-shadow: 0 4px 16px rgba(56,189,248,0.12);
+    transition: background 0.2s;
+}
+
+.cta-btn:hover {
+    background: var(--wave);
 }
 
 main {
-    padding: 3rem 6vw 3rem 6vw;
+    padding: 0;           /* Remove padding so video is flush with edges */
+}
+
+main.hero-main {
+    padding: 0;
 }
 
 .page-title {
@@ -130,7 +204,7 @@ nav a:hover {
 }
 
 .cta-btn:hover {
-    background: #b5179e;
+    background: var(--wave);
 }
 
 .hero-img img {
@@ -147,7 +221,8 @@ nav a:hover {
 }
 
 .feature {
-    background: var(--white);
+    background: var(--sand);
+    border: 2px solid var(--foam);
     padding: 2rem 1.5rem;
     border-radius: 1.5rem;
     box-shadow: 0 2px 12px rgba(34,34,59,0.06);
@@ -418,6 +493,16 @@ body, main, nav, footer, .about-section, .products, .collections {
     z-index: 1;
 }
 
+body::after {
+    content: "";
+    position: fixed;
+    left: 0; right: 0; bottom: 0;
+    height: 120px;
+    background: linear-gradient(to top, var(--sand) 80%, transparent 100%);
+    z-index: 0;
+    pointer-events: none;
+}
+
 @media (max-width: 900px) {
     main {
         padding: 2rem 2vw;
@@ -447,5 +532,15 @@ body, main, nav, footer, .about-section, .products, .collections {
     }
     .team-list {
         gap: 1.2rem;
+    }
+}
+
+@media (max-width: 700px) {
+    .hero-text-box {
+        padding: 1.5rem 1rem;
+        max-width: 98vw;
+    }
+    .hero-text-box h1 {
+        font-size: 1.5rem;
     }
 }
