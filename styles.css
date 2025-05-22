@@ -12,7 +12,7 @@
     --sun: #fff3b0;          /* Sunlight (optional accent) */
 }
 
-/* New styles for hero-nav to fix navbar at top */
+/* --- GLASSY NAVBAR --- */
 .hero-nav {
     position: fixed;
     top: 0;
@@ -20,28 +20,34 @@
     width: 100vw;
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    background: transparent;
-    /* box-shadow: 0 4px 12px rgba(0,0,0,0.1); */
-    /* backdrop-filter: blur(10px); */
-    /* -webkit-backdrop-filter: blur(10px); */
-    padding: 1rem 4vw;
-    z-index: 1000;
+    justify-content: flex-start;
+    background: rgba(255,255,255,0.18);
+    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.07);
+    backdrop-filter: blur(18px) saturate(1.5);
+    -webkit-backdrop-filter: blur(18px) saturate(1.5);
+    z-index: 100;
+    padding: 1.2rem 0 1.2rem 3vw;
+    border-bottom: 1px solid rgba(56,189,248,0.10);
 }
 
 .hero-nav .logo {
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--accent);
+    font-size: 2.3rem;
+    font-weight: 900;
+    color: #38bdf8;
     letter-spacing: 2.5px;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    margin-left: 0;
+    text-shadow: 0 2px 8px #38bdf833;
+    margin-right: 3vw;
     font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
+    text-transform: uppercase;
+    background: linear-gradient(90deg, #38bdf8 10%, #0ea5e9 60%, #fff3b0 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .hero-nav ul {
     display: flex;
-    gap: 0.3rem;
+    gap: 1.5rem;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -54,132 +60,30 @@
 
 .hero-nav a {
     text-decoration: none;
-    color: var(--primary);
-    font-weight: 600;
-    font-size: 0.9rem;
-    padding: 0.3rem 0.8rem;
-    border-radius: 0.3rem;
-    background: transparent;
-    box-shadow: none;
-    transition: color 0.3s;
-    text-shadow: none;
+    color: #114e60;
+    font-weight: 700;
+    font-size: 1.08rem;
+    padding: 0.7rem 2.1rem;
+    border-radius: 2rem;
+    background: rgba(255,255,255,0.72);
+    box-shadow: 0 4px 24px #bae6fd88;
+    transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.15s;
+    text-shadow: 0 1px 4px #38bdf81c;
+    margin: 0;
+    display: inline-block;
     position: relative;
-}
-
-.hero-nav a::after {
-    content: "";
-    position: absolute;
-    width: 0;
-    height: 2px;
-    bottom: 0;
-    left: 0;
-    background-color: white;
-    transition: width 0.3s ease;
-}
-
-.hero-nav a:hover::after,
-.hero-nav a:focus::after {
-    width: 100%;
+    letter-spacing: 1px;
 }
 
 .hero-nav a:hover,
 .hero-nav a:focus {
-    background: transparent;
-    color: white;
-    box-shadow: none;
-    transform: none;
+    background: linear-gradient(90deg, #38bdf8 0%, #fff3b0 100%);
+    color: #114e60;
+    box-shadow: 0 8px 32px #38bdf888, 0 2px 8px #fff3b055;
+    transform: translateY(-2px) scale(1.05);
 }
 
-@media (max-width: 900px) {
-    .hero-nav {
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 0.7rem 2vw;
-        gap: 0.7rem;
-    }
-    .hero-nav ul {
-        gap: 0.7rem;
-    }
-    .hero-nav .logo {
-        font-size: 1.3rem;
-        margin-bottom: 0.5rem;
-    }
-}
-html, body {
-    width: 100vw;
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    overflow-x: hidden; /* Prevent horizontal scroll */
-}
-
-body {
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-}
-
-main {
-    flex: 1 0 auto;
-    padding: 0;           /* Remove padding so video is flush with edges */
-}
-
-main.hero-main {
-    padding: 0;
-}
-
-.page-title {
-    font-size: 2.3rem;
-    font-weight: 800;
-    margin-bottom: 2.5rem;
-    letter-spacing: 1px;
-    color: var(--accent);
-    text-align: center;
-}
-
-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 2rem 4vw;
-    background: rgba(255, 255, 255, 0.15); /* reduced opacity for more translucency */
-    box-shadow: 0 2px 8px rgba(34,34,59,0.04);
-    backdrop-filter: blur(12px); /* adds a frosted glass effect */
-    -webkit-backdrop-filter: blur(12px);
-    position: relative;
-    z-index: 10;
-}
-
-.logo {
-    margin-left: 4vw;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--accent);
-    letter-spacing: 2px;
-}
-
-nav ul {
-    display: flex;
-    gap: 2rem;
-    list-style: none;
-    margin-right: 4vw;
-}
-
-nav a {
-    text-decoration: none;
-    color: var(--primary);
-    font-weight: 600;
-    transition: color 0.2s;
-    margin-right: 4vw;
-}
-
-nav a:hover {
-    color: var(--accent);
-}
-
+/* --- HERO SECTION --- */
 .hero {
     position: relative;
     width: 100vw;
@@ -188,11 +92,6 @@ nav a:hover {
     overflow: hidden; /* Ensures absolutely positioned children can't overflow */
     margin: 0;
     padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding-left: 4vw;
-    box-sizing: border-box;
 }
 
 .hero-bg-video {
@@ -203,28 +102,43 @@ nav a:hover {
     object-fit: cover;
     z-index: 0;
     border-radius: 0;
+    filter: brightness(0.92) blur(0.5px);
 }
 
 .hero-caption {
-    position: relative;
+    position: absolute;
+    left: 4vw;
+    bottom: 5vh;
     z-index: 2;
     color: #fff;
     text-align: left;
-    max-width: 40vw;
-    width: 100%;
-    padding: 2rem 3rem 2rem 2rem;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 1.5rem;
-    box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+    max-width: 48vw;
+    width: fit-content;
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+    padding: 0;
+    margin: 0;
+    /* No shadow or background, so it blends with the video */
+}
+
+@media (max-width: 900px) {
+    .hero-caption {
+        left: 3vw;
+        bottom: 3vw;
+        max-width: 90vw;
+    }
+}
+
+@media (max-width: 600px) {
+    .hero-caption {
+        left: 2vw;
+        bottom: 2vw;
+        max-width: 96vw;
+    }
 }
 
 .hero-caption h1 {
     font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
-    font-size: 3rem;
+    font-size: 3.2rem;
     font-weight: 900;
     letter-spacing: 2px;
     background: linear-gradient(90deg, #38bdf8 10%, #0ea5e9 60%, #fff3b0 100%);
@@ -239,7 +153,7 @@ nav a:hover {
 
 .hero-caption p {
     font-family: 'Montserrat', Arial, sans-serif;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     font-weight: 600;
     color: #fff;
     text-shadow: 0 2px 12px #0ea5e9cc, 0 1px 2px #0008;
@@ -272,6 +186,7 @@ nav a:hover {
     box-shadow: 0 8px 32px #fff3b088, 0 2px 8px #0ea5e9cc;
 }
 
+/* --- FEATURES --- */
 .features {
     display: flex;
     justify-content: center;
@@ -282,7 +197,7 @@ nav a:hover {
 }
 
 .feature {
-    background: var(--sand);
+    background: rgba(255,255,255,0.85);
     border: 2px solid var(--foam);
     padding: 2rem 1.5rem;
     border-radius: 1.5rem;
@@ -296,12 +211,13 @@ nav a:hover {
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.2s;
 }
 
 .feature:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 24px rgba(34,34,59,0.12);
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 8px 24px #38bdf866;
+    background: linear-gradient(120deg, #bae6fd 0%, #fff3b0 100%);
 }
 
 .feature span {
@@ -310,6 +226,16 @@ nav a:hover {
     margin-bottom: 0.5rem;
 }
 
+.feature h3 {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin: 0;
+    letter-spacing: 0.5px;
+}
+
+/* --- ANIMATIONS --- */
 @keyframes fadeInUp {
     from { opacity: 0; transform: translateY(40px);}
     to { opacity: 1; transform: translateY(0);}
@@ -323,9 +249,14 @@ nav a:hover {
     to { opacity: 1; transform: scale(1);}
 }
 
+/* --- RESPONSIVE --- */
 @media (max-width: 900px) {
-    main {
-        padding: 2rem 2vw;
+    .hero-caption {
+        left: 3vw;
+        bottom: 3vw;
+        max-width: 90vw;
+        padding: 1.5rem 1rem;
+        border-radius: 1.2rem;
     }
     .features {
         gap: 1.5rem;
@@ -340,8 +271,10 @@ nav a:hover {
 
 @media (max-width: 700px) {
     .hero-caption {
-        max-width: 95vw;
-        padding: 1.5rem 1rem;
+        left: 2vw;
+        bottom: 2vw;
+        max-width: 96vw;
+        padding: 1.2rem 0.7rem;
         border-radius: 1rem;
     }
     .hero-caption h1 {
