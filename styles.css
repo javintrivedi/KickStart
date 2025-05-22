@@ -11,6 +11,83 @@
     --foam: #bae6fd;         /* Foam Blue */
     --sun: #fff3b0;          /* Sunlight (optional accent) */
 }
+
+/* New styles for hero-nav to fix navbar at top */
+.hero-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(255, 255, 255, 0.85);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 1rem 4vw;
+    z-index: 1000;
+}
+
+.hero-nav .logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 2.5px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-left: 0;
+    font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
+}
+
+.hero-nav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.hero-nav li {
+    display: flex;
+    align-items: center;
+}
+
+.hero-nav a {
+    text-decoration: none;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 0.7rem 1.5rem;
+    border-radius: 2rem;
+    background: rgba(255,255,255,0.7);
+    box-shadow: 0 2px 8px rgba(56,189,248,0.15);
+    transition: background 0.3s, color 0.3s, box-shadow 0.3s;
+    text-shadow: 0 1px 3px rgba(56,189,248,0.2);
+}
+
+.hero-nav a:hover,
+.hero-nav a:focus {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 6px 20px #38bdf8cc, 0 2px 8px #fff3b055;
+    transform: translateY(-2px) scale(1.05);
+}
+
+@media (max-width: 900px) {
+    .hero-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 0.7rem 2vw;
+        gap: 0.7rem;
+    }
+    .hero-nav ul {
+        gap: 0.7rem;
+    }
+    .hero-nav .logo {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+    }
+}
 html, body {
     width: 100vw;
     height: 100%;
