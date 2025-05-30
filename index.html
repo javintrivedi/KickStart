@@ -9,46 +9,45 @@
 </head>
 <body>
     <main class="hero-main">
-        <section class="hero">
-            <nav class="hero-nav">
-                <div class="logo">KickStart</div>
+        <section class="hero" role="banner" aria-label="Main hero section">
+            <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
+                <div class="logo" aria-label="KickStart logo">KickStart</div>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html" aria-current="page">Home</a></li>
                     <li><a href="shop.html">Shop</a></li>
                     <li><a href="collections.html">Collections</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="cart.html">Cart</a></li>
                 </ul>
             </nav>
-            <video class="hero-bg-video" autoplay muted loop playsinline>
+            <video class="hero-bg-video" autoplay muted loop playsinline aria-hidden="true">
                 <source src="shoes.mp4" type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
             <div class="hero-caption">
                 <h1>Step Up Your Game</h1>
-                <!-- Removed the subheading text to keep it minimalistic -->
-                <a href="#" class="cta-btn">Shop Now</a>
+                <a href="#" class="cta-btn" role="button" aria-label="Shop Now">Shop Now</a>
             </div>
         </section>
-        <section class="features">
-            <div class="feature">
-                <span>🔥</span>
+        <section class="features" role="region" aria-label="Key features">
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">🔥</span>
                 <h3>Trending Styles</h3>
             </div>
-            <div class="feature">
-                <span>🌱</span>
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">🌱</span>
                 <h3>Eco-Friendly</h3>
             </div>
-            <div class="feature">
-                <span>🚚</span>
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">🚚</span>
                 <h3>Fast Delivery</h3>
             </div>
         </section>
     </main>
-    <footer>
+    <footer role="contentinfo">
         <p>&copy; 2025 KickStart. All rights reserved.</p>
     </footer>
     <script src="script.js"></script>
-    <canvas id="bubble-bg"></canvas>
+    <canvas id="bubble-bg" aria-hidden="true"></canvas>
 </body>
 </html>
