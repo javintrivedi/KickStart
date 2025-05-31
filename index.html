@@ -1,8 +1,9 @@
-<!DOCTYPE html>
+6<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="KickStart - Step up your game with trending, eco-friendly shoes and fast delivery." />
     <title>KickStart</title>
     <link rel="icon" type="image/x-icon" href="favicon.png" />
     <link rel="stylesheet" href="styles.css" />
@@ -20,15 +21,14 @@
                     <li><a href="cart.html">Cart</a></li>
                 </ul>
             </nav>
-            <video class="hero-bg-video" autoplay muted loop playsinline aria-hidden="true">
+            <video class="hero-bg-video" autoplay muted loop playsinline aria-hidden="true" loading="lazy">
                 <source src="shoes.mp4" type="video/mp4" />
                 Your browser does not support the video tag!
             </video>
             <div class="hero-caption">
                 <h1>Step Up Your Game</h1>
-                <a href="#" class="cta-btn" role="button" aria-label="Shop Now">Shop Now</a>
+                <a href="shop.html" class="cta-btn" role="button" aria-label="Shop Now">Shop Now</a>
                 <!-- Removed the subheading text to be minimalistic -->
-                <a href="#" class="cta-btn">Shop Now</a>
             </div>
         </section>
         <section class="features" role="region" aria-label="Key features">
@@ -51,5 +51,22 @@
     </footer>
     <script src="script.js"></script>
     <canvas id="bubble-bg" aria-hidden="true"></canvas>
+    <style>
+        /* Keyboard focus styles for interactive elements */
+        a:focus, button:focus {
+            outline: 3px solid #ff6600;
+            outline-offset: 2px;
+        }
+        /* Subtle animation for features */
+        .feature {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .feature:focus, .feature:hover {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
 </body>
 </html>
