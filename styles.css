@@ -111,7 +111,7 @@
 
 .hero-caption {
     position: relative;
-    left: 4vw;
+    left: 0; /* Changed from 4vw to 0 */
     bottom: auto;
     z-index: 2;
     color: #ffffff;
