@@ -20,14 +20,15 @@
     width: 100vw;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between; /* changed from flex-start */
     background: rgba(255,255,255,0.9);
     box-shadow: 0 8px 32px 0 rgba(0,0,0,0.1);
     backdrop-filter: blur(18px) saturate(1);
     -webkit-backdrop-filter: blur(18px) saturate(1);
     z-index: 100;
-    padding: 1.2rem 0 1.2rem 3vw;
+    padding: 1.2rem 3vw 1.2rem 3vw; /* equal left and right padding */
     border-bottom: 1px solid rgba(0,0,0,0.1);
+    transition: padding 0.3s, background 0.3s;
 }
 
 .hero-nav .logo {
@@ -43,6 +44,7 @@
     -webkit-background-clip: unset;
     -webkit-text-fill-color: #000000;
     background-clip: unset;
+    transition: font-size 0.3s, padding 0.3s;
 }
 
 .hero-nav ul {
@@ -50,7 +52,10 @@
     gap: 1.5rem;
     list-style: none;
     margin: 0;
+    margin-right: 5vw; /* equal right margin */
     padding: 0;
+    align-items: center;
+    justify-content: flex-end;
 }
 
 .hero-nav li {
@@ -73,6 +78,11 @@
     display: inline-block;
     position: relative;
     letter-spacing: 1px;
+    padding: 0.7rem 1.1rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    gap: 0;
 }
 
 .hero-nav a:hover,
@@ -83,13 +93,54 @@
     transform: translateY(-2px) scale(1.05);
 }
 
+/* Shrinking navbar on scroll */
+.hero-nav {
+    transition: padding 0.3s, background 0.3s;
+}
+.hero-nav .logo {
+    transition: font-size 0.3s, padding 0.3s;
+}
+.hero-nav a .nav-text {
+    display: inline-block;
+    transition: opacity 0.3s, width 0.3s;
+    white-space: nowrap;
+    overflow: hidden;
+}
+.hero-nav a i {
+    font-size: 1.2em;
+    margin-right: 0.7em;
+    transition: font-size 0.3s, margin 0.3s;
+    vertical-align: middle;
+}
+
+/* Shrunk state */
+.hero-nav.shrunk {
+    padding: 0.5rem 0 0.5rem 1vw;
+    background: rgba(255,255,255,0.95);
+}
+.hero-nav.shrunk .logo {
+    font-size: 1.3rem;
+    padding: 0.1em 0;
+}
+.hero-nav.shrunk a .nav-text {
+    opacity: 0;
+    width: 0;
+    margin: 0;
+    pointer-events: none;
+}
+.hero-nav.shrunk a i {
+    font-size: 1.3em;
+    margin-right: 0;
+}
+
 /* --- HERO SECTION --- */
 .hero {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    max-width: 100vw;
     min-height: 100vh;
-    overflow: hidden; /* Ensures absolutely positioned children can't overflow */
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
     margin: 0;
     padding: 0;
     display: flex;
@@ -101,17 +152,18 @@
 .hero-bg-video {
     position: absolute;
     top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
     z-index: 0;
     border-radius: 0;
     filter: brightness(0.5) blur(0.5px);
+    pointer-events: none;
 }
 
 .hero-caption {
     position: relative;
-    left: 0; /* Changed from 4vw to 0 */
+    left: 4vw; /* Changed from 4vw to 0 */
     bottom: auto;
     z-index: 2;
     color: #ffffff;
@@ -128,7 +180,7 @@
 
 @media (max-width: 900px) {
     .hero-caption {
-        left: 3vw;
+        left: 0; /* Changed from 3vw to 0 */
         max-width: 90vw;
         padding: 1.2rem 1rem;
         border-radius: 1.2rem;
@@ -277,7 +329,7 @@ footer {
 /* --- RESPONSIVE --- */
 @media (max-width: 900px) {
     .hero-caption {
-        left: 3vw;
+        left: 0; /* Changed from 3vw to 0 */
         max-width: 90vw;
         padding: 1.2rem 1rem;
         border-radius: 1.2rem;
@@ -296,7 +348,7 @@ footer {
 
 @media (max-width: 700px) {
     .hero-caption {
-        left: 2vw;
+        left: 0; /* Changed from 2vw to 0 */
         max-width: 96vw;
         padding: 1rem 0.7rem;
         border-radius: 1rem;
@@ -320,4 +372,17 @@ footer {
         max-width: 320px;
         padding: 1.5rem 2rem;
     }
+}
+
+html, body {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+}
+.hero-main {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
 }

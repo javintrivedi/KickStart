@@ -1,4 +1,4 @@
-6<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -7,6 +7,14 @@
     <title>KickStart</title>
     <link rel="icon" type="image/x-icon" href="favicon.png" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+        }
+    </style>
 </head>
 <body>
     <main class="hero-main">
@@ -14,11 +22,11 @@
             <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
                 <div class="logo" aria-label="KickStart logo">KickStart</div>
                 <ul>
-                    <li><a href="index.html" aria-current="page">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="collections.html">Collections</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="cart.html">Cart</a></li>
+                    <li><a href="index.html" aria-current="page"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
+                    <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
+                    <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
+                    <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span></a></li>
                 </ul>
             </nav>
             <video class="hero-bg-video" autoplay muted loop playsinline aria-hidden="true" loading="lazy">
@@ -28,21 +36,39 @@
             <div class="hero-caption">
                 <h1>Step Up Your Game</h1>
                 <a href="shop.html" class="cta-btn" role="button" aria-label="Shop Now">Shop Now</a>
-                <!-- Removed the subheading text to be minimalistic -->
             </div>
         </section>
-        <section class="features" role="region" aria-label="Key features">
+        <!-- Extra Features Section (appears on scroll) -->
+        <section class="features" role="region" aria-label="Extra features" style="margin-top: 8vh;">
             <div class="feature" tabindex="0">
-                <span aria-hidden="true">🔥</span>
-                <h3>Trending Styles</h3>
+                <span aria-hidden="true">🦶</span>
+                <h3>Custom Fit Technology</h3>
+                <p>Adaptive insoles for all-day comfort and support.</p>
             </div>
             <div class="feature" tabindex="0">
-                <span aria-hidden="true">🌱</span>
-                <h3>Eco-Friendly</h3>
+                <span aria-hidden="true">💧</span>
+                <h3>Water Resistant</h3>
+                <p>Stay dry and stylish in any weather.</p>
             </div>
             <div class="feature" tabindex="0">
-                <span aria-hidden="true">🚚</span>
-                <h3>Fast Delivery</h3>
+                <span aria-hidden="true">🎨</span>
+                <h3>Personalized Designs</h3>
+                <p>Choose from exclusive colorways and patterns.</p>
+            </div>
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">🔒</span>
+                <h3>Secure Payments</h3>
+                <p>Shop safely with end-to-end encryption.</p>
+            </div>
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">♻️</span>
+                <h3>Recycled Materials</h3>
+                <p>Made with sustainable, planet-friendly fabrics.</p>
+            </div>
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">⭐</span>
+                <h3>4.9/5 Customer Rating</h3>
+                <p>Loved by thousands of happy customers.</p>
             </div>
         </section>
     </main>
@@ -52,12 +78,10 @@
     <script src="script.js"></script>
     <canvas id="bubble-bg" aria-hidden="true"></canvas>
     <style>
-        /* Keyboard focus styles for interactive elements */
         a:focus, button:focus {
             outline: 3px solid #ff6600;
             outline-offset: 2px;
         }
-        /* Subtle animation for features */
         .feature {
             opacity: 0;
             transform: translateY(20px);
@@ -67,6 +91,44 @@
             opacity: 1;
             transform: translateY(0);
         }
+        /* Reveal features on scroll */
+        .feature.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .feature p {
+            margin: 0.5rem 0 0 0;
+            font-size: 0.98rem;
+            color: #333;
+        }
     </style>
+    <script>
+        // Reveal features on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const features = document.querySelectorAll('.feature');
+            function revealOnScroll() {
+                const trigger = window.innerHeight * 0.95;
+                features.forEach(f => {
+                    const rect = f.getBoundingClientRect();
+                    if(rect.top < trigger) {
+                        f.classList.add('visible');
+                    }
+                });
+            }
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll();
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const nav = document.querySelector('.hero-nav');
+            const shrinkOn = 60; // px
+            window.addEventListener('scroll', function() {
+                if(window.scrollY > shrinkOn) {
+                    nav.classList.add('shrunk');
+                } else {
+                    nav.classList.remove('shrunk');
+                }
+            });
+        });
+</script>
 </body>
 </html>
