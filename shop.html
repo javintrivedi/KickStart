@@ -224,7 +224,6 @@
     <script>
 function addToCart(name, price, img) {
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    // Check if already in cart
     let found = cart.find(item => item.name === name);
     if (found) {
         found.qty += 1;

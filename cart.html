@@ -175,17 +175,67 @@
         <p>&copy; 2025 KickStart. All rights reserved.</p>
     </footer>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const nav = document.querySelector('.hero-nav');
-            const shrinkOn = 60;
-            window.addEventListener('scroll', function() {
-                if(window.scrollY > shrinkOn) {
-                    nav.classList.add('shrunk');
-                } else {
-                    nav.classList.remove('shrunk');
-                }
-            });
-        });
+function renderCart() {
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const tbody = document.getElementById('cart-body');
+    const totalSpan = document.getElementById('cart-total');
+    tbody.innerHTML = '';
+    let total = 0;
+    if (cart.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="cart-empty">Your cart is empty.</td></tr>`;
+        totalSpan.textContent = '₹0';
+        return;
+    }
+    cart.forEach((item, idx) => {
+        total += item.price * item.qty;
+        tbody.innerHTML += `
+            <tr>
+                <td><img class="cart-img" src="${item.img}" alt="${item.name}"></td>
+                <td>${item.name}</td>
+                <td>₹${item.price.toLocaleString()}</td>
+                <td>${item.qty}</td>
+                <td>
+                    <button class="cart-remove-btn" aria-label="Remove ${item.name}" onclick="removeFromCart(${idx})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+    totalSpan.textContent = '₹' + total.toLocaleString();
+}
+function removeFromCart(idx) {
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    cart.splice(idx, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+}
+function checkoutCart() {
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+    localStorage.removeItem('cart');
+    renderCart();
+    alert("Thank you for shopping with KickStart!");
+}
+document.addEventListener('DOMContentLoaded', function() {
+    // Navbar shrink
+    const nav = document.querySelector('.hero-nav');
+    const shrinkOn = 60;
+    window.addEventListener('scroll', function() {
+        if(window.scrollY > shrinkOn) {
+            nav.classList.add('shrunk');
+        } else {
+            nav.classList.remove('shrunk');
+        }
+    });
+    // Render cart
+    renderCart();
+    // Checkout button
+    document.querySelector('.checkout-btn').onclick = checkoutCart;
+});
     </script>
 </body>
 </html>
