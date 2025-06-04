@@ -17,6 +17,63 @@
             max-width: 1200px;
             padding: 0 2vw;
         }
+        .collections-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .collections-header h1 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            color: #181818;
+            margin-bottom: 0.7rem;
+        }
+        .collections-header p {
+            font-size: 1.08rem;
+            color: #444;
+            margin: 0 auto 1.2rem auto;
+            max-width: 700px;
+        }
+        .collections-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .collections-feature {
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            padding: 1.2rem 1.5rem;
+            min-width: 220px;
+            max-width: 270px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .collections-feature:hover {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+            transform: translateY(-4px) scale(1.03);
+        }
+        .collections-feature span {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .collections-feature h3 {
+            font-size: 1.08rem;
+            font-weight: 700;
+            margin: 0.2rem 0 0.5rem 0;
+            color: #181818;
+        }
+        .collections-feature p {
+            font-size: 0.97rem;
+            color: #555;
+            margin: 0;
+        }
         .collections-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -86,22 +143,12 @@
             transform: scale(1.08);
             outline: none;
         }
-        .page-title {
-            font-family: 'Montserrat', Arial, sans-serif;
-            font-size: 2.1rem;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            color: #181818;
-            margin: 2.5rem 0 2.2rem 0;
-            text-align: center;
-        }
         @media (max-width: 900px) {
             .collections-section {
                 margin-top: 4.5rem;
             }
-            .page-title {
+            .collections-header h1 {
                 font-size: 1.5rem;
-                margin: 2rem 0 1.5rem 0;
             }
         }
         @media (max-width: 700px) {
@@ -120,6 +167,9 @@
                 padding: 1.2rem 0.7rem 1rem 0.7rem;
                 min-height: 220px;
             }
+            .collections-features {
+                gap: 1rem;
+            }
         }
     </style>
 </head>
@@ -135,8 +185,45 @@
         </ul>
     </nav>
     <main>
-        <h1 class="page-title">Our Collections</h1>
-        <section class="collections-section" aria-label="Sneaker Collections">
+        <section class="collections-section">
+            <div class="collections-header">
+                <h1>Discover Our Versatile Collections</h1>
+                <p>
+                    At <strong>KickStart</strong>, we believe in shoes that fit every mood, every move, and every moment. Our curated collections bring together the best in style, comfort, and innovation—so you can step up your game, wherever life takes you.
+                </p>
+            </div>
+            <div class="collections-features">
+                <div class="collections-feature">
+                    <span aria-hidden="true">🌈</span>
+                    <h3>All-Occasion Styles</h3>
+                    <p>From street to sport, find sneakers for every event and every personality.</p>
+                </div>
+                <div class="collections-feature">
+                    <span aria-hidden="true">🦶</span>
+                    <h3>Custom Fit Comfort</h3>
+                    <p>Adaptive insoles and ergonomic designs for all-day support.</p>
+                </div>
+                <div class="collections-feature">
+                    <span aria-hidden="true">🌱</span>
+                    <h3>Eco-Friendly Choices</h3>
+                    <p>Made with recycled and sustainable materials for a greener tomorrow.</p>
+                </div>
+                <div class="collections-feature">
+                    <span aria-hidden="true">💧</span>
+                    <h3>Weather Ready</h3>
+                    <p>Water-resistant and durable—perfect for any adventure.</p>
+                </div>
+                <div class="collections-feature">
+                    <span aria-hidden="true">🎨</span>
+                    <h3>Personalized Designs</h3>
+                    <p>Exclusive colorways and patterns to match your unique vibe.</p>
+                </div>
+                <div class="collections-feature">
+                    <span aria-hidden="true">⭐</span>
+                    <h3>Top Rated</h3>
+                    <p>Loved by thousands, rated 4.9/5 by our happy customers.</p>
+                </div>
+            </div>
             <div class="collections-grid">
                 <div class="collection-card" tabindex="0">
                     <img class="collection-img" src="https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/183930d6-ec63-471a-8413-b094dae0e330/air-jordan-1-low-og-shoes-29tsx7.png" alt="Trending Sneakers">
@@ -162,6 +249,18 @@
                     <div class="collection-desc">Sustainable styles made with recycled and planet-friendly materials.</div>
                     <a href="shop.html" class="view-collection-btn" aria-label="Shop Eco-Friendly">Shop Now</a>
                 </div>
+                <div class="collection-card" tabindex="0">
+                    <img class="collection-img" src="https://images.unsplash.com/photo-1517260911205-8c1e1b6c7a6b?auto=format&fit=crop&w=400&q=80" alt="Limited Editions">
+                    <div class="collection-title">Limited Editions</div>
+                    <div class="collection-desc">Rare finds and exclusive collabs you won’t see anywhere else.</div>
+                    <a href="shop.html" class="view-collection-btn" aria-label="Shop Limited Editions">Shop Now</a>
+                </div>
+                <div class="collection-card" tabindex="0">
+                    <img class="collection-img" src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80" alt="Everyday Essentials">
+                    <div class="collection-title">Everyday Essentials</div>
+                    <div class="collection-desc">Minimalist, versatile, and built for your daily hustle.</div>
+                    <a href="shop.html" class="view-collection-btn" aria-label="Shop Everyday Essentials">Shop Now</a>
+                </div>
             </div>
         </section>
     </main>
@@ -171,7 +270,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const nav = document.querySelector('.hero-nav');
-            const shrinkOn = 60; // px
+            const shrinkOn = 60;
             window.addEventListener('scroll', function() {
                 if(window.scrollY > shrinkOn) {
                     nav.classList.add('shrunk');
