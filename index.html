@@ -8,13 +8,16 @@
     <link rel="icon" type="image/x-icon" href="favicon.png" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link rel="stylesheet" href="navbar.css" />
     <style>
         html, body {
             width: 100%;
             max-width: 100vw;
             overflow-x: hidden;
             background: #f6f7fb;
+        }
+        a:focus, button:focus {
+            outline: 3px solid #ff6600;
+            outline-offset: 2px;
         }
         .hero {
             padding-top: 6.5rem; /* Add space for fixed navbar */
@@ -32,6 +35,50 @@
             object-fit: cover;
             z-index: 0;
             filter: brightness(0.85) blur(1px);
+        }
+        .hero-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 3vw;
+            z-index: 100;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(6px);
+            transition: box-shadow 0.2s;
+         }
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #181818;
+            margin-left: auto;
+            margin-right: 0;
+        }
+        .hero-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+            margin-left: 0;
+            margin-right: auto;
+        }
+        .hero-nav li a {
+            color: #181818;
+            font-weight: 600;
+            font-size: 1.08rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+        .hero-nav li a[aria-current="page"], .hero-nav li a:hover {
+            color: #ff6600;
         }
         .hero-banner {
             position: relative;
@@ -236,7 +283,7 @@
 </head>
 <body>
     <main>
-<section class="hero" role="banner" aria-label="Main hero section">
+        <section class="hero" role="banner" aria-label="Main hero section">
             <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
                 <div class="logo" aria-label="KickStart logo">KickStart</div>
                 <ul>
@@ -251,7 +298,6 @@
                 <source src="shoes.mp4" type="video/mp4" />
                 Your browser does not support the video tag!
             </video>
-            <div class="orange-shade"></div>
             <div class="hero-banner">
                 <h1>Unleash Your Style</h1>
                 <p>
