@@ -8,41 +8,110 @@
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
-        /* Apply these styles to the <style> section of ALL your HTML files (index.html, shop.html, collections.html, about.html, cart.html, etc.) */
-        .hero-nav {
+        body {
+            background: #f6f7fb;
+            margin: 0;
+            padding: 0;
+        }
+        /* Use this CSS for your navbar in ALL HTML files for the exact look as your index page */
+.hero-nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             display: flex;
-            flex-direction: row-reverse; /* Logo right, nav buttons left */
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: center;
             padding: 1.2rem 3vw;
             z-index: 100;
             background: rgba(255,255,255,0.85);
             backdrop-filter: blur(6px);
-            transition: box-shadow 0.2s;
+            transition: box-shadow 0.2s, padding 0.2s, height 0.2s;
+            gap: 2.5rem;
+         }
+.logo {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #181818;
+            margin-right: 2.5rem;
+            margin-left: 0;
+            transition: font-size 0.2s;
         }
-        .hero-nav ul {
+.hero-nav ul {
             list-style: none;
             display: flex;
             gap: 2rem;
             margin: 0;
             padding: 0;
-            margin-left: 0;
-            margin-right: auto;
         }
-        .logo {
-            font-size: 2rem;
-            font-weight: 900;
-            letter-spacing: 2px;
+.hero-nav li a {
             color: #181818;
-            margin-left: auto;
-            margin-right: 0;
+            font-weight: 600;
+            font-size: 1.08rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #fff;
+            border-radius: 2rem;
+            padding: 0.5rem 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+            transition: color 0.2s, background 0.2s, transform 0.2s, padding 0.2s, font-size 0.2s;
         }
+.hero-nav li a[aria-current="page"], .hero-nav li a:hover {
+            color: #ff6600;
+            background: #fff;
+            transform: scale(1.08);
+        }
+        
         .hero {
-            padding-top: 5.5rem; /* Add space for fixed navbar */
+            padding-top: 6.5rem; /* Add space for fixed navbar */
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(120deg, #f6f7fb 70%, #ff6600 100%);
+            overflow: hidden;
+        }
+        .shop-hero-video {
+            position: absolute;
+            top: 0; left: 0; width: 100vw; height: 100%;
+            object-fit: cover;
+            z-index: 0;
+            opacity: 0.18;
+            filter: blur(2px);
+        }
+        .shop-hero-graffiti {
+            position: absolute;
+            right: 3vw;
+            bottom: 0;
+            width: 220px;
+            opacity: 0.7;
+            z-index: 1;
+            pointer-events: none;
+            animation: graffitiFloat 4s infinite alternate cubic-bezier(.23,1.01,.32,1);
+        }
+        @keyframes graffitiFloat {
+            0% { transform: translateY(0);}
+            100% { transform: translateY(-18px);}
+        }
+        .shop-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #181818;
+            margin-bottom: 0.5rem;
+            z-index: 2;
+            position: relative;
+            letter-spacing: 1.5px;
+        }
+        .shop-description {
+            font-size: 1.15rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+            z-index: 2;
+            position: relative;
         }
         .shop-section {
             margin: 4rem auto 2rem auto;
@@ -164,6 +233,55 @@
             display: inline-block;
             margin-bottom: 0.5rem;
         }
+        /* Graffiti/graphics section */
+        .graffiti-section {
+            margin: 5vh auto 2vh auto;
+            max-width: 1200px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2.5rem;
+            justify-content: center;
+            align-items: center;
+        }
+        .graffiti-card {
+            background: linear-gradient(135deg, #f6f7fb 60%, #ff6600 100%);
+            border-radius: 1.2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            padding: 1.5rem 2rem;
+            min-width: 260px;
+            max-width: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) both;
+        }
+        .graffiti-card img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            border-radius: 0.7rem;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .graffiti-card h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin: 0.5rem 0 0.3rem 0;
+            color: #181818;
+        }
+        .graffiti-card p {
+            font-size: 0.98rem;
+            color: #444;
+            margin-bottom: 0.7rem;
+        }
+        .graffiti-card a {
+            color: #ff6600;
+            font-weight: 700;
+            text-decoration: underline;
+            margin-top: 0.5rem;
+        }
         @media (max-width: 700px) {
             .shop-section {
                 margin-top: 2.5rem;
@@ -177,7 +295,38 @@
                 width: 36px;
                 height: 36px;
             }
+            .shop-hero-graffiti {
+                width: 120px;
+            }
         }
+        .hero-nav.shrunk {
+    padding: 0.5rem 2vw;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.hero-nav.shrunk .logo {
+    font-size: 1.3rem;
+}
+.hero-nav.shrunk ul {
+    gap: 1.2rem;
+}
+.hero-nav.shrunk li a {
+    padding: 0.5rem 0.7rem;
+    font-size: 0;
+    min-width: 2.5rem;
+    justify-content: center;
+}
+.hero-nav.shrunk li a .nav-text {
+    display: none;
+}
+.hero-nav li a .fa-home,
+.hero-nav li a .fa-store,
+.hero-nav li a .fa-th-large,
+.hero-nav li a .fa-info-circle,
+.hero-nav li a .fa-shopping-cart {
+    font-size: 1.25rem;
+    min-width: 1.25rem;
+    min-height: 1.25rem;
+}
     </style>
 </head>
 <body>
@@ -192,8 +341,37 @@
         </ul>
     </nav>
     <main>
-        <h1 class="page-title">Shop by Brands</h1>
+        <section class="hero">
+            <video class="shop-hero-video" autoplay muted loop playsinline aria-hidden="true" loading="lazy">
+                <source src="shoes.mp4" type="video/mp4" />
+                Your browser does not support the video tag!
+            </video>
+            <img class="shop-hero-graffiti" src="https://pngimg.com/d/graffiti_PNG62.png" alt="Graffiti sneaker" />
+            <div>
+                <h1 class="shop-title">Welcome to KickStart Shop</h1>
+                <p class="shop-description">Your one-stop destination for the latest and greatest sneakers from top brands.</p>
+            </div>
+        </section>
+        <section class="graffiti-section" aria-label="Shop Highlights">
+            <div class="graffiti-card">
+                <img src="https://pngimg.com/d/graffiti_PNG57.png" alt="Street Style Graffiti">
+                <h4>Street Style</h4>
+                <p>Inspired by urban culture, our sneakers are made to stand out on every street.</p>
+            </div>
+            <div class="graffiti-card">
+                <img src="https://pngimg.com/d/graffiti_PNG44.png" alt="Performance Graffiti">
+                <h4>Performance Ready</h4>
+                <p>Engineered for comfort and speed, perfect for athletes and go-getters.</p>
+            </div>
+            <div class="graffiti-card">
+                <img src="https://pngimg.com/d/graffiti_PNG60.png" alt="Eco Graffiti">
+                <h4>Eco-Conscious</h4>
+                <p>Our eco-friendly collection uses recycled materials for a greener tomorrow.</p>
+            </div>
+        </section>
         <section class="shop-section">
+            <h2 class="shop-title">Shop Our Latest Sneakers</h2>
+            <p class="shop-description">Discover the latest trends in sneakers from top brands. Shop now and elevate your style!</p>
             <div class="shop-grid">
                 <div class="product-card">
                     <a href="https://www.nike.com/in/" target="_blank" class="brand-link" aria-label="Nike brand homepage">
@@ -218,7 +396,7 @@
                     <p>₹10,999</p>
                     <div class="product-meta">
                         <a href="https://www.adidas.co.in/samba-og-shoes/B75806.html" target="_blank" class="add-cart-btn">View on Adidas</a>
-                        <button class="icon-cart-btn" onclick="addToCart('Samba OG Shoes', 10999)">
+                        <button class="icon-cart-btn" onclick="addToCart('Samba OG Shoes', 10999, 'https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/07567ea7d2bb425b8651a8bf0117e4f1_9366/Samba_OG_Shoes_White_B75806_06_standard.jpg')">
                             <span class="plus-icon">+</span>
                         </button>
                     </div>
@@ -232,7 +410,7 @@
                     <p>₹4,549</p>
                     <div class="product-meta">
                         <a href="https://in.puma.com/in/en/pd/scuderia-ferrari-neo-cat-2-0-driving-shoes/308062?swatch=04" target="_blank" class="add-cart-btn">View on Puma</a>
-                        <button class="icon-cart-btn" onclick="addToCart('Scuderia Ferrari Neo Cat 2.0 Driving Shoes', 4549)">
+                        <button class="icon-cart-btn" onclick="addToCart('Scuderia Ferrari Neo Cat 2.0 Driving Shoes', 4549, 'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/308062/04/sv01/fnd/IND/fmt/png/Scuderia-Ferrari-Neo-Cat-2.0-Driving-Shoes')">
                             <span class="plus-icon">+</span>
                         </button>
                     </div>
@@ -246,7 +424,7 @@
                     <p>₹4,799</p>
                     <div class="product-meta">
                         <a href="https://www.converse.in/convere-chuck-taylor-all-star-wide-167491c-black.html" target="_blank" class="add-cart-btn">View on Converse</a>
-                        <button class="icon-cart-btn" onclick="addToCart('Chuck Taylor All Star Wide', 4799)">
+                        <button class="icon-cart-btn" onclick="addToCart('Chuck Taylor All Star Wide', 4799, 'https://www.converse.in/media/catalog/product/1/6/167491c_1.jpg?optimize=medium&bg-color=255%2C255%2C255&fit=cover&height=900&width=900&format=webp')">
                             <span class="plus-icon">+</span>
                         </button>
                     </div>
@@ -257,7 +435,6 @@
     <footer>
         <p>&copy; 2025 KickStart. All rights reserved.</p>
     </footer>
-    <script src="script.js"></script>
     <script>
 function addToCart(name, price, img) {
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -270,6 +447,19 @@ function addToCart(name, price, img) {
     localStorage.setItem('cart', JSON.stringify(cart));
     alert(name + " added to cart!");
 }
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const nav = document.querySelector('.hero-nav');
+    const shrinkOn = 60;
+    window.addEventListener('scroll', function() {
+        if(window.scrollY > shrinkOn) {
+            nav.classList.add('shrunk');
+        } else {
+            nav.classList.remove('shrunk');
+        }
+    });
+});
 </script>
 </body>
 </html>
