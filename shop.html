@@ -14,38 +14,42 @@
             padding: 0;
         }
         /* Use this CSS for your navbar in ALL HTML files for the exact look as your index page */
-.hero-nav {
+        a:focus, button:focus {
+            outline: 3px solid #ff6600;
+            outline-offset: 2px;
+        }
+        .hero-nav {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             display: flex;
-            justify-content: flex-start;
+            justify-content: space-between;
             align-items: center;
             padding: 1.2rem 3vw;
             z-index: 100;
             background: rgba(255,255,255,0.85);
             backdrop-filter: blur(6px);
-            transition: box-shadow 0.2s, padding 0.2s, height 0.2s;
-            gap: 2.5rem;
+            transition: box-shadow 0.2s;
          }
-.logo {
+        .logo {
             font-size: 2rem;
             font-weight: 900;
             letter-spacing: 2px;
             color: #181818;
-            margin-right: 2.5rem;
-            margin-left: 0;
-            transition: font-size 0.2s;
+            margin-left: auto;
+            margin-right: 0;
         }
-.hero-nav ul {
+        .hero-nav ul {
             list-style: none;
             display: flex;
             gap: 2rem;
             margin: 0;
             padding: 0;
+            margin-left: 0;
+            margin-right: auto;
         }
-.hero-nav li a {
+        .hero-nav li a {
             color: #181818;
             font-weight: 600;
             font-size: 1.08rem;
@@ -53,18 +57,11 @@
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            background: #fff;
-            border-radius: 2rem;
-            padding: 0.5rem 1.5rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-            transition: color 0.2s, background 0.2s, transform 0.2s, padding 0.2s, font-size 0.2s;
+            transition: color 0.2s;
         }
-.hero-nav li a[aria-current="page"], .hero-nav li a:hover {
+        .hero-nav li a[aria-current="page"], .hero-nav li a:hover {
             color: #ff6600;
-            background: #fff;
-            transform: scale(1.08);
-        }
-        
+        }        
         .hero {
             padding-top: 6.5rem; /* Add space for fixed navbar */
             position: relative;
