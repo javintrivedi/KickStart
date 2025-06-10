@@ -13,6 +13,38 @@
             margin: 0;
             padding: 0;
         }
+        .hero-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            display: flex;
+            flex-direction: row-reverse; /* Logo right, nav buttons left */
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 3vw;
+            z-index: 100;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(6px);
+            transition: box-shadow 0.2s;
+        }
+        .hero-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+            margin-left: 0;
+            margin-right: auto;
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #181818;
+            margin-left: auto;
+            margin-right: 0;
+        }
         .about-section {
             max-width: 800px;
             margin: 6rem auto 2.5rem auto;
