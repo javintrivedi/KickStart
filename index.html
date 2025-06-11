@@ -301,6 +301,7 @@
                     <li><a href="index.html" aria-current="page"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
                     <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
                     <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
+                    <li><a href="ai-analyzer.html" id="ai-analyzer-btn"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI Analyzer</span></a></li>
                     <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
                     <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span></a></li>
                 </ul>
@@ -352,6 +353,27 @@
                 <span aria-hidden="true">⭐</span>
                 <h3>4.9/5 Customer Rating</h3>
                 <p>Loved by thousands of happy customers.</p>
+            </div>
+            <!-- New features added here -->
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">🤖</span>
+                <h3>AI Style Recommender</h3>
+                <p>Get personalized sneaker suggestions based on your browsing and purchase history.</p>
+            </div>
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">📸</span>
+                <h3>Visual Search</h3>
+                <p>Upload a photo of any shoe and our AI finds the closest match in our store.</p>
+            </div>
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">🦶</span>
+                <h3>AI Fit Predictor</h3>
+                <p>Scan your foot with your camera and let AI suggest the perfect size for you.</p>
+            </div>
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">💬</span>
+                <h3>AI Chat Assistant</h3>
+                <p>Ask our AI anything about sneakers, orders, or style tips—24/7 support!</p>
             </div>
         </section>
         <!-- Graphics/Animated Section: Connect to Shop & Collections -->
@@ -469,6 +491,37 @@
                 msg.style.color = "#ff0000";
             }
         }
+
+        // AI Style Recommender (Mock)
+        function getAIRecommendations() {
+            alert("👟 AI Style Recommender: Based on your activity, we recommend the Nike Air Max, Adidas Samba OG, and Puma Neo Cat!");
+        }
+
+        // Visual Search (Mock)
+        function visualSearch() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = () => {
+                alert("🔍 AI Visual Search: Searching for shoes similar to your uploaded photo...");
+                // Here you would send the image to your AI backend for processing
+            };
+            input.click();
+        }
+
+        // AI Fit Predictor (Mock)
+        function aiFitPredictor() {
+            alert("🦶 AI Fit Predictor: Please use the AI Analyzer to scan your foot for a size suggestion!");
+            // You could integrate this with your AR/camera page
+        }
+
+        // AI Chat Assistant (Mock)
+        function openAIChat() {
+            alert("💬 AI Chat Assistant: Hi! How can I help you today?");
+            // For a real chat, integrate with a chatbot API or widget
+        }
+
+        // Optionally, add buttons or triggers for these features in your UI
     </script>
 </body>
 </html>
