@@ -199,10 +199,10 @@
             margin: 7vh auto 0 auto;
             max-width: 1200px;
             display: flex;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;         /* Prevent wrapping to next line */
             gap: 2.5rem;
             justify-content: center;
-            align-items: center;
+            align-items: stretch;
         }
         .graphic-card {
             background: linear-gradient(135deg, #f6f7fb 60%, #ff6600 100%);
@@ -279,6 +279,17 @@
                 margin-top: 2vh;
             }
         }
+        @media (max-width: 1100px) {
+            .graphics-section {
+                flex-wrap: wrap;
+            }
+        }
+        @media (max-width: 800px) {
+            .graphics-section {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
     </style>
 </head>
 <body>
@@ -286,7 +297,7 @@
         <section class="hero" role="banner" aria-label="Main hero section">
             <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
                 <div class="logo" aria-label="KickStart logo">KickStart</div>
-                <ul>
+                <ul id="nav-menu">
                     <li><a href="index.html" aria-current="page"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
                     <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
                     <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
@@ -433,6 +444,18 @@
                 }
             });
         });
+
+        // Burger menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const burger = document.querySelector('.burger-menu');
+            const navMenu = document.getElementById('nav-menu');
+            burger.addEventListener('click', function() {
+                const expanded = burger.getAttribute('aria-expanded') === 'true' || false;
+                burger.setAttribute('aria-expanded', !expanded);
+                navMenu.classList.toggle('nav-open');
+            });
+        });
+
         // Newsletter subscribe mock
         function subscribeNewsletter(e) {
             e.preventDefault();
