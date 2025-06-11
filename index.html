@@ -7,6 +7,24 @@
     <title>KickStart</title>
     <link rel="icon" type="image/x-icon" href="favicon.png" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="navbar.css">
+    
+    <script src="https://cdn.botpress.cloud/webchat/v3.0/inject.js" defer></script>
+<script src="https://files.bpcontent.cloud/2025/06/11/06/20250611064508-5PKN4QR6.js" defer></script>
+    <script src="https://cdn.botpress.cloud/webchat/v3.0/bundle.js" defer></script>
+    <script>
+        window.botpressWebChat.init({
+            host: 'https://cdn.botpress.cloud/webchat/v3.0',
+            botId: 'kickstart',
+            messagingUrl: 'https://files.bpcontent.cloud/2025/06/11/06/20250611064508-5PKN4QR6.js',
+            enableReset: true,
+            enableTranscriptDownload: true,
+            enableFeedback: true,
+            enableTypingIndicator: true,
+            showPoweredBy: false
+        });
+        </script>
+    <link rel="stylesheet" href="/assets/css/botpress-custom-style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         html, body {
@@ -301,7 +319,7 @@
                     <li><a href="index.html" aria-current="page"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
                     <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
                     <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
-                    <li><a href="ai-analyzer.html" id="ai-analyzer-btn"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI Analyzer</span></a></li>
+                    <li><a href="ai-analyzer.html"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI Analyzer</span></a></li>
                     <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
                     <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span></a></li>
                 </ul>
@@ -375,6 +393,13 @@
                 <h3>AI Chat Assistant</h3>
                 <p>Ask our AI anything about sneakers, orders, or style tips—24/7 support!</p>
             </div>
+        </section>
+        <!-- AI Actions Section -->
+        <section class="ai-actions" style="display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;margin:2.5rem 0;">
+            <button class="cta-btn" onclick="getAIRecommendations()" style="background:#181818;"><i class="fas fa-magic"></i> AI Style Recommender</button>
+            <button class="cta-btn" onclick="visualSearch()" style="background:#ff6600;"><i class="fas fa-camera"></i> Visual Search</button>
+            <button class="cta-btn" onclick="aiFitPredictor()" style="background:#181818;"><i class="fas fa-ruler-combined"></i> AI Fit Predictor</button>
+            <button class="cta-btn" onclick="openAIChat()" style="background:#ff6600;"><i class="fas fa-robot"></i> AI Chat Assistant</button>
         </section>
         <!-- Graphics/Animated Section: Connect to Shop & Collections -->
         <div class="section-title">Explore More</div>

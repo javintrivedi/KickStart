@@ -66,9 +66,13 @@ a:focus, button:focus {
 .hero-nav.shrunk li a .nav-text {
     display: none;
 }
+.hero-nav li a i {
+    display: inline-block !important;
+}
 .hero-nav li a .fa-home,
 .hero-nav li a .fa-store,
 .hero-nav li a .fa-th-large,
+.hero-nav li a .fa-shoe-prints,
 .hero-nav li a .fa-info-circle,
 .hero-nav li a .fa-shopping-cart {
     font-size: 1.25rem;
