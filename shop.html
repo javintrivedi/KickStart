@@ -10,135 +10,96 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         body {
-            background: #f6f7fb;
+            background: #f8f9fb;
             margin: 0;
             padding: 0;
-        }
-        /* Use this CSS for your navbar in ALL HTML files for the exact look as your index page */
-        a:focus, button:focus {
-            outline: 3px solid #ff6600;
-            outline-offset: 2px;
+            font-family: 'Montserrat', Arial, sans-serif;
         }
         .hero-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
+            /* Use navbar.css for consistency */
+        }
+        .shop-hero {
+            padding-top: 7rem;
+            padding-bottom: 2.5rem;
+            background: #fff;
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             align-items: center;
-            padding: 1.2rem 3vw;
-            z-index: 100;
-            background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(6px);
-            transition: box-shadow 0.2s;
-         }
-        .logo {
-            font-size: 2rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: #181818;
-            margin-left: auto;
-            margin-right: 0;
-        }
-        .hero-nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-            margin: 0;
-            padding: 0;
-            margin-left: 0;
-            margin-right: auto;
-        }
-        .hero-nav li a {
-            color: #181818;
-            font-weight: 600;
-            font-size: 1.08rem;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: color 0.2s;
-        }
-        .hero-nav li a[aria-current="page"], .hero-nav li a:hover {
-            color: #ff6600;
-        }        
-        .hero {
-            padding-top: 6.5rem; /* Add space for fixed navbar */
-            position: relative;
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(120deg, #f6f7fb 70%, #ff6600 100%);
-            overflow: hidden;
-        }
-        .shop-hero-video {
-            position: absolute;
-            top: 0; left: 0; width: 100vw; height: 100%;
-            object-fit: cover;
-            z-index: 0;
-            opacity: 0.18;
-            filter: blur(2px);
-        }
-        .shop-hero-graffiti {
-            position: absolute;
-            right: 3vw;
-            bottom: 0;
-            width: 220px;
-            opacity: 0.7;
-            z-index: 1;
-            pointer-events: none;
-            animation: graffitiFloat 4s infinite alternate cubic-bezier(.23,1.01,.32,1);
-        }
-        @keyframes graffitiFloat {
-            0% { transform: translateY(0);}
-            100% { transform: translateY(-18px);}
+            border-bottom: 1px solid #ececec;
         }
         .shop-title {
-            font-size: 2.5rem;
+            font-size: 2.7rem;
             font-weight: 900;
             color: #181818;
             margin-bottom: 0.5rem;
-            z-index: 2;
-            position: relative;
             letter-spacing: 1.5px;
+            text-align: center;
         }
         .shop-description {
-            font-size: 1.15rem;
-            color: #333;
+            font-size: 1.18rem;
+            color: #444;
             margin-bottom: 1.5rem;
-            z-index: 2;
-            position: relative;
+            text-align: center;
+            max-width: 600px;
+        }
+        .shop-actions {
+            display: flex;
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .shop-actions .cta-btn {
+            background: #181818;
+            color: #fff;
+            padding: 0.7rem 2rem;
+            border-radius: 2rem;
+            font-weight: 700;
+            font-size: 1.05rem;
+            border: none;
+            transition: background 0.2s, transform 0.2s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        .shop-actions .cta-btn.alt {
+            background: #ff6600;
+        }
+        .shop-actions .cta-btn:hover, .shop-actions .cta-btn:focus {
+            background: #ff6600;
+            color: #fff;
+            transform: scale(1.06);
         }
         .shop-section {
-            margin: 4rem auto 2rem auto;
+            margin: 3rem auto 2rem auto;
             max-width: 1200px;
             padding: 0 2vw;
         }
         .shop-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2rem;
+            gap: 2.2rem;
         }
         .product-card {
             background: #fff;
             border-radius: 1.2rem;
-            box-shadow: 0 4px 24px rgba(0,0,0,0.07);
-            padding: 1.5rem 1.2rem 1.2rem 1.2rem;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
             display: flex;
             flex-direction: column;
             align-items: center;
             transition: box-shadow 0.2s, transform 0.2s;
             position: relative;
+            min-height: 420px;
         }
         .product-card:hover, .product-card:focus-within {
             box-shadow: 0 8px 32px rgba(0,0,0,0.13);
             transform: translateY(-4px) scale(1.03);
         }
         .brand-logo {
-            width: 48px;
-            height: 48px;
+            width: 44px;
+            height: 44px;
             object-fit: contain;
             margin-bottom: 0.5rem;
             background: #f7f7f7;
@@ -148,18 +109,19 @@
             width: 120px;
             height: 120px;
             object-fit: contain;
-            margin-bottom: 1rem;
+            margin-bottom: 1.2rem;
             border-radius: 0.7rem;
             background: #f7f7f7;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
-        .product-title, .product h3 {
+        .product-title {
             font-size: 1.18rem;
             font-weight: 700;
             margin: 0.5rem 0 0.2rem 0;
             color: #111;
             text-align: center;
         }
-        .product-desc, .product p {
+        .product-desc {
             font-size: 0.98rem;
             color: #444;
             text-align: center;
@@ -179,7 +141,7 @@
             color: #000;
         }
         .add-cart-btn {
-            background: #000;
+            background: #181818;
             color: #fff;
             border: none;
             border-radius: 2rem;
@@ -199,7 +161,7 @@
             outline: none;
         }
         .icon-cart-btn {
-            background: #000;
+            background: #ff6600;
             color: #fff;
             border: none;
             border-radius: 50%;
@@ -218,11 +180,11 @@
         .icon-cart-btn .plus-icon {
             font-size: 1.4rem;
             font-weight: bold;
-            color: #ff6600;
+            color: #fff;
             pointer-events: none;
         }
         .icon-cart-btn:hover, .icon-cart-btn:focus {
-            background: #ff6600;
+            background: #181818;
             color: #fff;
             transform: scale(1.12);
             outline: none;
@@ -231,106 +193,67 @@
             display: inline-block;
             margin-bottom: 0.5rem;
         }
-        /* Graffiti/graphics section */
-        .graffiti-section {
-            margin: 5vh auto 2vh auto;
-            max-width: 1200px;
+        .product-card .product-actions {
+            margin-top: 1.2rem;
+            width: 100%;
             display: flex;
-            flex-wrap: wrap;
-            gap: 2.5rem;
-            justify-content: center;
-            align-items: center;
+            justify-content: space-between;
+            gap: 0.7rem;
         }
-        .graffiti-card {
-            background: linear-gradient(135deg, #f6f7fb 60%, #ff6600 100%);
-            border-radius: 1.2rem;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-            padding: 1.5rem 2rem;
-            min-width: 260px;
-            max-width: 340px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) both;
-        }
-        .graffiti-card img {
-            width: 120px;
-            height: 120px;
-            object-fit: contain;
-            margin-bottom: 1rem;
-            border-radius: 0.7rem;
+        .product-card .product-actions .view-btn {
             background: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .graffiti-card h4 {
-            font-size: 1.1rem;
-            font-weight: 800;
-            margin: 0.5rem 0 0.3rem 0;
             color: #181818;
-        }
-        .graffiti-card p {
+            border: 1px solid #ececec;
+            border-radius: 2rem;
+            padding: 0.4rem 1.1rem;
             font-size: 0.98rem;
-            color: #444;
-            margin-bottom: 0.7rem;
+            font-weight: 600;
+            transition: background 0.2s, color 0.2s;
+            cursor: pointer;
         }
-        .graffiti-card a {
-            color: #ff6600;
-            font-weight: 700;
-            text-decoration: underline;
-            margin-top: 0.5rem;
+        .product-card .product-actions .view-btn:hover {
+            background: #ff6600;
+            color: #fff;
+            border: 1px solid #ff6600;
         }
-        @media (max-width: 700px) {
-            .shop-section {
-                margin-top: 2.5rem;
-                padding: 0 1vw;
-            }
-            .product-img {
-                width: 90px;
-                height: 90px;
-            }
-            .brand-logo {
-                width: 36px;
-                height: 36px;
-            }
-            .shop-hero-graffiti {
-                width: 120px;
+        .shop-filters {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+        .shop-filters select, .shop-filters input[type="text"] {
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            border: 1px solid #ececec;
+            font-size: 1rem;
+            outline: none;
+            background: #fff;
+            transition: border 0.2s;
+        }
+        .shop-filters select:focus, .shop-filters input[type="text"]:focus {
+            border: 1px solid #ff6600;
+        }
+        @media (max-width: 900px) {
+            .shop-grid {
+                grid-template-columns: 1fr 1fr;
             }
         }
-        .hero-nav.shrunk {
-    padding: 0.5rem 2vw;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-}
-.hero-nav.shrunk .logo {
-    font-size: 1.3rem;
-}
-.hero-nav.shrunk ul {
-    gap: 1.2rem;
-}
-.hero-nav.shrunk li a {
-    padding: 0.5rem 0.7rem;
-    font-size: 0;
-    min-width: 2.5rem;
-    justify-content: center;
-}
-.hero-nav.shrunk li a .nav-text {
-    display: none;
-}
-.hero-nav li a .fa-home,
-.hero-nav li a .fa-store,
-.hero-nav li a .fa-th-large,
-.hero-nav li a .fa-info-circle,
-.hero-nav li a .fa-shopping-cart {
-    font-size: 1.25rem;
-    min-width: 1.25rem;
-    min-height: 1.25rem;
-}
+        @media (max-width: 600px) {
+            .shop-grid {
+                grid-template-columns: 1fr;
+            }
+            .shop-hero {
+                padding-top: 6rem;
+            }
+        }
     </style>
 </head>
 <body>
     <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
         <div class="logo" aria-label="KickStart logo">KickStart</div>
-        <ul>
+        <ul id="nav-menu">
             <li><a href="index.html"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
             <li><a href="shop.html" aria-current="page"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
             <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
@@ -340,94 +263,34 @@
         </ul>
     </nav>
     <main>
-        <section class="hero">
-            <video class="shop-hero-video" autoplay muted loop playsinline aria-hidden="true" loading="lazy">
-                <source src="shoes.mp4" type="video/mp4" />
-                Your browser does not support the video tag!
-            </video>
-            <img class="shop-hero-graffiti" src="https://pngimg.com/d/graffiti_PNG62.png" alt="Graffiti sneaker" />
-            <div>
-                <h1 class="shop-title">Welcome to KickStart Shop</h1>
-                <p class="shop-description">Your one-stop destination for the latest and greatest sneakers from top brands.</p>
+        <section class="shop-hero">
+            <h1 class="shop-title">Shop the Latest Sneakers</h1>
+            <p class="shop-description">Discover trending, premium, and eco-friendly sneakers from top brands. Minimal, elegant, and made for you.</p>
+            <div class="shop-actions">
+                <button class="cta-btn" onclick="sortProducts('price')"><i class="fas fa-sort-amount-up"></i> Sort by Price</button>
+                <button class="cta-btn alt" onclick="sortProducts('brand')"><i class="fas fa-tags"></i> Sort by Brand</button>
+                <button class="cta-btn" onclick="filterEco();showEcoDefinition()"><i class="fas fa-leaf"></i> Eco-Friendly</button>
+                <button class="cta-btn alt" onclick="openVisualSearch()"><i class="fas fa-camera"></i> Visual Search</button>
             </div>
-        </section>
-        <section class="graffiti-section" aria-label="Shop Highlights">
-            <div class="graffiti-card">
-                <img src="https://pngimg.com/d/graffiti_PNG57.png" alt="Street Style Graffiti">
-                <h4>Street Style</h4>
-                <p>Inspired by urban culture, our sneakers are made to stand out on every street.</p>
+            <div class="shop-filters">
+                <input type="text" id="searchInput" placeholder="Search sneakers..." oninput="searchProducts()">
+                <select id="brandFilter" onchange="filterByBrand()">
+                    <option value="">All Brands</option>
+                    <option value="Nike">Nike</option>
+                    <option value="Adidas">Adidas</option>
+                    <option value="Puma">Puma</option>
+                    <option value="Converse">Converse</option>
+                </select>
             </div>
-            <div class="graffiti-card">
-                <img src="https://pngimg.com/d/graffiti_PNG44.png" alt="Performance Graffiti">
-                <h4>Performance Ready</h4>
-                <p>Engineered for comfort and speed, perfect for athletes and go-getters.</p>
-            </div>
-            <div class="graffiti-card">
-                <img src="https://pngimg.com/d/graffiti_PNG60.png" alt="Eco Graffiti">
-                <h4>Eco-Conscious</h4>
-                <p>Our eco-friendly collection uses recycled materials for a greener tomorrow.</p>
+            <!-- Eco-Friendly definition section -->
+            <div id="ecoDefinition" style="display:none; background:#eafbe7; color:#205c2c; border-radius:1rem; padding:1.1rem 1.5rem; margin:1.2rem auto 0 auto; max-width:600px; font-size:1.08rem; text-align:center; box-shadow:0 2px 8px rgba(32,92,44,0.06);">
+                <strong>What are Eco-Friendly Sneakers?</strong><br>
+                Eco-friendly sneakers are made using sustainable materials, ethical manufacturing, and processes that reduce environmental impact. Choosing these helps support a cleaner, greener planet.
             </div>
         </section>
         <section class="shop-section">
-            <h2 class="shop-title">Shop Our Latest Sneakers</h2>
-            <p class="shop-description">Discover the latest trends in sneakers from top brands. Shop now and elevate your style!</p>
-            <div class="shop-grid">
-                <div class="product-card">
-                    <a href="https://www.nike.com/in/" target="_blank" class="brand-link" aria-label="Nike brand homepage">
-                        <img class="brand-logo" src="https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg" alt="Nike Logo">
-                    </a>
-                    <img class="product-img" src="https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/183930d6-ec63-471a-8413-b094dae0e330/air-jordan-1-low-og-shoes-29tsx7.png" alt="Nike Air Max">
-                    <h3>Air Jordan 1 Low OG</h3>
-                    <p>₹12,795</p>
-                    <div class="product-meta">
-                        <a href="https://www.nike.com/in/t/air-jordan-1-low-og-shoes-29tsx7/CZ0790-107" target="_blank" class="add-cart-btn">View on Nike</a>
-                        <button class="icon-cart-btn" onclick="addToCart('Air Jordan 1 Low OG', 12795, 'https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/183930d6-ec63-471a-8413-b094dae0e330/air-jordan-1-low-og-shoes-29tsx7.png')" aria-label="Add Air Jordan 1 Low OG to cart">
-                            <span class="plus-icon">+</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <a href="https://shop.adidas.co.in/" target="_blank" class="brand-link" aria-label="Adidas brand homepage">
-                        <img class="brand-logo" src="https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg" alt="Adidas Logo">
-                    </a>
-                    <img class="product-img" src="https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/07567ea7d2bb425b8651a8bf0117e4f1_9366/Samba_OG_Shoes_White_B75806_06_standard.jpg" alt="Samba OG Shoes">
-                    <h3>Samba OG Shoes</h3>
-                    <p>₹10,999</p>
-                    <div class="product-meta">
-                        <a href="https://www.adidas.co.in/samba-og-shoes/B75806.html" target="_blank" class="add-cart-btn">View on Adidas</a>
-                        <button class="icon-cart-btn" onclick="addToCart('Samba OG Shoes', 10999, 'https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/07567ea7d2bb425b8651a8bf0117e4f1_9366/Samba_OG_Shoes_White_B75806_06_standard.jpg')">
-                            <span class="plus-icon">+</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <a href="https://in.puma.com/" target="_blank" class="brand-link" aria-label="Puma brand homepage">
-                        <img class="brand-logo" src="https://upload.wikimedia.org/wikipedia/en/thumb/d/da/Puma_complete_logo.svg/375px-Puma_complete_logo.svg.png" alt="Puma Logo">
-                    </a>
-                    <img class="product-img" src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/308062/04/sv01/fnd/IND/fmt/png/Scuderia-Ferrari-Neo-Cat-2.0-Driving-Shoes" alt="Scuderia Ferrari Neo Cat 2.0 Driving Shoes">
-                    <h3>Scuderia Ferrari Neo Cat 2.0 Driving Shoes</h3>
-                    <p>₹4,549</p>
-                    <div class="product-meta">
-                        <a href="https://in.puma.com/in/en/pd/scuderia-ferrari-neo-cat-2-0-driving-shoes/308062?swatch=04" target="_blank" class="add-cart-btn">View on Puma</a>
-                        <button class="icon-cart-btn" onclick="addToCart('Scuderia Ferrari Neo Cat 2.0 Driving Shoes', 4549, 'https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/308062/04/sv01/fnd/IND/fmt/png/Scuderia-Ferrari-Neo-Cat-2.0-Driving-Shoes')">
-                            <span class="plus-icon">+</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="product-card">
-                    <a href="https://www.converse.com/" target="_blank" class="brand-link" aria-label="Converse brand homepage">
-                        <img class="brand-logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Converse_logo.svg/330px-Converse_logo.svg.png" alt="Converse Logo">
-                    </a>
-                    <img class="product-img" src="https://www.converse.in/media/catalog/product/1/6/167491c_1.jpg?optimize=medium&bg-color=255%2C255%2C255&fit=cover&height=900&width=900&format=webp" alt="Chuck Taylor All Star Wide">
-                    <h3>Chuck Taylor All Star Wide</h3>
-                    <p>₹4,799</p>
-                    <div class="product-meta">
-                        <a href="https://www.converse.in/convere-chuck-taylor-all-star-wide-167491c-black.html" target="_blank" class="add-cart-btn">View on Converse</a>
-                        <button class="icon-cart-btn" onclick="addToCart('Chuck Taylor All Star Wide', 4799, 'https://www.converse.in/media/catalog/product/1/6/167491c_1.jpg?optimize=medium&bg-color=255%2C255%2C255&fit=cover&height=900&width=900&format=webp')">
-                            <span class="plus-icon">+</span>
-                        </button>
-                    </div>
-                </div>
+            <div class="shop-grid" id="productGrid">
+                <!-- Product cards will be rendered here by JS -->
             </div>
         </section>
     </main>
@@ -435,30 +298,220 @@
         <p>&copy; 2025 KickStart. All rights reserved.</p>
     </footer>
     <script>
-function addToCart(name, price, img) {
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    let found = cart.find(item => item.name === name);
-    if (found) {
-        found.qty += 1;
-    } else {
-        cart.push({ name, price, img, qty: 1 });
-    }
-    localStorage.setItem('cart', JSON.stringify(cart));
-    alert(name + " added to cart!");
-}
-</script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const nav = document.querySelector('.hero-nav');
-    const shrinkOn = 60;
-    window.addEventListener('scroll', function() {
-        if(window.scrollY > shrinkOn) {
-            nav.classList.add('shrunk');
-        } else {
-            nav.classList.remove('shrunk');
+    // Product data (for demo, you can fetch from backend)
+    const products = [
+        {
+            name: "Air Jordan 1 Low OG",
+            price: 12795,
+            img: "https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/183930d6-ec63-471a-8413-b094dae0e330/air-jordan-1-low-og-shoes-29tsx7.png",
+            brand: "Nike",
+            eco: false,
+            link: "https://www.nike.com/in/t/air-jordan-1-low-og-shoes-29tsx7/CZ0790-107",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg"
+        },
+        {
+            name: "Samba OG Shoes",
+            price: 10999,
+            img: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/07567ea7d2bb425b8651a8bf0117e4f1_9366/Samba_OG_Shoes_White_B75806_06_standard.jpg",
+            brand: "Adidas",
+            eco: true,
+            link: "https://www.adidas.co.in/samba-og-shoes/B75806.html",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg"
+        },
+        {
+            name: "Scuderia Ferrari Neo Cat 2.0 Driving Shoes",
+            price: 4549,
+            img: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/308062/04/sv01/fnd/IND/fmt/png/Scuderia-Ferrari-Neo-Cat-2.0-Driving-Shoes",
+            brand: "Puma",
+            eco: false,
+            link: "https://in.puma.com/in/en/pd/scuderia-ferrari-neo-cat-2-0-driving-shoes/308062?swatch=04",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/en/thumb/d/da/Puma_complete_logo.svg/375px-Puma_complete_logo.svg.png"
+        },
+        {
+            name: "Chuck Taylor All Star Wide",
+            price: 4799,
+            img: "https://www.converse.in/media/catalog/product/1/6/167491c_1.jpg?optimize=medium&bg-color=255%2C255%2C255&fit=cover&height=900&width=900&format=webp",
+            brand: "Converse",
+            eco: true,
+            link: "https://www.converse.in/convere-chuck-taylor-all-star-wide-167491c-black.html",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Converse_logo.svg/330px-Converse_logo.svg.png"
+        },
+        {
+            name: "Nike Air Max 97",
+            price: 16995,
+            img: "https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/0c6e6e8e-2e6e-4d8a-9e3e-2e2e2e2e2e/air-max-97-shoes-29tsx7.png",
+            brand: "Nike",
+            eco: false,
+            link: "https://www.nike.com/in/t/air-max-97-shoes-921826-101",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg"
+        },
+        {
+            name: "Adidas Ultraboost 22",
+            price: 17999,
+            img: "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/3e8e8e8e8e8e4e8e8e8e8e8e8e8e8e_9366/Ultraboost_22_Shoes_White_GX5462_01_standard.jpg",
+            brand: "Adidas",
+            eco: true,
+            link: "https://www.adidas.co.in/ultraboost-22-shoes/GX5462.html",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg"
+        },
+        {
+            name: "Puma RS-X Reinvent",
+            price: 8999,
+            img: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/373236/01/sv01/fnd/IND/fmt/png/RS-X-Reinvent-Unisex-Sneakers",
+            brand: "Puma",
+            eco: false,
+            link: "https://in.puma.com/in/en/pd/rs-x-reinvent-unisex-sneakers/373236?swatch=01",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/en/thumb/d/da/Puma_complete_logo.svg/375px-Puma_complete_logo.svg.png"
+        },
+        {
+            name: "Converse Run Star Hike",
+            price: 7999,
+            img: "https://www.converse.in/media/catalog/product/1/6/166800c_1.jpg?optimize=medium&bg-color=255%2C255%2C255&fit=cover&height=900&width=900&format=webp",
+            brand: "Converse",
+            eco: false,
+            link: "https://www.converse.in/converse-run-star-hike-166800c-black.html",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Converse_logo.svg/330px-Converse_logo.svg.png"
+        },
+        {
+            name: "Nike Air Force 1 '07",
+            price: 9495,
+            img: "https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/4e8e8e8e-4e8e-4e8e-4e8e-4e8e8e8e8e8e/air-force-1-07-shoes-29tsx7.png",
+            brand: "Nike",
+            eco: false,
+            link: "https://www.nike.com/in/t/air-force-1-07-shoes-315122-111",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg"
+        },
+        {
+            name: "Adidas Stan Smith",
+            price: 8999,
+            img: "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/4e8e8e8e8e8e4e8e8e8e8e8e8e8e8e8e_9366/Stan_Smith_Shoes_White_FX5502_01_standard.jpg",
+            brand: "Adidas",
+            eco: true,
+            link: "https://www.adidas.co.in/stan-smith-shoes/FX5502.html",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg"
+        },
+        {
+            name: "Puma Future Rider Play On",
+            price: 7499,
+            img: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/371149/01/sv01/fnd/IND/fmt/png/Future-Rider-Play-On-Unisex-Sneakers",
+            brand: "Puma",
+            eco: false,
+            link: "https://in.puma.com/in/en/pd/future-rider-play-on-unisex-sneakers/371149?swatch=01",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/en/thumb/d/da/Puma_complete_logo.svg/375px-Puma_complete_logo.svg.png"
+        },
+        {
+            name: "Converse Chuck 70 High Top",
+            price: 5999,
+            img: "https://www.converse.in/media/catalog/product/1/6/162050c_1.jpg?optimize=medium&bg-color=255%2C255%2C255&fit=cover&height=900&width=900&format=webp",
+            brand: "Converse",
+            eco: true,
+            link: "https://www.converse.in/chuck-70-high-top-162050c-black.html",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Converse_logo.svg/330px-Converse_logo.svg.png"
         }
+    ];
+
+    let filteredProducts = [...products];
+
+    function renderProducts(list = filteredProducts) {
+        const grid = document.getElementById('productGrid');
+        grid.innerHTML = '';
+        if (list.length === 0) {
+            grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;color:#888;font-size:1.2rem;padding:2rem;">No sneakers found.</div>`;
+            return;
+        }
+        list.forEach(prod => {
+            grid.innerHTML += `
+                <div class="product-card" tabindex="0">
+                    <a href="${prod.link}" target="_blank" class="brand-link" aria-label="${prod.brand} brand homepage">
+                        <img class="brand-logo" src="${prod.brandLogo}" alt="${prod.brand} Logo">
+                    </a>
+                    <img class="product-img" src="${prod.img}" alt="${prod.name}">
+                    <div class="product-title">${prod.name}</div>
+                    <div class="product-desc">${prod.eco ? '<span style="color:#ff6600;font-weight:600;">Eco-Friendly</span> | ' : ''}${prod.brand}</div>
+                    <div class="product-meta">
+                        <span class="product-price">₹${prod.price.toLocaleString()}</span>
+                        <button class="icon-cart-btn" onclick="addToCart('${prod.name.replace(/'/g,"\\'")}', ${prod.price}, '${prod.img.replace(/'/g,"\\'")}')" aria-label="Add ${prod.name} to cart">
+                            <span class="plus-icon">+</span>
+                        </button>
+                    </div>
+                    <div class="product-actions">
+                        <a href="${prod.link}" target="_blank" class="view-btn">View Details</a>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    function sortProducts(type) {
+        if (type === 'price') {
+            filteredProducts.sort((a, b) => a.price - b.price);
+        } else if (type === 'brand') {
+            filteredProducts.sort((a, b) => a.brand.localeCompare(b.brand));
+        }
+        renderProducts();
+    }
+
+    function filterEco() {
+        filteredProducts = products.filter(p => p.eco);
+        renderProducts();
+    }
+
+    function showEcoDefinition() {
+        const def = document.getElementById('ecoDefinition');
+        def.style.display = def.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function filterByBrand() {
+        const brand = document.getElementById('brandFilter').value;
+        filteredProducts = brand ? products.filter(p => p.brand === brand) : [...products];
+        renderProducts();
+    }
+
+    function searchProducts() {
+        const q = document.getElementById('searchInput').value.toLowerCase();
+        filteredProducts = products.filter(p =>
+            p.name.toLowerCase().includes(q) ||
+            p.brand.toLowerCase().includes(q)
+        );
+        renderProducts();
+    }
+
+    function openVisualSearch() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'image/*';
+        input.onchange = () => {
+            alert("🔍 Visual Search: Searching for shoes similar to your uploaded photo...");
+            // Integrate AI backend here
+        };
+        input.click();
+    }
+
+    function addToCart(name, price, img) {
+        let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+        let found = cart.find(item => item.name === name);
+        if (found) {
+            found.qty += 1;
+        } else {
+            cart.push({ name, price, img, qty: 1 });
+        }
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(name + " added to cart!");
+    }
+
+    // Navbar shrink effect
+    document.addEventListener('DOMContentLoaded', function() {
+        renderProducts();
+        const nav = document.querySelector('.hero-nav');
+        const shrinkOn = 60;
+        window.addEventListener('scroll', function() {
+            if(window.scrollY > shrinkOn) {
+                nav.classList.add('shrunk');
+            } else {
+                nav.classList.remove('shrunk');
+            }
+        });
     });
-});
-</script>
+    </script>
 </body>
 </html>
