@@ -1,17 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap');
 
 :root {
-    --primary: #114e60;      /* Deep Sea Blue */
-    --accent: #38bdf8;       /* Bright Sky Blue */
-    --bg: #e0f7fa;           /* Light Aqua */
-    --text: #114e60;         /* Deep Sea Blue */
-    --white: #fff;
-    --sand: #ffe5b4;         /* Sand */
-    --wave: #0ea5e9;         /* Wave Blue */
-    --foam: #bae6fd;         /* Foam Blue */
-    --sun: #fff3b0;          /* Sunlight (optional accent) */
+    --primary: #000000;      /* Black */
+    --accent: #000000;       /* Black */
+    --bg: #ffffff;           /* White */
+    --text: #000000;         /* Black */
+    --white: #ffffff;
+    --sand: #ffffff;         /* White */
+    --wave: #000000;         /* Black */
+    --foam: #000000;         /* Black */
+    --sun: #ffffff;          /* White */
 }
-/* --- GLASSY NAVBAR --- */
+
+/* Reuse existing navbar styles */
 .hero-nav {
     position: fixed;
     top: 0;
@@ -20,28 +21,23 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background: rgba(255,255,255,0.18);
-    box-shadow: 0 8px 32px 0 rgba(31,38,135,0.07);
-    backdrop-filter: blur(18px) saturate(1.5);
-    -webkit-backdrop-filter: blur(18px) saturate(1.5);
+    background: rgba(255,255,255,0.9);
+    box-shadow: 0 8px 32px 0 rgba(0,0,0,0.1);
+    backdrop-filter: blur(18px) saturate(1);
+    -webkit-backdrop-filter: blur(18px) saturate(1);
     z-index: 100;
     padding: 1.2rem 0 1.2rem 3vw;
-    border-bottom: 1px solid rgba(56,189,248,0.10);
+    border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
 .hero-nav .logo {
     font-size: 2.3rem;
     font-weight: 900;
-    color: #38bdf8;
+    color: var(--primary);
     letter-spacing: 2.5px;
-    text-shadow: 0 2px 8px #38bdf833;
-    margin-right: 3vw;
     font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
     text-transform: uppercase;
-    background: linear-gradient(90deg, #38bdf8 10%, #0ea5e9 60%, #fff3b0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    margin-right: 3vw;
 }
 
 .hero-nav ul {
@@ -59,265 +55,184 @@
 
 .hero-nav a {
     text-decoration: none;
-    color: #114e60;
+    color: var(--primary);
     font-weight: 700;
     font-size: 1.08rem;
     padding: 0.7rem 2.1rem;
     border-radius: 2rem;
-    background: rgba(255,255,255,0.72);
-    box-shadow: 0 4px 24px #bae6fd88;
-    transition: background 0.18s, color 0.18s, box-shadow 0.18s, transform 0.15s;
-    text-shadow: 0 1px 4px #38bdf81c;
-    margin: 0;
-    display: inline-block;
-    position: relative;
+    background: rgba(255,255,255,0.9);
+    transition: background 0.18s, color 0.18s, transform 0.15s;
     letter-spacing: 1px;
 }
 
 .hero-nav a:hover,
 .hero-nav a:focus {
-    background: linear-gradient(90deg, #38bdf8 0%, #fff3b0 100%);
-    color: #114e60;
-    box-shadow: 0 8px 32px #38bdf888, 0 2px 8px #fff3b055;
+    background: var(--primary);
+    color: var(--white);
     transform: translateY(-2px) scale(1.05);
 }
 
-/* --- HERO SECTION --- */
-.hero {
-    position: relative;
-    width: 100vw;
-    height: 100vh;
-    min-height: 100vh;
-    overflow: hidden; /* Ensures absolutely positioned children can't overflow */
-    margin: 0;
+/* Main content styling */
+main {
+    padding: 8rem 3vw 3rem 3vw;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.about-section, .cart-section {
+    margin-top: 1.5rem;
+}
+
+/* Add padding-top to about-title and cart-title to prevent hiding behind navbar */
+.about-title, .cart-title {
+    padding-top: 1.5rem;
+}
+
+.page-title {
+    font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    color: var(--primary);
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+/* Products grid */
+.products {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
     padding: 0;
+    margin: 0 auto;
+}
+
+/* Individual product card */
+.product {
+    background: var(--white);
+    border: 1.5px solid var(--primary);
+    border-radius: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 1.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
+    align-items: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.hero-bg-video {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100vw;
-    height: 100vh;
+.product:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+
+/* Brand logo */
+.brand-logo {
+    width: 80px;
+    height: auto;
+    margin-bottom: 1rem;
+    filter: brightness(0) saturate(100%) invert(0%);
+    transition: filter 0.3s ease;
+}
+
+.product:hover .brand-logo {
+    filter: brightness(0) saturate(100%) invert(20%) sepia(100%) saturate(500%) hue-rotate(180deg);
+}
+
+/* Product image */
+.product > img:not(.brand-logo) {
+    width: 100%;
+    height: 180px;
     object-fit: cover;
-    z-index: 0;
-    border-radius: 0;
-    filter: brightness(0.92) blur(0.5px);
-    inset: 0;
-    margin: 0;
-    padding: 0;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-.hero-caption {
-    position: relative;
-    left: 4vw;
-    bottom: auto;
-    z-index: 2;
-    color: #fff;
-    text-align: left;
-    max-width: 48vw;
-    width: fit-content;
-    box-sizing: border-box;
-    padding: 1.5rem 2rem;
-    margin: 0 0 5vh 0;
-    background: rgba(0, 0, 0, 0.35);
-    border-radius: 1.2rem;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.6);
+/* Product title */
+.product h3 {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0.5rem 0 0.3rem 0;
+    text-align: center;
 }
 
+/* Product price */
+.product p {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #444;
+    margin: 0 0 1rem 0;
+}
+
+/* Brand link */
+.brand-link {
+    font-size: 0.9rem;
+    color: var(--primary);
+    text-decoration: none;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+
+.brand-link:hover,
+.brand-link:focus {
+    color: #5555ff;
+    text-decoration: underline;
+}
+
+/* Add to Cart button */
+.product button {
+    background-color: var(--primary);
+    color: var(--white);
+    border: none;
+    border-radius: 2rem;
+    padding: 0.7rem 1.8rem;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.product button:hover {
+    background-color: #333333;
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1.5rem 0;
+    background: var(--white);
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: inset 0 1px 0 rgba(0,0,0,0.2);
+}
+
+/* Responsive adjustments */
 @media (max-width: 900px) {
-    .hero-caption {
-        left: 3vw;
-        max-width: 90vw;
-        padding: 1.2rem 1rem;
-        border-radius: 1.2rem;
-        margin-bottom: 3vh;
+    main {
+        padding: 6rem 2vw 3rem 2vw;
+    }
+    .products {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 1.5rem;
+    }
+    .product > img:not(.brand-logo) {
+        height: 150px;
     }
 }
 
 @media (max-width: 600px) {
-    .hero-caption {
-        left: 2vw;
-        max-width: 96vw;
-        padding: 1rem 0.7rem;
-        border-radius: 1rem;
-        margin-bottom: 2vh;
+    main {
+        padding: 5rem 1.5vw 2rem 1.5vw;
     }
-}
-
-.hero-caption h1 {
-    font-family: 'Montserrat', 'Arial Black', Arial, sans-serif;
-    font-size: 3.2rem;
-    font-weight: 900;
-    letter-spacing: 2px;
-    background: linear-gradient(90deg, #38bdf8 10%, #0ea5e9 60%, #fff3b0 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 4px 24px #0ea5e9cc);
-    margin: 0 0 1rem 0;
-    text-transform: uppercase;
-    animation: neonGlow 2.5s infinite alternate;
-}
-
-.cta-btn {
-    background: linear-gradient(90deg, #38bdf8 0%, #0ea5e9 100%);
-    color: #fff;
-    padding: 1rem 2.5rem;
-    border: none;
-    border-radius: 2rem;
-    font-size: 1.2rem;
-    font-weight: 800;
-    cursor: pointer;
-    text-decoration: none;
-    box-shadow: 0 4px 32px #0ea5e955, 0 2px 8px #fff3b055;
-    transition: background 0.2s, transform 0.2s;
-    letter-spacing: 1px;
-    text-shadow: 0 2px 8px #0ea5e9cc;
-    animation: popBtn 1.5s cubic-bezier(.23,1.01,.32,1) both;
-    align-self: flex-start;
-    display: inline-block;
-}
-
-.cta-btn:hover {
-    background: linear-gradient(90deg, #fff3b0 0%, #38bdf8 100%);
-    color: #114e60;
-    transform: scale(1.07) rotate(-2deg);
-    box-shadow: 0 8px 32px #fff3b088, 0 2px 8px #0ea5e9cc;
-}
-
-/* --- FEATURES --- */
-.features {
-    display: flex;
-    justify-content: center;
-    gap: 3rem;
-    margin: 3rem 0;
-    padding: 0 4vw;
-    flex-wrap: wrap;
-}
-
-.feature {
-    background: rgba(255,255,255,0.85);
-    border: 2px solid var(--foam);
-    padding: 2rem 1.5rem;
-    border-radius: 1.5rem;
-    box-shadow: 0 2px 12px rgba(34,34,59,0.06);
-    text-align: center;
-    min-width: 140px;
-    flex: 1 1 140px;
-    max-width: 180px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.2s;
-}
-
-.feature:hover {
-    transform: translateY(-8px) scale(1.04);
-    box-shadow: 0 8px 24px #38bdf866;
-    background: linear-gradient(120deg, #bae6fd 0%, #fff3b0 100%);
-}
-
-.feature span {
-    font-size: 2.5rem;
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.feature h3 {
-    font-family: 'Montserrat', Arial, sans-serif;
-    font-size: 1.1rem;
-    font-weight: 800;
-    color: var(--primary);
-    margin: 0;
-    letter-spacing: 0.5px;
-}
-
-/* --- FOOTER --- */
-footer {
-    text-align: center;
-    padding: 1.5rem 0;
-    background: var(--bg);
-    color: var(--primary);
-    font-weight: 600;
-    font-size: 0.9rem;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.6);
-}
-
-/* --- BUBBLE BACKGROUND CANVAS --- */
-#bubble-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    pointer-events: none;
-    z-index: -1;
-}
-
-/* --- ANIMATIONS --- */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(40px);}
-    to { opacity: 1; transform: translateY(0);}
-}
-@keyframes neonGlow {
-    from { filter: drop-shadow(0 0 8px #38bdf8cc); }
-    to { filter: drop-shadow(0 0 32px #fff3b0cc); }
-}
-@keyframes popBtn {
-    from { opacity: 0; transform: scale(0.7);}
-    to { opacity: 1; transform: scale(1);}
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 900px) {
-    .hero-caption {
-        left: 3vw;
-        max-width: 90vw;
-        padding: 1.2rem 1rem;
-        border-radius: 1.2rem;
-        margin-bottom: 3vh;
+    .products {
+        grid-template-columns: 1fr;
+        gap: 1rem;
     }
-    .features {
-        gap: 1.5rem;
-        margin: 2rem 0;
-    }
-    .feature {
-        min-width: 120px;
-        max-width: 140px;
-        padding: 1.5rem 1rem;
-    }
-}
-
-@media (max-width: 700px) {
-    .hero-caption {
-        left: 2vw;
-        max-width: 96vw;
-        padding: 1rem 0.7rem;
-        border-radius: 1rem;
-        margin-bottom: 2vh;
-    }
-    .hero-caption h1 {
-        font-size: 2rem;
-    }
-    .cta-btn {
-        font-size: 1rem;
-        padding: 0.8rem 1.5rem;
-    }
-    .features {
-        flex-direction: column;
-        align-items: center;
-        gap: 1.5rem;
-        margin: 2rem 0;
-    }
-    .feature {
-        width: 90vw;
-        max-width: 320px;
-        padding: 1.5rem 2rem;
+    .product > img:not(.brand-logo) {
+        height: 140px;
     }
 }

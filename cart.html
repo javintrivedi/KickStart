@@ -4,27 +4,244 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cart | KickStart</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background: #f6f7fb;
+            margin: 0;
+            padding: 0;
+        }
+        .hero {
+            padding-top: 5.5rem;
+        }
+        .cart-section {
+            max-width: 800px;
+            margin: 6rem auto 2.5rem auto;
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 2.5rem 2rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .cart-title {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 2.1rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            color: #181818;
+            margin: 2.5rem 0 2.2rem 0;
+            text-align: center;
+        }
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 1.5rem;
+        }
+        .cart-table th, .cart-table td {
+            padding: 0.9rem 0.6rem;
+            text-align: left;
+        }
+        .cart-table th {
+            background: #f6f7fb;
+            font-weight: 700;
+            color: #222;
+            border-bottom: 2px solid #eee;
+        }
+        .cart-table td {
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: middle;
+        }
+        .cart-img {
+            width: 56px;
+            height: 56px;
+            object-fit: contain;
+            border-radius: 0.5rem;
+            background: #f7f7f7;
+        }
+        .cart-remove-btn {
+            background: #ff6600;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 2rem;
+            height: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+        }
+        .cart-remove-btn:hover, .cart-remove-btn:focus {
+            background: #d43d00;
+            transform: scale(1.1);
+            outline: none;
+        }
+        .cart-summary {
+            text-align: right;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: #181818;
+            margin-top: 1.2rem;
+        }
+        .checkout-btn {
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 2rem;
+            padding: 0.7rem 2.2rem;
+            font-size: 1.08rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            margin-top: 1.5rem;
+            float: right;
+        }
+        .checkout-btn:hover, .checkout-btn:focus {
+            background: #ff
+            color: #fff;
+            transform: scale(1.06);
+            outline: none;
+        }
+        .cart-empty {
+            text-align: center;
+            color: #888;
+            font-size: 1.15rem;
+            margin: 2.5rem 0;
+        }
+        @media (max-width: 900px) {
+            .cart-section {
+                margin-top: 4.5rem;
+                padding: 1.5rem 1rem 1.2rem 1rem;
+            }
+            .cart-title {
+                font-size: 1.5rem;
+                margin: 2rem 0 1.5rem 0;
+            }
+        }
+        @media (max-width: 600px) {
+            .cart-section {
+                margin-top: 3.2rem;
+                padding: 1rem 0.5rem 1rem 0.5rem;
+            }
+            .cart-table th, .cart-table td {
+                padding: 0.5rem 0.3rem;
+            }
+            .checkout-btn {
+                width: 100%;
+                float: none;
+            }
+        }
+    </style>
 </head>
 <body>
-    <nav class="hero-nav">
-                <div class="logo">KickStart</div>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="collections.html">Collections</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="cart.html">Cart</a></li>
-                </ul>
-            </nav>
+    <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
+        <div class="logo" aria-label="KickStart logo">KickStart</div>
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
+            <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
+            <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
+            <li><a href="ai-analyzer.html"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI Analyzer</span></a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
+            <li><a href="cart.html" aria-current="page"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span></a></li>
+        </ul>
+    </nav>
     <main>
-        <h1>Your Cart</h1>
-        <div id="cart-items"></div>
-        <p id="cart-total"></p>
+        <section class="cart-section" aria-label="Shopping Cart">
+            <h1 class="cart-title">Your Cart</h1>
+            <!-- Example cart table, replace with dynamic content as needed -->
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th> </th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-body"></tbody>
+            </table>
+            <div class="cart-summary">
+                Total: <span id="cart-total">₹12,795</span>
+            </div>
+            <button class="checkout-btn">Checkout</button>
+            <!-- If cart is empty, show this instead:
+            <div class="cart-empty">Your cart is empty.</div>
+            -->
+        </section>
     </main>
     <footer>
         <p>&copy; 2025 KickStart. All rights reserved.</p>
     </footer>
-    <script src="script.js"></script>
+    <script>
+function renderCart() {
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const tbody = document.getElementById('cart-body');
+    const totalSpan = document.getElementById('cart-total');
+    tbody.innerHTML = '';
+    let total = 0;
+    if (cart.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="cart-empty">Your cart is empty.</td></tr>`;
+        totalSpan.textContent = '₹0';
+        return;
+    }
+    cart.forEach((item, idx) => {
+        total += item.price * item.qty;
+        tbody.innerHTML += `
+            <tr>
+                <td><img class="cart-img" src="${item.img}" alt="${item.name}"></td>
+                <td>${item.name}</td>
+                <td>₹${item.price.toLocaleString()}</td>
+                <td>${item.qty}</td>
+                <td>
+                    <button class="cart-remove-btn" aria-label="Remove ${item.name}" onclick="removeFromCart(${idx})">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </td>
+            </tr>
+        `;
+    });
+    totalSpan.textContent = '₹' + total.toLocaleString();
+}
+function removeFromCart(idx) {
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    cart.splice(idx, 1);
+    localStorage.setItem('cart', JSON.stringify(cart));
+    renderCart();
+}
+function checkoutCart() {
+    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    if (cart.length === 0) {
+        alert("Your cart is empty!");
+        return;
+    }
+    localStorage.removeItem('cart');
+    renderCart();
+    alert("Thank you for shopping with KickStart!");
+}
+document.addEventListener('DOMContentLoaded', function() {
+    // Navbar shrink
+    const nav = document.querySelector('.hero-nav');
+    const shrinkOn = 60;
+    window.addEventListener('scroll', function() {
+        if(window.scrollY > shrinkOn) {
+            nav.classList.add('shrunk');
+        } else {
+            nav.classList.remove('shrunk');
+        }
+    });
+    // Render cart
+    renderCart();
+    // Checkout
+    document.querySelector('.checkout-btn').onclick = checkoutCart;
+});
+    </script>
 </body>
 </html>

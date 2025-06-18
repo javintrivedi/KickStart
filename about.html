@@ -4,36 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | KickStart</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background: #f6f7fb;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .about-section {
+            max-width: 800px;
+            margin: 6rem auto 2.5rem auto;
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 2.5rem 2rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .about-title {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 2.1rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            color: #181818;
+            margin: 2.5rem 0 2.2rem 0;
+            text-align: center;
+        }
+        .about-section p {
+            font-size: 1.08rem;
+            color: #333;
+            line-height: 1.7;
+            margin: 0;
+        }
+        .about-section strong {
+            color: #ff6600;
+            font-weight: 700;
+        }
+        @media (max-width: 900px) {
+            .about-section {
+                margin-top: 4.5rem;
+                padding: 1.5rem 1rem 1.2rem 1rem;
+            }
+            .about-title {
+                font-size: 1.5rem;
+                margin: 2rem 0 1.5rem 0;
+            }
+        }
+        @media (max-width: 600px) {
+            .about-section {
+                margin-top: 3.2rem;
+                padding: 1rem 0.5rem 1rem 0.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <nav class="hero-nav">
-                <div class="logo">KickStart</div>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="collections.html">Collections</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="cart.html">Cart</a></li>
-                </ul>
-            </nav>
+    <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
+        <div class="logo" aria-label="KickStart logo">KickStart</div>
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
+            <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
+            <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
+            <li><a href="ai-analyzer.html"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI Analyzer</span></a></li>
+            <li><a href="about.html" aria-current="page"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
+            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span></a></li>
+        </ul>
+    </nav>
     <main>
-        <h1 class="page-title">About KickStart</h1>
-        <section class="about-section">
+            <section class="about-section" aria-label="About KickStart">
+                <h1 class="about-title">About KickStart</h1>
             <p>
                 <strong>KickStart</strong> is your go-to destination for the freshest sneaker drops and timeless classics. We curate the best from Nike, Adidas, Puma, Converse, and more—so you can flex your style your way.
             </p>
             <p>
-                <strong>Our Mission:</strong> At KickStart, we empower Gen Z to express themselves with bold, iconic footwear that’s as sustainable as it is stylish. Our minimalist designs are made for maximum impact—on your look, not the planet.
-
-We believe self expression should never come at the cost of the future. That’s why every pair is crafted with purpose, blending fashion-forward aesthetics with eco-conscious innovation.
-
-Step into your story. Step into KickStart—where bold meets better.
+                <strong>Our Mission:</strong> At KickStart, we empower Gen-Z to express themselves with bold, iconic footwear that’s as sustainable as it is stylish. Our minimalist designs are made for maximum impact—on your look, not the planet.
+            </p>
+            <p>
+                We believe self-expression should never come at the cost of the future. That’s why every pair is crafted with purpose, blending fashion-forward aesthetics with eco-conscious innovation.
+            </p>
+            <p>
+                Step into your story. Step into <strong>KickStart</strong>—where bold meets better.
             </p>
         </section>
     </main>
     <footer>
         <p>&copy; 2025 KickStart. All rights reserved.</p>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nav = document.querySelector('.hero-nav');
+            const shrinkOn = 60; // px
+            window.addEventListener('scroll', function() {
+                if(window.scrollY > shrinkOn) {
+                    nav.classList.add('shrunk');
+                } else {
+                    nav.classList.remove('shrunk');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

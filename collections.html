@@ -4,50 +4,285 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Collections | KickStart</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background: #f6f7fb;
+            margin: 0;
+            padding: 0;
+        }
+        .collections-section {
+            margin: 5.5rem auto 2.5rem auto;
+            max-width: 1200px;
+            padding: 0 2vw;
+        }
+        .collections-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding-top: 2.5rem; /* Add this line for top padding */
+        }
+        .collections-header h1 {
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 2.2rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            color: #181818;
+            margin-bottom: 0.7rem;
+        }
+        .collections-header p {
+            font-size: 1.08rem;
+            color: #444;
+            margin: 0 auto 1.2rem auto;
+            max-width: 700px;
+        }
+        .collections-features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2.5rem;
+        }
+        .collections-feature {
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            padding: 1.2rem 1.5rem;
+            min-width: 220px;
+            max-width: 270px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: box-shadow 0.2s, transform 0.2s;
+        }
+        .collections-feature:hover {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+            transform: translateY(-4px) scale(1.03);
+        }
+        .collections-feature span {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .collections-feature h3 {
+            font-size: 1.08rem;
+            font-weight: 700;
+            margin: 0.2rem 0 0.5rem 0;
+            color: #181818;
+        }
+        .collections-feature p {
+            font-size: 0.97rem;
+            color: #555;
+            margin: 0;
+        }
+        .collections-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 2.2rem;
+        }
+        .collection-card {
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 2rem 1.2rem 1.5rem 1.2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: box-shadow 0.22s, transform 0.22s;
+            position: relative;
+            min-height: 340px;
+        }
+        .collection-card:hover, .collection-card:focus-within {
+            box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+            transform: translateY(-6px) scale(1.025);
+        }
+        .collection-img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 1.2rem;
+            border-radius: 0.7rem;
+            background: #f7f7f7;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .collection-title {
+            font-size: 1.22rem;
+            font-weight: 800;
+            margin: 0.5rem 0 0.3rem 0;
+            color: #181818;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        .collection-desc {
+            font-size: 1.01rem;
+            color: #444;
+            text-align: center;
+            margin-bottom: 1.1rem;
+            line-height: 1.5;
+        }
+        .view-collection-btn {
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 2rem;
+            padding: 0.55rem 1.4rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.04rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            transition: background 0.2s, transform 0.2s;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: auto;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        }
+        .view-collection-btn:hover, .view-collection-btn:focus {
+            background: #ff6600;
+            color: #fff;
+            transform: scale(1.08);
+            outline: none;
+        }
+        @media (max-width: 900px) {
+            .collections-section {
+                margin-top: 4.5rem;
+            }
+            .collections-header h1 {
+                font-size: 1.5rem;
+            }
+        }
+        @media (max-width: 700px) {
+            .collections-section {
+                margin-top: 3.2rem;
+                padding: 0 1vw;
+            }
+            .collections-grid {
+                gap: 1.2rem;
+            }
+            .collection-img {
+                width: 80px;
+                height: 80px;
+            }
+            .collection-card {
+                padding: 1.2rem 0.7rem 1rem 0.7rem;
+                min-height: 220px;
+            }
+            .collections-features {
+                gap: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <nav class="hero-nav">
-                <div class="logo">KickStart</div>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="collections.html">Collections</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="cart.html">Cart</a></li>
-                </ul>
-            </nav>
+    <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
+        <div class="logo" aria-label="KickStart logo">KickStart</div>
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
+            <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
+            <li><a href="collections.html" aria-current="page"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
+            <li><a href="ai-analyzer.html"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI Analyzer</span></a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
+            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span></a></li>
+        </ul>
+    </nav>
     <main>
-        <h1 class="page-title">Curated Collections</h1>
-        <div class="collections">
-            <div class="collection-card">
-                <img src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=500&q=80" alt="Street Style">
-                <h2>Street Style</h2>
-                <p>Bold, trendy, and made for the city. Featuring Nike, Adidas, and Puma.</p>
-                <a href="shop.html" class="cta-btn">Shop Street</a>
+        <section class="collections-section">
+            <div class="collections-header">
+                <h1>Discover Our Versatile Collections</h1>
+                <p>
+                    At <strong>KickStart</strong>, we believe in shoes that fit every mood, every move, and every moment. Our curated collections bring together the best in style, comfort, and innovation—so you can step up your game, wherever life takes you.
+                </p>
             </div>
-            <div class="collection-card">
-                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=500&q=80" alt="Minimal Vibes">
-                <h2>Minimal Vibes</h2>
-                <p>Clean lines, neutral tones. For the understated and the stylish.</p>
-                <a href="shop.html" class="cta-btn">Shop Minimal</a>
+            <div class="collections-features">
+                <div class="collections-feature">
+                    <span aria-hidden="true">🌈</span>
+                    <h3>All-Occasion Styles</h3>
+                    <p>From street to sport, find sneakers for every event and every personality.</p>
+                </div>
+                <div class="collections-feature">
+                    <span aria-hidden="true">🦶</span>
+                    <h3>Custom Fit Comfort</h3>
+                    <p>Adaptive insoles and ergonomic designs for all-day support.</p>
+                </div>
+                <div class="collections-feature">
+                    <span aria-hidden="true">🌱</span>
+                    <h3>Eco-Friendly Choices</h3>
+                    <p>Made with recycled and sustainable materials for a greener tomorrow.</p>
+                </div>
+                <div class="collections-feature">
+                    <span aria-hidden="true">💧</span>
+                    <h3>Weather Ready</h3>
+                    <p>Water-resistant and durable—perfect for any adventure.</p>
+                </div>
+                <div class="collections-feature">
+                    <span aria-hidden="true">🎨</span>
+                    <h3>Personalized Designs</h3>
+                    <p>Exclusive colorways and patterns to match your unique vibe.</p>
+                </div>
+                <div class="collections-feature">
+                    <span aria-hidden="true">⭐</span>
+                    <h3>Top Rated</h3>
+                    <p>Loved by thousands, rated 4.9/5 by our happy customers.</p>
+                </div>
             </div>
-            <div class="collection-card">
-                <img src="https://images.unsplash.com/photo-1528701800484-905dffb7c6b4?auto=format&fit=crop&w=500&q=80" alt="Eco Friendly">
-                <h2>Eco Friendly</h2>
-                <p>Shoes that care for the planet. Explore sustainable picks from top brands.</p>
-                <a href="shop.html" class="cta-btn">Shop Eco</a>
+            <div class="collections-grid">
+                <div class="collection-card" tabindex="0">
+                    <img class="collection-img" src="https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/183930d6-ec63-471a-8413-b094dae0e330/air-jordan-1-low-og-shoes-29tsx7.png" alt="Trending Sneakers">
+                    <div class="collection-title">Trending Sneakers</div>
+                    <div class="collection-desc">Discover the latest drops and most-wanted kicks of the season.</div>
+                    <a href="shop.html" class="view-collection-btn" aria-label="Shop Trending Sneakers">Shop Now</a>
+                </div>
+                <div class="collection-card" tabindex="0">
+                    <img class="collection-img" src="https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/07567ea7d2bb425b8651a8bf0117e4f1_9366/Samba_OG_Shoes_White_B75806_06_standard.jpg" alt="Classics">
+                    <div class="collection-title">Classics</div>
+                    <div class="collection-desc">Timeless icons from Converse, Adidas, Nike, and more.</div>
+                    <a href="shop.html" class="view-collection-btn" aria-label="Shop Classics">Shop Now</a>
+                </div>
+                <div class="collection-card" tabindex="0">
+                    <img class="collection-img" src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/308062/04/sv01/fnd/IND/fmt/png/Scuderia-Ferrari-Neo-Cat-2.0-Driving-Shoes" alt="Performance">
+                    <div class="collection-title">Performance</div>
+                    <div class="collection-desc">Engineered for running, training, and all-day comfort.</div>
+                    <a href="shop.html" class="view-collection-btn" aria-label="Shop Performance">Shop Now</a>
+                </div>
+                <div class="collection-card" tabindex="0">
+                    <img class="collection-img" src="https://www.converse.in/media/catalog/product/1/6/167491c_1.jpg?optimize=medium&bg-color=255%2C255%2C255&fit=cover&height=900&width=900&format=webp" alt="Eco-Friendly">
+                    <div class="collection-title">Eco-Friendly</div>
+                    <div class="collection-desc">Sustainable styles made with recycled and planet-friendly materials.</div>
+                    <a href="shop.html" class="view-collection-btn" aria-label="Shop Eco-Friendly">Shop Now</a>
+                </div>
+                <div class="collection-card" tabindex="0">
+                    <img class="collection-img" src="https://images.unsplash.com/photo-1517260911205-8c1e1b6c7a6b?auto=format&fit=crop&w=400&q=80" alt="Limited Editions">
+                    <div class="collection-title">Limited Editions</div>
+                    <div class="collection-desc">Rare finds and exclusive collabs you won’t see anywhere else.</div>
+                    <a href="shop.html" class="view-collection-btn" aria-label="Shop Limited Editions">Shop Now</a>
+                </div>
+                <div class="collection-card" tabindex="0">
+                    <img class="collection-img" src="https://images.unsplash.com/photo-1519864600265-abb23847ef2c?auto=format&fit=crop&w=400&q=80" alt="Everyday Essentials">
+                    <div class="collection-title">Everyday Essentials</div>
+                    <div class="collection-desc">Minimalist, versatile, and built for your daily hustle.</div>
+                    <a href="shop.html" class="view-collection-btn" aria-label="Shop Everyday Essentials">Shop Now</a>
+                </div>
             </div>
-            <div class="collection-card">
-                <img src="https://images.unsplash.com/photo-1517260911205-8a3bfa7c7d97?auto=format&fit=crop&w=500&q=80" alt="Classics">
-                <h2>Classics</h2>
-                <p>Timeless icons like Converse Chuck Taylor and more. Always in style.</p>
-                <a href="shop.html" class="cta-btn">Shop Classics</a>
-            </div>
-        </div>
+        </section>
     </main>
     <footer>
         <p>&copy; 2025 KickStart. All rights reserved.</p>
     </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nav = document.querySelector('.hero-nav');
+            const shrinkOn = 60;
+            window.addEventListener('scroll', function() {
+                if(window.scrollY > shrinkOn) {
+                    nav.classList.add('shrunk');
+                } else {
+                    nav.classList.remove('shrunk');
+                }
+            });
+        });
+    </script>
 </body>
 </html>

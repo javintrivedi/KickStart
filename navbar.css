@@ -1,0 +1,136 @@
+/* Navbar styles extracted from shop.html */
+a:focus, button:focus {
+    outline: 3px solid #ff6600;
+    outline-offset: 2px;
+}
+.hero-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.2rem 3vw;
+    z-index: 100;
+    background: rgba(255,255,255,0.85);
+    backdrop-filter: blur(6px);
+    transition: box-shadow 0.2s;
+}
+.logo {
+    font-size: 2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #181818;
+    margin-left: auto;
+    margin-right: 0;
+}
+.hero-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+    margin-left: 0;
+    margin-right: auto;
+}
+.hero-nav li a {
+    color: #181818;
+    font-weight: 600;
+    font-size: 1.08rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+}
+.hero-nav li a[aria-current="page"], .hero-nav li a:hover {
+    color: #ff6600;
+}
+.hero-nav.shrunk {
+    padding: 0.5rem 2vw;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+}
+.hero-nav.shrunk .logo {
+    font-size: 1.3rem;
+}
+.hero-nav.shrunk ul {
+    gap: 1.2rem;
+}
+.hero-nav.shrunk li a {
+    padding: 0.5rem 0.7rem;
+    font-size: 0;
+    min-width: 2.5rem;
+    justify-content: center;
+}
+.hero-nav.shrunk li a .nav-text {
+    display: none;
+}
+.hero-nav li a i {
+    display: inline-block !important;
+}
+.hero-nav li a .fa-home,
+.hero-nav li a .fa-store,
+.hero-nav li a .fa-th-large,
+.hero-nav li a .fa-shoe-prints,
+.hero-nav li a .fa-info-circle,
+.hero-nav li a .fa-shopping-cart {
+    font-size: 1.25rem;
+    min-width: 1.25rem;
+    min-height: 1.25rem;
+}
+
+/* Burger menu button styles */
+.burger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 28px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 110;
+}
+
+.burger-menu:focus {
+    outline: 3px solid #ff6600;
+    outline-offset: 2px;
+}
+
+.burger-bar {
+    width: 100%;
+    height: 3px;
+    background-color: #181818;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Responsive styles */
+@media (max-width: 700px) {
+    .hero-nav ul {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: rgba(255,255,255,0.95);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        padding: 1rem 0;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        border-radius: 0 0 8px 8px;
+    }
+    .hero-nav ul.nav-open {
+        display: flex;
+    }
+    .burger-menu {
+        display: flex !important;
+        position: relative;
+        z-index: 120;
+    }
+    .hero-nav li a {
+        padding: 0.8rem 1.5rem;
+        font-size: 1.1rem;
+    }
+}

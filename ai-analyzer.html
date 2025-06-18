@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Analyzer | KickStart</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background: #f6f7fb;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+        .hero-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 3vw;
+            z-index: 100;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(6px);
+            transition: box-shadow 0.2s;
+        }
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #181818;
+            margin-left: auto;
+            margin-right: 0;
+        }
+        .hero-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+            margin-left: 0;
+            margin-right: auto;
+        }
+        .hero-nav li a {
+            color: #181818;
+            font-weight: 600;
+            font-size: 1.08rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+        .hero-nav li a[aria-current="page"], .hero-nav li a:hover {
+            color: #ff6600;
+        }
+        .ai-analyzer-section {
+            margin-top: 8rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 80vh;
+        }
+        .ai-analyzer-card {
+            background: #fff;
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+            padding: 2.5rem 2.5rem 2rem 2.5rem;
+            max-width: 420px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+        .ai-analyzer-card h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            color: #181818;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+        .ai-analyzer-card p {
+            font-size: 1.1rem;
+            color: #222;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        .ai-analyzer-btn {
+            background: #ff6600;
+            color: #fff;
+            padding: 0.8rem 2.2rem;
+            font-size: 1.08rem;
+            font-weight: 700;
+            border-radius: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: background 0.2s,transform 0.2s;
+            border: none;
+            text-decoration: none;
+            margin-top: 0.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        .ai-analyzer-btn:hover, .ai-analyzer-btn:focus {
+            background: #181818;
+            color: #fff;
+            transform: scale(1.06);
+        }
+        #ai-video-modal {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(0,0,0,0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+        }
+        #ai-video-modal-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background: #fff;
+            border-radius: 1.2rem;
+            padding: 2rem;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.25);
+            position: relative;
+        }
+        #ai-video-modal video {
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.15);
+            width: 350px;
+            height: 350px;
+            background: #000;
+        }
+        #ai-video-modal .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #ff6600;
+            color: #fff;
+            border: none;
+            border-radius: 2rem;
+            padding: 0.5rem 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+        }
+        #ai-video-modal .close-btn:hover {
+            background: #181818;
+        }
+        @media (max-width: 600px) {
+            .ai-analyzer-card {
+                padding: 1.2rem;
+            }
+            #ai-video-modal video {
+                width: 90vw;
+                height: 50vw;
+                min-width: 180px;
+                min-height: 180px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
+        <div class="logo" aria-label="KickStart logo">KickStart</div>
+        <ul>
+            <li><a href="index.html"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
+            <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
+            <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
+            <li><a href="ai-analyzer.html"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI Analyzer</span></a></li>
+            <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
+            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span></a></li>
+        </ul>
+    </nav>
+    <main>
+        <section class="ai-analyzer-section">
+            <div class="ai-analyzer-card">
+                <h1>AI Shoe Fit Analyzer</h1>
+                <p>
+                    Try our AR-powered shoe fit analyzer!<br>
+                    Click the button below to open your camera and see how our shoes fit your foot in real time.
+                </p>
+                <button class="ai-analyzer-btn" id="open-ai-analyzer">
+                    <i class="fas fa-camera"></i> Try AR Shoe Fit
+                </button>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2025 KickStart. All rights reserved.</p>
+    </footer>
+    <script>
+    document.getElementById('open-ai-analyzer').onclick = function() {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function(stream) {
+                    // Modal
+                    let modal = document.createElement('div');
+                    modal.id = 'ai-video-modal';
+
+                    let content = document.createElement('div');
+                    content.id = 'ai-video-modal-content';
+
+                    let video = document.createElement('video');
+                    video.autoplay = true;
+                    video.srcObject = stream;
+
+                    let info = document.createElement('div');
+                    info.textContent = "Point your camera at your foot to try AR shoe fitting!";
+                    info.style.color = "#181818";
+                    info.style.marginBottom = "1rem";
+                    info.style.fontSize = "1.1rem";
+                    info.style.textAlign = "center";
+                    info.style.fontWeight = "600";
+
+                    let closeBtn = document.createElement('button');
+                    closeBtn.textContent = 'Close';
+                    closeBtn.className = 'close-btn';
+                    closeBtn.onclick = function() {
+                        stream.getTracks().forEach(track => track.stop());
+                        document.body.removeChild(modal);
+                    };
+
+                    content.appendChild(info);
+                    content.appendChild(video);
+                    content.appendChild(closeBtn);
+                    modal.appendChild(content);
+                    document.body.appendChild(modal);
+                })
+                .catch(function() {
+                    alert('Camera access denied or not available.');
+                });
+        } else {
+            alert('Camera not supported on this device.');
+        }
+    };
+    </script>
+</body>
+</html>

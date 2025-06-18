@@ -1,4 +1,4 @@
-6<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
@@ -7,66 +7,546 @@
     <title>KickStart</title>
     <link rel="icon" type="image/x-icon" href="favicon.png" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="navbar.css">
+    
+    <script src="https://cdn.botpress.cloud/webchat/v3.0/inject.js" defer></script>
+<script src="https://files.bpcontent.cloud/2025/06/11/06/20250611064508-5PKN4QR6.js" defer></script>
+    <script src="https://cdn.botpress.cloud/webchat/v3.0/bundle.js" defer></script>
+    <script>
+        window.botpressWebChat.init({
+            host: 'https://cdn.botpress.cloud/webchat/v3.0',
+            botId: 'kickstart',
+            messagingUrl: 'https://files.bpcontent.cloud/2025/06/11/06/20250611064508-5PKN4QR6.js',
+            enableReset: true,
+            enableTranscriptDownload: true,
+            enableFeedback: true,
+            enableTypingIndicator: true,
+            showPoweredBy: false
+        }); 
+        </script>
+    <link rel="stylesheet" href="/assets/css/botpress-custom-style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        html, body {
+            width: 100%;
+            max-width: 100vw;
+            overflow-x: hidden;
+            background: #f6f7fb;
+        }
+        a:focus, button:focus {
+            outline: 3px solid #ff6600;
+            outline-offset: 2px;
+        }
+        .hero {
+            padding-top: 6.5rem; /* Add space for fixed navbar */
+            position: relative;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(120deg, #f6f7fb 70%, #ff6600 100%);
+            overflow: hidden;
+        }
+        .hero-bg-video {
+            position: absolute;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            object-fit: cover;
+            z-index: 0;
+            filter: brightness(0.85) blur(1px);
+        }
+        .hero-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 3vw;
+            z-index: 100;
+            background: rgba(255,255,255,0.85);
+            backdrop-filter: blur(6px);
+            transition: box-shadow 0.2s;
+         }
+        .logo {
+            font-size: 2rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            color: #181818;
+            margin-left: auto;
+            margin-right: 0;
+        }
+        .hero-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+            margin-left: 0;
+            margin-right: auto;
+        }
+        .hero-nav li a {
+            color: #181818;
+            font-weight: 600;
+            font-size: 1.08rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: color 0.2s;
+        }
+        .hero-nav li a[aria-current="page"], .hero-nav li a:hover {
+            color: #ff6600;
+        }
+        .hero-banner {
+            position: relative;
+            z-index: 1;
+            background: rgba(255,255,255,0.68);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
+            padding: 2.5rem 2.5rem 2rem 2.5rem;
+            max-width: 480px;
+            margin-top: 5vh;
+            margin-bottom: 2vh;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            animation: fadeInUp 1.1s cubic-bezier(.23,1.01,.32,1) 0.2s both;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px);}
+            to { opacity: 1; transform: translateY(0);}
+        }
+        .hero-banner h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            color: #181818;
+            margin-bottom: 0.7rem;
+        }
+        .hero-banner p {
+            font-size: 1.13rem;
+            color: #222;
+            margin-bottom: 1.2rem;
+            line-height: 1.6;
+        }
+        .hero-banner .cta-btn {
+            background: #ff6600;
+            color: #fff;
+            padding: 0.7rem 2.2rem;
+            font-size: 1.08rem;
+            font-weight: 700;
+            border-radius: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            transition: background 0.2s,transform 0.2s;
+            border: none;
+            text-decoration: none;
+            margin-top: 0.5rem;
+        }
+        .hero-banner .cta-btn:hover, .hero-banner .cta-btn:focus {
+            background: #181818;
+            color: #fff;
+            transform: scale(1.06);
+        }
+        .scroll-down {
+            position: absolute;
+            left: 50%;
+            bottom: 2.5rem;
+            transform: translateX(-50%);
+            z-index: 2;
+            font-size: 2.2rem;
+            color: #ff6600;
+            animation: bounce 1.5s infinite;
+            cursor: pointer;
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0);}
+            50% { transform: translateX(-50%) translateY(12px);}
+        }
+        /* Features Section */
+        .features {
+            margin: 7vh auto 0 auto;
+            max-width: 1200px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+        }
+        .feature {
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            padding: 1.2rem 1.5rem;
+            min-width: 220px;
+            max-width: 270px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s, transform 0.6s;
+        }
+        .feature.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .feature:focus, .feature:hover {
+            opacity: 1;
+            transform: scale(1.06) translateY(0);
+            background: inherit;
+            transition: transform 0.3s cubic-bezier(.23,1.01,.32,1), opacity 0.3s;
+        }
+        .feature span {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        .feature h3 {
+            font-size: 1.08rem;
+            font-weight: 700;
+            margin: 0.2rem 0 0.5rem 0;
+            color: #181818;
+        }
+        .feature p {
+            font-size: 0.97rem;
+            color: #555;
+            margin: 0;
+        }
+        /* Animated Graphics Section */
+        .graphics-section {
+            margin: 7vh auto 0 auto;
+            max-width: 1200px;
+            display: flex;
+            flex-wrap: nowrap;         /* Prevent wrapping to next line */
+            gap: 2.5rem;
+            justify-content: center;
+            align-items: stretch;
+        }
+        .graphic-card {
+            background: linear-gradient(135deg, #f6f7fb 60%, #ff6600 100%);
+            border-radius: 1.2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+            padding: 1.5rem 2rem;
+            min-width: 260px;
+            max-width: 340px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) both;
+        }
+        .graphic-card img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            border-radius: 0.7rem;
+            background: #fff;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .graphic-card h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin: 0.5rem 0 0.3rem 0;
+            color: #181818;
+        }
+        .graphic-card p {
+            font-size: 0.98rem;
+            color: #444;
+            margin-bottom: 0.7rem;
+        }
+        .graphic-card a {
+            color: #ff6600;
+            font-weight: 700;
+            text-decoration: underline;
+            margin-top: 0.5rem;
+        }
+        /* Section Titles */
+        .section-title {
+            text-align: center;
+            font-family: 'Montserrat', Arial, sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #181818;
+            margin: 4vh 0 2vh 0;
+        }
+        /* Responsive */
+        @media (max-width: 900px) {
+            .hero-banner {
+                padding: 1.2rem 1.2rem;
+                max-width: 95vw;
+            }
+            .hero-banner h1 {
+                font-size: 1.5rem;
+            }
+            .features, .graphics-section {
+                gap: 1rem;
+            }
+        }
+        @media (max-width: 700px) {
+            .hero-nav {
+                flex-direction: column;
+                gap: 0.7rem;
+                padding: 0.7rem 2vw;
+            }
+            .features, .graphics-section {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            .hero-banner {
+                margin-top: 2vh;
+            }
+        }
+        @media (max-width: 1100px) {
+            .graphics-section {
+                flex-wrap: wrap;
+            }
+        }
+        @media (max-width: 800px) {
+            .graphics-section {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <main class="hero-main">
+    <main>
         <section class="hero" role="banner" aria-label="Main hero section">
             <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
                 <div class="logo" aria-label="KickStart logo">KickStart</div>
-                <ul>
-                    <li><a href="index.html" aria-current="page">Home</a></li>
-                    <li><a href="shop.html">Shop</a></li>
-                    <li><a href="collections.html">Collections</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="cart.html">Cart</a></li>
+                <ul id="nav-menu">
+                    <li><a href="index.html" aria-current="page"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
+                    <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
+                    <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
+                    <li><a href="ai-analyzer.html"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI Analyzer</span></a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
+                    <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span></a></li>
                 </ul>
             </nav>
             <video class="hero-bg-video" autoplay muted loop playsinline aria-hidden="true" loading="lazy">
                 <source src="shoes.mp4" type="video/mp4" />
                 Your browser does not support the video tag!
             </video>
-            <div class="hero-caption">
-                <h1>Step Up Your Game</h1>
-                <a href="shop.html" class="cta-btn" role="button" aria-label="Shop Now">Shop Now</a>
-                <!-- Removed the subheading text to be minimalistic -->
+            <div class="hero-banner">
+                <h1>Unleash Your Style</h1>
+                <p>
+                    Discover the boldest, most versatile sneakers for every journey.<br>
+                    <span style="color:#ff6600;font-weight:600;">Shop trending, eco-friendly, and exclusive drops</span>—delivered fast to your door.
+                </p>
+                <a href="#features" class="cta-btn" role="button" aria-label="Explore Features">Explore Features</a>
+            </div>
+            <div class="scroll-down" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
+                <i class="fas fa-angle-double-down"></i>
             </div>
         </section>
-        <section class="features" role="region" aria-label="Key features">
+        <!-- Features Section -->
+        <section class="features" id="features" role="region" aria-label="Extra features">
             <div class="feature" tabindex="0">
-                <span aria-hidden="true">🔥</span>
-                <h3>Trending Styles</h3>
+                <span aria-hidden="true">🦶</span>
+                <h3>Custom Fit Technology</h3>
+                <p>Adaptive insoles for all-day comfort and support.</p>
             </div>
             <div class="feature" tabindex="0">
-                <span aria-hidden="true">🌱</span>
-                <h3>Eco-Friendly</h3>
+                <span aria-hidden="true">💧</span>
+                <h3>Water Resistant</h3>
+                <p>Stay dry and stylish in any weather.</p>
             </div>
             <div class="feature" tabindex="0">
-                <span aria-hidden="true">🚚</span>
-                <h3>Fast Delivery</h3>
+                <span aria-hidden="true">🎨</span>
+                <h3>Personalized Designs</h3>
+                <p>Choose from exclusive colorways and patterns.</p>
+            </div>
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">🔒</span>
+                <h3>Secure Payments</h3>
+                <p>Shop safely with end-to-end encryption.</p>
+            </div>
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">♻️</span>
+                <h3>Recycled Materials</h3>
+                <p>Made with sustainable, planet-friendly fabrics.</p>
+            </div>
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">⭐</span>
+                <h3>4.9/5 Customer Rating</h3>
+                <p>Loved by thousands of happy customers.</p>
+            </div>
+            <!-- New features added here -->
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">🤖</span>
+                <h3>AI Style Recommender</h3>
+                <p>Get personalized sneaker suggestions based on your browsing and purchase history.</p>
+            </div>
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">📸</span>
+                <h3>Visual Search</h3>
+                <p>Upload a photo of any shoe and our AI finds the closest match in our store.</p>
+            </div>
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">🦶</span>
+                <h3>AI Fit Predictor</h3>
+                <p>Scan your foot with your camera and let AI suggest the perfect size for you.</p>
+            </div>
+            <div class="feature" tabindex="0">
+                <span aria-hidden="true">💬</span>
+                <h3>AI Chat Assistant</h3>
+                <p>Ask our AI anything about sneakers, orders, or style tips—24/7 support!</p>
+            </div>
+        </section>
+        <!-- AI Actions Section -->
+        <section class="ai-actions" style="display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:center;margin:2.5rem 0;">
+            <button class="cta-btn" onclick="getAIRecommendations()" style="background:#181818;"><i class="fas fa-magic"></i> AI Style Recommender</button>
+            <button class="cta-btn" onclick="visualSearch()" style="background:#ff6600;"><i class="fas fa-camera"></i> Visual Search</button>
+            <button class="cta-btn" onclick="aiFitPredictor()" style="background:#181818;"><i class="fas fa-ruler-combined"></i> AI Fit Predictor</button>
+            <button class="cta-btn" onclick="openAIChat()" style="background:#ff6600;"><i class="fas fa-robot"></i> AI Chat Assistant</button>
+        </section>
+        <!-- Graphics/Animated Section: Connect to Shop & Collections -->
+        <div class="section-title">Explore More</div>
+        <section class="graphics-section" aria-label="Explore Shop and Collections">
+            <div class="graphic-card" style="animation-delay:0.1s;">
+                <img src="https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/183930d6-ec63-471a-8413-b094dae0e330/air-jordan-1-low-og-shoes-29tsx7.png" alt="Shop Sneakers">
+                <h4>Shop the Latest</h4>
+                <p>Browse our curated shop for the hottest drops and timeless classics.</p>
+                <a href="shop.html">Go to Shop &rarr;</a>
+            </div>
+            <div class="graphic-card" style="animation-delay:0.3s;">
+                <img src="https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/07567ea7d2bb425b8651a8bf0117e4f1_9366/Samba_OG_Shoes_White_B75806_06_standard.jpg" alt="Collections">
+                <h4>Discover Collections</h4>
+                <p>Find your vibe with trending, eco-friendly, and limited edition collections.</p>
+                <a href="collections.html">See Collections &rarr;</a>
+            </div>
+            <div class="graphic-card" style="animation-delay:0.5s;">
+                <img src="https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/308062/04/sv01/fnd/IND/fmt/png/Scuderia-Ferrari-Neo-Cat-2.0-Driving-Shoes" alt="About Us">
+                <h4>About KickStart</h4>
+                <p>Learn more about our mission, vision, and what makes us iconic.</p>
+                <a href="about.html">About Us &rarr;</a>
+            </div>
+        </section>
+        <!-- Testimonials Section -->
+        <div class="section-title">What Our Customers Say</div>
+        <section class="graphics-section" aria-label="Customer Testimonials">
+            <div class="graphic-card" style="background: #fff;">
+                <div class="stars" style="color:#ffb400;margin-bottom:0.3rem;">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p>“KickStart made it so easy to find the perfect pair for my morning runs. The shoes arrived in just two days and fit like a dream!”</p>
+                <div class="user" style="font-weight:700;color:#181818;">— Priya S.</div>
+            </div>
+            <div class="graphic-card" style="background: #fff;">
+                <div class="stars" style="color:#ffb400;margin-bottom:0.3rem;">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                </div>
+                <p>“I love the variety! From classic sneakers to limited editions, KickStart always has something new. Plus, the checkout process is super smooth.”</p>
+                <div class="user" style="font-weight:700;color:#181818;">— Aarav M.</div>
+            </div>
+            <div class="graphic-card" style="background: #fff;">
+                <div class="stars" style="color:#ffb400;margin-bottom:0.3rem;">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                </div>
+                <p>“The eco-friendly collection is a game changer. I feel good about my purchase and the shoes are so comfortable for daily wear!”</p>
+                <div class="user" style="font-weight:700;color:#181818;">— Sneha R.</div>
+            </div>
+        </section>
+        <!-- Newsletter Signup -->
+        <div class="section-title">Stay in the Loop</div>
+        <section class="graphics-section" aria-label="Newsletter Signup">
+            <div class="graphic-card" style="background:#181818;color:#fff;max-width:500px;">
+                <h4 style="color:#fff;">Get exclusive offers, early access to drops, and sneaker news—straight to your inbox.</h4>
+                <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                    <input type="email" id="newsletter-email" placeholder="Your email address" required style="padding:0.7rem 1.2rem;border-radius:2rem;border:none;font-size:1rem;width:220px;">
+                    <button type="submit" style="background:#ff6600;color:#fff;border:none;border-radius:2rem;padding:0.7rem 1.5rem;font-size:1rem;font-weight:700;cursor:pointer;transition:background 0.2s,transform 0.2s;">Subscribe</button>
+                </form>
+                <div id="newsletter-msg" style="margin-top:1rem;font-size:1rem;"></div>
             </div>
         </section>
     </main>
     <footer role="contentinfo">
         <p>&copy; 2025 KickStart. All rights reserved.</p>
     </footer>
-    <script src="script.js"></script>
-    <canvas id="bubble-bg" aria-hidden="true"></canvas>
-    <style>
-        /* Keyboard focus styles for interactive elements */
-        a:focus, button:focus {
-            outline: 3px solid #ff6600;
-            outline-offset: 2px;
+    <script>
+        // Reveal features on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const features = document.querySelectorAll('.feature');
+            function revealOnScroll() {
+                const trigger = window.innerHeight * 0.95;
+                features.forEach(f => {
+                    const rect = f.getBoundingClientRect();
+                    if(rect.top < trigger) {
+                        f.classList.add('visible');
+                    }
+                });
+            }
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll();
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const nav = document.querySelector('.hero-nav');
+            const shrinkOn = 60;
+            window.addEventListener('scroll', function() {
+                if(window.scrollY > shrinkOn) {
+                    nav.classList.add('shrunk');
+                } else {
+                    nav.classList.remove('shrunk');
+                }
+            });
+        });
+
+        // Burger menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const burger = document.querySelector('.burger-menu');
+            const navMenu = document.getElementById('nav-menu');
+            burger.addEventListener('click', function() {
+                const expanded = burger.getAttribute('aria-expanded') === 'true' || false;
+                burger.setAttribute('aria-expanded', !expanded);
+                navMenu.classList.toggle('nav-open');
+            });
+        });
+
+        // Newsletter subscribe mock
+        function subscribeNewsletter(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletter-email').value;
+            const msg = document.getElementById('newsletter-msg');
+            if(email && email.includes('@')) {
+                msg.textContent = "Thanks for subscribing! 🚀";
+                msg.style.color = "#ff6600";
+            } else {
+                msg.textContent = "Please enter a valid email address.";
+                msg.style.color = "#ff0000";
+            }
         }
-        /* Subtle animation for features */
-        .feature {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+
+        // AI Style Recommender (Mock)
+        function getAIRecommendations() {
+            alert("👟 AI Style Recommender: Based on your activity, we recommend the Nike Air Max, Adidas Samba OG, and Puma Neo Cat!");
         }
-        .feature:focus, .feature:hover {
-            opacity: 1;
-            transform: translateY(0);
+
+        // Visual Search (Mock)
+        function visualSearch() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*';
+            input.onchange = () => {
+                alert("🔍 AI Visual Search: Searching for shoes similar to your uploaded photo...");
+                // Here you would send the image to your AI backend for processing
+            };
+            input.click();
         }
-    </style>
+
+        // AI Fit Predictor (Mock)
+        function aiFitPredictor() {
+            alert("🦶 AI Fit Predictor: Please use the AI Analyzer to scan your foot for a size suggestion!");
+            // You could integrate this with your AR/camera page
+        }
+
+        // AI Chat Assistant (Mock)
+        function openAIChat() {
+            alert("💬 AI Chat Assistant: Hi! How can I help you today?");
+            // For a real chat, integrate with a chatbot API or widget
+        }
+
+        // Optionally, add buttons or triggers for these features in your UI
+    </script>
 </body>
 </html>

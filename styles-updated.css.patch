@@ -1,0 +1,21 @@
+<<<<<<<
+/* Main content styling */
+main {
+    padding: 6rem 3vw 3rem 3vw;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+=======
+
+/* Main content styling */
+main {
+    padding: 6rem 3vw 3rem 3vw;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Add padding-top to about-title and cart-title to prevent hiding behind navbar */
+.about-title, .cart-title {
+    padding-top: 1.5rem;
+}
+>>>>>>>
