@@ -21,7 +21,7 @@ a:focus, button:focus {
     font-size: 2rem;
     font-weight: 900;
     letter-spacing: 2px;
-    color: #181818;
+    color: #ffffff;
     margin-left: auto;
     margin-right: 0;
 }
@@ -133,4 +133,19 @@ a:focus, button:focus {
         padding: 0.8rem 1.5rem;
         font-size: 1.1rem;
     }
+}
+
+.hero-nav,
+.hero-nav.navbar-collapsed {
+    transition: background 0.3s, color 0.3s;
+    height: 44px;           /* Fixed height, does not change on scroll */
+    padding: 0 16px;        /* Fixed padding */
+}
+
+#nav-menu li a,
+#nav-menu li a:hover,
+#nav-menu li a[aria-current="page"] {
+    transition: color 0.2s, border-bottom 0.2s, filter 0.2s;
+    font-size: 0.95rem;     /* Fixed font size */
+    padding: 4px 10px;      /* Fixed padding */
 }
