@@ -13,51 +13,6 @@
             background: #f6f7fb;
             margin: 0;
             padding: 0;
-            font-family: 'Montserrat', Arial, sans-serif;
-        }
-        .hero-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 3vw;
-            z-index: 100;
-            background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(6px);
-            transition: box-shadow 0.2s;
-        }
-        .logo {
-            font-size: 2rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: #181818;
-            margin-left: auto;
-            margin-right: 0;
-        }
-        .hero-nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-            margin: 0;
-            padding: 0;
-            margin-left: 0;
-            margin-right: auto;
-        }
-        .hero-nav li a {
-            color: #181818;
-            font-weight: 600;
-            font-size: 1.08rem;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            transition: color 0.2s;
-        }
-        .hero-nav li a[aria-current="page"], .hero-nav li a:hover {
-            color: #ff6600;
         }
         .ai-analyzer-section {
             margin-top: 8rem;
@@ -166,12 +121,28 @@
                 min-height: 180px;
             }
         }
+        @media (max-width: 900px) {
+            .hero-nav {
+                height: 48px;
+            }
+            .hero-nav .logo {
+                font-size: 1.1rem;
+                margin-right: 12px;
+            }
+            #nav-menu {
+                gap: 10px;
+            }
+            #nav-menu li a {
+                font-size: 0.95rem;
+                padding-bottom: 2px;
+            }
+        }
     </style>
 </head>
 <body>
-    <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
-        <div class="logo" aria-label="KickStart logo">KickStart</div>
-        <ul>
+     <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
+        <div class="logo" aria-label="KickStart logo">KICKSTART</div>
+        <ul id="nav-menu">
             <li><a href="index.html"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
             <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
             <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>

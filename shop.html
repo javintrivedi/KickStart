@@ -30,52 +30,58 @@
             background: #f8f9fb;
             margin: 0;
             padding: 0;
-            font-family: 'Montserrat', Arial, sans-serif;
         }
         .shop-hero {
-            padding-top: 7rem;
-            padding-bottom: 2.5rem;
+            padding-top: 6rem;
+            padding-bottom: 3rem;
             background: #fff;
             display: flex;
             flex-direction: column;
             align-items: center;
             border-bottom: 1px solid #ececec;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-left: 2rem;
+            padding-right: 2rem;
+            box-sizing: border-box;
         }
         .shop-title {
             font-size: 2.7rem;
             font-weight: 900;
             color: #181818;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem;
             letter-spacing: 1.5px;
             text-align: center;
+            max-width: 90%;
         }
         .shop-description {
             font-size: 1.18rem;
             color: #444;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.8rem;
             text-align: center;
             max-width: 600px;
         }
         .shop-actions {
             display: flex;
-            gap: 1.2rem;
-            margin-bottom: 1.5rem;
+            gap: 1.5rem;
+            margin-bottom: 1.8rem;
             flex-wrap: wrap;
             justify-content: center;
+            max-width: 90%;
         }
         .shop-actions .cta-btn {
             background: #181818;
             color: #fff;
-            padding: 0.7rem 2rem;
+            padding: 0.75rem 2.2rem;
             border-radius: 2rem;
             font-weight: 700;
-            font-size: 1.05rem;
+            font-size: 1.1rem;
             border: none;
             transition: background 0.2s, transform 0.2s;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 0.7rem;
+            gap: 0.8rem;
         }
         .shop-actions .cta-btn.alt {
             background: #ff6600;
@@ -83,57 +89,55 @@
         .shop-actions .cta-btn:hover, .shop-actions .cta-btn:focus {
             background: #ff6600;
             color: #fff;
-            transform: scale(1.06);
+            transform: scale(1.08);
         }
         .shop-section {
             margin: 3rem auto 2rem auto;
             max-width: 1200px;
-            padding: 0 2vw;
+            padding: 0 2rem;
+            box-sizing: border-box;
         }
         .shop-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 2.2rem;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2.5rem;
         }
         .product-card {
             background: #fff;
-            border-radius: 1.2rem;
-            box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            padding: 2.2rem 1.8rem 1.8rem 1.8rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: box-shadow 0.2s, transform 0.2s;
+            transition: box-shadow 0.3s, transform 0.3s;
             position: relative;
-            min-height: 420px;
+            min-height: 440px;
+            max-height: 480px;
         }
         .product-card:hover, .product-card:focus-within {
-            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
-            transform: translateY(-4px) scale(1.03);
-        }
-        .brand-logo {
-            width: 44px;
-            height: 44px;
-            object-fit: contain;
-            margin-bottom: 0.5rem;
-            background: #f7f7f7;
-            border-radius: 0.5rem;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.15);
+            transform: translateY(-6px) scale(1.05);
         }
         .product-img {
-            width: 120px;
-            height: 120px;
+            width: 130px;
+            height: 130px;
             object-fit: contain;
-            margin-bottom: 1.2rem;
-            border-radius: 0.7rem;
+            margin-bottom: 1.5rem;
+            border-radius: 0.8rem;
             background: #f7f7f7;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
         .product-title {
-            font-size: 1.18rem;
+            font-size: 1.25rem;
             font-weight: 700;
-            margin: 0.5rem 0 0.2rem 0;
+            margin: 0.6rem 0 0.3rem 0;
             color: #111;
             text-align: center;
+            min-height: 3.2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .product-meta {
             display: flex;
@@ -141,10 +145,10 @@
             justify-content: space-between;
             width: 100%;
             margin-top: auto;
-            gap: 0.5rem;
+            gap: 0.6rem;
         }
         .product-price {
-            font-size: 1.08rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: #000;
         }
@@ -153,356 +157,105 @@
             color: #fff;
             border: none;
             border-radius: 2rem;
-            padding: 0.5rem 1.2rem;
+            padding: 0.6rem 1.4rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            font-size: 1rem;
-            transition: background 0.2s, transform 0.2s;
+            font-size: 1.05rem;
+            transition: background 0.3s, transform 0.3s;
             cursor: pointer;
             text-decoration: none;
         }
         .add-cart-btn:hover, .add-cart-btn:focus {
             background: #ff6600;
             color: #fff;
-            transform: scale(1.08);
+            transform: scale(1.1);
             outline: none;
         }
         .product-card .product-actions {
-            margin-top: 1.2rem;
+            margin-top: 1.4rem;
             width: 100%;
             display: flex;
             justify-content: space-between;
-            gap: 0.7rem;
+            gap: 0.9rem;
         }
         .product-card .product-actions .view-btn {
             background: #fff;
             color: #181818;
-            border: 1px solid #ececec;
+            border: 1.5px solid #ececec;
             border-radius: 2rem;
-            padding: 0.4rem 1.1rem;
-            font-size: 0.98rem;
+            padding: 0.5rem 1.3rem;
+            font-size: 1rem;
             font-weight: 600;
-            transition: background 0.2s, color 0.2s;
+            transition: background 0.3s, color 0.3s;
             cursor: pointer;
         }
         .product-card .product-actions .view-btn:hover {
             background: #ff6600;
             color: #fff;
-            border: 1px solid #ff6600;
+            border: 1.5px solid #ff6600;
         }
         .shop-filters {
             display: flex;
-            gap: 1.2rem;
+            gap: 1.5rem;
             justify-content: center;
-            margin-bottom: 2.5rem;
+            margin-bottom: 3rem;
             flex-wrap: wrap;
-        }
-        .shop-filters select, .shop-filters input[type="text"] {
-            padding: 0.5rem 1rem;
-            border-radius: 2rem;
-            border: 1px solid #ececec;
-            font-size: 1rem;
-            outline: none;
-            background: #fff;
-            transition: border 0.2s;
-        }
-        .shop-filters select:focus, .shop-filters input[type="text"]:focus {
-            border: 1px solid #ff6600;
-        }
-        @media (max-width: 900px) {
-            .shop-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        @media (max-width: 600px) {
-            .shop-grid {
-                grid-template-columns: 1fr;
-            }
-            .shop-hero {
-                padding-top: 6rem;
-            }
-        }
-        html, body {
-            width: 100%;
-            max-width: 100vw;
-            overflow-x: hidden;
-            background: #f6f7fb;
-        }
-        a:focus, button:focus {
-            outline: 3px solid #ff6600;
-            outline-offset: 2px;
-        }
-        .hero {
-            padding-top: 6.5rem; /* Add space for fixed navbar */
-            position: relative;
-            min-height: 60vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: linear-gradient(120deg, #f6f7fb 70%, #ff6600 100%);
-            overflow: hidden;
-        }
-        .hero-bg-video {
-            position: absolute;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            object-fit: cover;
-            z-index: 0;
-            filter: brightness(0.85) blur(1px);
-        }
-        .hero-nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.2rem 3vw;
-            z-index: 100;
-            background: rgba(255,255,255,0.85);
-            backdrop-filter: blur(6px);
-            transition: box-shadow 0.2s;
-         }
-        .logo {
-            font-size: 2rem;
-            font-weight: 900;
-            letter-spacing: 2px;
-            color: #181818;
+            max-width: 90%;
             margin-left: auto;
-            margin-right: 0;
-        }
-        .hero-nav ul {
-            list-style: none;
-            display: flex;
-            gap: 2rem;
-            margin: 0;
-            padding: 0;
-            margin-left: 0;
             margin-right: auto;
         }
-        .hero-nav li a {
-            color: #181818;
-            font-weight: 600;
-            font-size: 1.08rem;
-            text-decoration: none;
+    </style>
+    <style>
+        /* Custom modal styles */
+        .custom-modal {
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: rgba(0,0,0,0.6);
             display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 0.5rem;
-            transition: color 0.2s;
+            animation: fadeIn 0.3s ease forwards;
+            /* Added to ensure perfect centering */
+            text-align: center;
         }
-        .hero-nav li a[aria-current="page"], .hero-nav li a:hover {
-            color: #ff6600;
-        }
-        .hero-banner {
+        .custom-modal-content {
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            padding: 2rem 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.8);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: 700;
             position: relative;
-            z-index: 1;
-            background: rgba(255,255,255,0.68);
-            border-radius: 1.5rem;
-            box-shadow: 0 8px 32px rgba(0,0,0,0.13);
-            padding: 2.5rem 2.5rem 2rem 2.5rem;
-            max-width: 480px;
-            margin-top: 5vh;
-            margin-bottom: 2vh;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            animation: fadeInUp 1.1s cubic-bezier(.23,1.01,.32,1) 0.2s both;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
         }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px);}
-            to { opacity: 1; transform: translateY(0);}
-        }
-        .hero-banner h1 {
-            font-size: 2.5rem;
-            font-weight: 900;
-            letter-spacing: 1.5px;
-            color: #181818;
-            margin-bottom: 0.7rem;
-        }
-        .hero-banner p {
-            font-size: 1.13rem;
-            color: #222;
-            margin-bottom: 1.2rem;
-            line-height: 1.6;
-        }
-        .hero-banner .cta-btn {
-            background: #ff6600;
-            color: #fff;
-            padding: 0.7rem 2.2rem;
-            font-size: 1.08rem;
-            font-weight: 700;
-            border-radius: 2rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-            transition: background 0.2s,transform 0.2s;
-            border: none;
-            text-decoration: none;
-            margin-top: 0.5rem;
-        }
-        .hero-banner .cta-btn:hover, .hero-banner .cta-btn:focus {
-            background: #181818;
-            color: #fff;
-            transform: scale(1.06);
-        }
-        .scroll-down {
+        .custom-close-btn {
             position: absolute;
-            left: 50%;
-            bottom: 2.5rem;
-            transform: translateX(-50%);
-            z-index: 2;
-            font-size: 2.2rem;
+            top: 0.3rem;
+            right: 1rem;
             color: #ff6600;
-            animation: bounce 1.5s infinite;
+            font-size: 2.4rem;
+            font-weight: bold;
             cursor: pointer;
+            transition: color 0.3s ease;
+            user-select: none;
         }
-        @keyframes bounce {
-            0%, 100% { transform: translateX(-50%) translateY(0);}
-            50% { transform: translateX(-50%) translateY(12px);}
+        .custom-close-btn:hover {
+            color: #ffa64d;
         }
-        /* Features Section */
-        .features {
-            margin: 7vh auto 0 auto;
-            max-width: 1200px;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-        }
-        .feature {
-            background: #fff;
-            border-radius: 1.2rem;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-            padding: 1.2rem 1.5rem;
-            min-width: 220px;
-            max-width: 270px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s, transform 0.6s;
-        }
-        .feature.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .feature:focus, .feature:hover {
-            opacity: 1;
-            transform: scale(1.06) translateY(0);
-            background: inherit;
-            transition: transform 0.3s cubic-bezier(.23,1.01,.32,1), opacity 0.3s;
-        }
-        .feature span {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-        .feature h3 {
-            font-size: 1.08rem;
-            font-weight: 700;
-            margin: 0.2rem 0 0.5rem 0;
-            color: #181818;
-        }
-        .feature p {
-            font-size: 0.97rem;
-            color: #555;
-            margin: 0;
-        }
-        /* Animated Graphics Section */
-        .graphics-section {
-            margin: 7vh auto 0 auto;
-            max-width: 1200px;
-            display: flex;
-            flex-wrap: nowrap;         /* Prevent wrapping to next line */
-            gap: 2.5rem;
-            justify-content: center;
-            align-items: stretch;
-        }
-        .graphic-card {
-            background: linear-gradient(135deg, #f6f7fb 60%, #ff6600 100%);
-            border-radius: 1.2rem;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-            padding: 1.5rem 2rem;
-            min-width: 260px;
-            max-width: 340px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            animation: fadeInUp 1.2s cubic-bezier(.23,1.01,.32,1) both;
-        }
-        .graphic-card img {
-            width: 120px;
-            height: 120px;
-            object-fit: contain;
-            margin-bottom: 1rem;
-            border-radius: 0.7rem;
-            background: #fff;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-        .graphic-card h4 {
-            font-size: 1.1rem;
-            font-weight: 800;
-            margin: 0.5rem 0 0.3rem 0;
-            color: #181818;
-        }
-        .graphic-card p {
-            font-size: 0.98rem;
-            color: #444;
-            margin-bottom: 0.7rem;
-        }
-        .graphic-card a {
-            color: #ff6600;
-            font-weight: 700;
-            text-decoration: underline;
-            margin-top: 0.5rem;
-        }
-        /* Section Titles */
-        .section-title {
-            text-align: center;
-            font-family: 'Montserrat', Arial, sans-serif;
-            font-size: 2rem;
-            font-weight: 900;
-            color: #181818;
-            margin: 4vh 0 2vh 0;
-        }
-        /* Responsive */
-        @media (max-width: 900px) {
-            .hero-banner {
-                padding: 1.2rem 1.2rem;
-                max-width: 95vw;
-            }
-            .hero-banner h1 {
-                font-size: 1.5rem;
-            }
-            .features, .graphics-section {
-                gap: 1rem;
-            }
-        }
-        @media (max-width: 700px) {
-            .hero-nav {
-                flex-direction: column;
-                gap: 0.7rem;
-                padding: 0.7rem 2vw;
-            }
-            .features, .graphics-section {
-                flex-direction: column;
-                gap: 1rem;
-            }
-            .hero-banner {
-                margin-top: 2vh;
-            }
-        }
-        @media (max-width: 1100px) {
-            .graphics-section {
-                flex-wrap: wrap;
-            }
-        }
-        @media (max-width: 800px) {
-            .graphics-section {
-                flex-direction: column;
-                gap: 1.5rem;
-            }
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
         }
     </style>
 </head>
@@ -515,7 +268,7 @@
             <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
             <li><a href="ai-analyzer.html"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI Analyzer</span></a></li>
             <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
-            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span></a></li>
+            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span> <span id="cart-count" style="background:#ff6600; color:#fff; border-radius:50%; padding:0 7px; font-size:0.8rem; font-weight:bold; vertical-align:top; margin-left:4px;">0</span></a></li>
         </ul>
     </nav>
     <main>
@@ -526,7 +279,6 @@
                 <button class="cta-btn" onclick="sortProducts('price')"><i class="fas fa-sort-amount-up"></i> Sort by Price</button>
                 <button class="cta-btn alt" onclick="sortProducts('brand')"><i class="fas fa-tags"></i> Sort by Brand</button>
                 <button class="cta-btn" onclick="filterEco();showEcoDefinition()"><i class="fas fa-leaf"></i> Eco-Friendly</button>
-                <button class="cta-btn alt" onclick="openVisualSearch()"><i class="fas fa-camera"></i> Visual Search</button>
             </div>
             <div class="shop-filters">
                 <input type="text" id="searchInput" placeholder="Search sneakers..." oninput="searchProducts()">
@@ -541,7 +293,7 @@
                     <option value="Reebok">Reebok</option>
                     <option value="Vans">Vans</option>
                     <option value="Skechers">Skechers</option>
-                    <option value="Hoka One One">Hoka One One</option>
+                    <option value="Comet">Comet</option>
                 </select>
             </div>
             <div id="ecoDefinition" style="display:none; background:#eafbe7; color:#205c2c; border-radius:1rem; padding:1.1rem 1.5rem; margin:1.2rem auto 0 auto; max-width:600px; font-size:1.08rem; text-align:center; box-shadow:0 2px 8px rgba(32,92,44,0.06);">
@@ -598,130 +350,157 @@
             brandLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Converse_logo.svg/330px-Converse_logo.svg.png"
         },
         {
-            name: "Nike Air Max 97",
-            price: 16995,
-            img: "https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/0c6e6e8e-2e6e-4d8a-9e3e-2e2e2e2e2e/air-max-97-shoes-29tsx7.png",
+            name: "Nike Vomero 18",
+            price: 13295,
+            img: "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/1d44513a-3a70-4ffd-a0a0-491f8db786bf/W+NIKE+VOMERO+18.png",
             brand: "Nike",
             eco: false,
-            link: "https://www.nike.com/in/t/air-max-97-shoes-921826-101",
+            link: "https://www.nike.com/in/t/vomero-18-road-running-shoes-Vn57Nq/HM6804-102",
             brandLogo: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg"
         },
         {
-            name: "Adidas Ultraboost 22",
-            price: 17999,
-            img: "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/3e8e8e8e8e8e4e8e8e8e8e8e8e8e8e_9366/Ultraboost_22_Shoes_White_GX5462_01_standard.jpg",
+            name: "Adidas Ultraboost 1.0",
+            price: 8999.50,
+            img: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/a3996cc46d9c44ad92ec9ded7271c100_9366/ULTRABOOST_1.0_SHOES_White_JH9212_HM1.jpg",
             brand: "Adidas",
             eco: true,
-            link: "https://www.adidas.co.in/ultraboost-22-shoes/GX5462.html",
+            link: "https://www.adidas.co.in/ultraboost-1.0-shoes/JH9212.html",
             brandLogo: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg"
         },
         {
-            name: "Puma RS-X Reinvent",
-            price: 8999,
-            img: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/373236/01/sv01/fnd/IND/fmt/png/RS-X-Reinvent-Unisex-Sneakers",
+            name: "Porsche Legacy RS-X Sneakers",
+            price: 5639,
+            img: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
             brand: "Puma",
             eco: false,
-            link: "https://in.puma.com/in/en/pd/rs-x-reinvent-unisex-sneakers/373236?swatch=01",
+            link: "https://in.puma.com/in/en/pd/porsche-legacy-rs-x-sneakers/307835?swatch=03",
             brandLogo: "https://upload.wikimedia.org/wikipedia/en/thumb/d/da/Puma_complete_logo.svg/375px-Puma_complete_logo.svg.png"
         },
         {
-            name: "Converse Run Star Hike",
-            price: 7999,
-            img: "https://www.converse.in/media/catalog/product/1/6/166800c_1.jpg?optimize=medium&bg-color=255%2C255%2C255&fit=cover&height=900&width=900&format=webp",
+            name: "Run Star Hike Animalier",
+            price: 4199,
+            img: "https://www.converse.in/media/catalog/product/a/0/a03729c_01_1.jpg?optimize=medium&bg-color=255%2C255%2C255&fit=cover&height=900&width=900&format=webp",
             brand: "Converse",
             eco: false,
-            link: "https://www.converse.in/converse-run-star-hike-166800c-black.html",
+            link: "https://www.converse.in/run-star-hike-animalier-a03729c-beige.html",
             brandLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Converse_logo.svg/330px-Converse_logo.svg.png"
         },
         {
-            name: "Nike Air Force 1 '07",
-            price: 9495,
-            img: "https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/4e8e8e8e-4e8e-4e8e-4e8e-4e8e8e8e8e8e/air-force-1-07-shoes-29tsx7.png",
+            name: "Nike P-6000",
+            price: 7995,
+            img: "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/c0bef76c-db55-40d4-a8e4-996c31f13f65/NIKE+P-6000.png",
             brand: "Nike",
             eco: false,
-            link: "https://www.nike.com/in/t/air-force-1-07-shoes-315122-111",
+            link: "https://www.nike.com/in/t/p-6000-shoes-QcQbpx/CD6404-107",
             brandLogo: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg"
         },
         {
             name: "Adidas Stan Smith",
-            price: 8999,
-            img: "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/4e8e8e8e8e8e4e8e8e8e8e8e8e8e8e_9366/Stan_Smith_Shoes_White_FX5502_01_standard.jpg",
+            price: 4499,
+            img: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/68ae7ea7849b43eca70aac1e00f5146d_9366/Stan_Smith_Shoes_White_FX5502_01_standard.jpg",
             brand: "Adidas",
             eco: true,
             link: "https://www.adidas.co.in/stan-smith-shoes/FX5502.html",
             brandLogo: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg"
         },
         {
-            name: "Puma Future Rider Play On",
-            price: 7499,
-            img: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_500,h_500/global/371149/01/sv01/fnd/IND/fmt/png/Future-Rider-Play-On-Unisex-Sneakers",
+            name: "Future Rider Play On Sneakers",
+            price: 4049,
+            img: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/371149/25/sv01/fnd/IND/fmt/png/Future-Rider-Play-On-Sneakers",
             brand: "Puma",
             eco: false,
-            link: "https://in.puma.com/in/en/pd/future-rider-play-on-unisex-sneakers/371149?swatch=01",
+            link: "https://in.puma.com/in/en/pd/future-rider-play-on-unisex-sneakers/371149?swatch=25",
             brandLogo: "https://upload.wikimedia.org/wikipedia/en/thumb/d/da/Puma_complete_logo.svg/375px-Puma_complete_logo.svg.png"
         },
         {
-            name: "Converse Chuck 70 High Top",
-            price: 5999,
-            img: "https://www.converse.in/media/catalog/product/1/6/162050c_1.jpg?optimize=medium&bg-color=255%2C255%2C255&fit=cover&height=900&width=900&format=webp",
+            name: "Chuck 70 Garden Noir",
+            price: 4199,
+            img: "https://www.converse.in/media/catalog/product/a/0/a04624c-1.jpg?optimize=medium&bg-color=255%2C255%2C255&fit=cover&height=900&width=900&format=webp",
             brand: "Converse",
             eco: true,
-            link: "https://www.converse.in/chuck-70-high-top-162050c-black.html",
+            link: "http://converse.in/chuck-70-garden-noir-a04624c-blue.html",
             brandLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Converse_logo.svg/330px-Converse_logo.svg.png"
         },
         {
-            name: "New Balance 574 Core",
-            price: 8999,
-            img: "https://nb.scene7.com/is/image/NB/m5740sg_nb_02_i?$pdpflexf2$&wid=440&hei=440",
+            name: "New Balance 530",
+            price: 8659,
+            img: "https://nb.scene7.com/is/image/NB/mr530sg_nb_02_i?$pdpflexf22x$&qlt=80&fmt=webp&wid=880&hei=880",
             brand: "New Balance",
-            eco: true,
-            link: "https://www.newbalance.co.in/men/shoes/574-core/M5740SG.html",
-            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/7/7a/New_Balance_logo.svg"
+            eco: false,
+            link: "https://www.newbalance.com/pd/530/MR530-32265-PMG-NA.html?dwvar_MR530-32265-PMG-NA_style=MR530SG",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/New_Balance_logo.svg/450px-New_Balance_logo.svg.png"
         },
         {
-            name: "ASICS GEL-LYTE III OG",
+            name: "ASICS GEL-EXCITE 10",
             price: 10999,
-            img: "https://cdn.asics.com/media/catalog/product/1/2/1201A051_020_SR_RT_GLB.jpg",
+            img: "https://www.asics.co.in/media/catalog/product/1/0/1011c008002_1.jpg?auto=webp&format=pjpg&width=160&height=200&fit=cover",
             brand: "ASICS",
             eco: false,
-            link: "https://www.asics.com/in/en-in/gel-lyte-iii-og/p/1201A051-020.html",
-            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/2/2e/Asics_Logo.svg"
+            link: "https://www.asics.co.in/1011c008-002-gel-excite-10.html",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Asics_Logo.svg/1920px-Asics_Logo.svg.png"
         },
         {
-            name: "Reebok Club C 85",
-            price: 6999,
-            img: "https://assets.reebok.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/2e8e8e8e8e8e4e8e8e8e8e8e8e8e8e_9366/Club_C_85_Shoes_White_AR0456_01_standard.jpg",
+            name: "Reebok Club C 85 Vintage Shoes",
+            price: 7795,
+            img: "https://cdn.shopify.com/s/files/1/0862/7834/0912/files/100000317_SLC_eCom-tif.png?v=1736438191",
             brand: "Reebok",
             eco: true,
-            link: "https://www.reebok.com/in/club-c-85-shoes/AR0456.html",
-            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/3/3a/Reebok_logo.svg"
+            link: "https://www.reebok.com/products/reebok-club-c-85-vintage-shoes-chalk-paperwhite-glen-green-103162",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/da/Reebok_delta_logo.svg/750px-Reebok_delta_logo.svg.png"
         },
         {
             name: "Vans Old Skool",
-            price: 5999,
-            img: "https://images.vans.com/is/image/VansBrand/VN000D3HY28-HERO?$PDP-FLEX-HERO$",
+            price: 8750,
+            img: "https://assets.vans.eu/images/t_img/c_fill,g_center,f_auto,h_815,w_652,e_unsharp_mask:100/dpr_2.0/v1741605993/VN000D6WYY6-HERO/Old-Skool-Shoes.jpg",
             brand: "Vans",
             eco: false,
-            link: "https://www.vans.in/shop/en/vans-in/old-skool-black-white",
-            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/1/1c/Vans_logo.svg"
+            link: "https://www.vans.com/en-gb/p/old-skool-shoes-VN000D6WYY6",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Vans_company_logo.svg/768px-Vans_company_logo.svg.png?20190325000411"
         },
         {
-            name: "Skechers D'Lites",
-            price: 7499,
-            img: "https://skechersindia.vtexassets.com/arquivos/ids/163742-800-auto?v=638206663973230000&width=800&height=auto&aspect=true",
+            name: "Skechers SKX RESAGRIP- Basketball",
+            price: 14399,
+            img: "https://www.skechers.in/on/demandware.static/-/Sites-skechers_india/default/dw55e1de34/images/large/197976666894-1.jpg",
             brand: "Skechers",
-            eco: false,
-            link: "https://www.skechers.in/d-lites-3-0-air-cool-memory-foam-black-white/p/155306BKWH",
-            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Skechers_logo.svg"
+            eco: true,
+            link: "https://www.skechers.in/skx-resagrip--basketball/253007-BKGD.html",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Skechers.svg/668px-Skechers.svg.png"
         },
         {
-            name: "Hoka One One Bondi 7",
-            price: 15999,
-            img: "https://cdn.hokaoneone.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3f8b6c1d/images/1019279/1019279_0.jpg",
-            brand: "Hoka One One",
+            name: "Comet X Lows CORTADO",
+            price: 4299,
+            img: "https://www.wearcomet.com/cdn/shop/t/85/assets/cream-canvas_280x.png?v=70150149848413386391747827344",
+            brand: "Comet",
             eco: true,
-            link: "https://www.hokaoneone.in/bondi-7/1019279.html",
-            brandLogo: "https://upload.wikimedia.org/wikipedia/en/thumb/2/2e/Hoka_One_One_logo.svg/375px-Hoka_One_One_logo.svg.png"
+            link: "https://www.wearcomet.com/products/x-lows-cortado?variant=50916838342963&country=IN&currency=INR&utm_medium=product_sync&utm_source=google&utm_content=sag_organic&utm_campaign=sag_organic&tw_source=google&tw_adid=&tw_campaign=21665743115&tw_kwdid=&gad_source=1&gad_campaignid=21669404383&gbraid=0AAAAAp7wtpURgVWDopTbk_yJ1rwg4-AQe&gclid=Cj0KCQjwjdTCBhCLARIsAEu8bpJ8uJNT1y3TxehV-SPkEVRLFRIxgXgR5m7NUEzrZ0EU96Kfx4-zn2caAlCREALw_wcB",
+            brandLogo: "https://cdn.brandfetch.io/idzESRSZzL/w/304/h/64/theme/dark/logo.png?c=1dxbfHSJFAPEGdCLU4o5B"
+        },
+        {
+            name: "Nike Air Force 1",
+            price: 7495,
+            img: "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/33533fe2-1157-4001-896e-1803b30659c8/AIR+FORCE+1+%2707.png",
+            brand: "Nike",
+            eco: false,
+            link: "https://www.nike.com/in/t/air-force-1-07-shoes-WrLlWX/CW2288-111",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/a/a6/Logo_NIKE.svg"
+        },
+        {
+            name: "Adidas Ultraboost 1.0 Shoes",
+            price: 7795,
+            img: "https://assets.adidas.com/images/h_840,f_auto,q_auto,fl_lossy,c_fill,g_auto/d864e76161654c6daab10a06cbdb9ffe_9366/Ultraboost_1.0_Shoes_Black_JR3369_HM1.jpg",
+            brand: "Adidas",
+            eco: true,
+            link: "https://www.adidas.com/us/ultraboost-1.0-shoes/JR3369.html",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/2/20/Adidas_Logo.svg"
+        },
+        {
+            name: "New Balance 574",
+            price: 7795,
+            img: "https://nb.scene7.com/is/image/NB/ml574evw_nb_02_i?$pdpflexf22x$&qlt=80&fmt=webp&wid=880&hei=880",
+            brand: "New Balance",
+            eco: true,
+            link: "https://www.newbalance.com/pd/574-core/ML574V3-40377.html?dwvar_ML574V3-40377_style=ML574EVW",
+            brandLogo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ea/New_Balance_logo.svg/450px-New_Balance_logo.svg.png"
         }
     ];
 
@@ -744,7 +523,7 @@
                     <span class="product-price">₹${product.price}</span>
                     ${product.eco ? '<span title="Eco-Friendly" style="color:#2ecc40;"><i class="fas fa-leaf"></i></span>' : ''}
                 </div>
-                <div class="product-card product-actions">
+                <div class="product-actions">
                     <a class="view-btn" href="${product.link}" target="_blank">View</a>
                     <button class="add-cart-btn" onclick="addToCart('${product.name}')"><i class="fas fa-cart-plus"></i> Add</button>
                 </div>
@@ -753,8 +532,12 @@
     }
 
     function addToCart(name) {
+        console.log("addToCart called with:", name);
         const product = products.find(p => p.name === name);
-        if (!product) return;
+        if (!product) {
+            console.error("Product not found:", name);
+            return;
+        }
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         const existing = cart.find(item => item.name === name);
         if (existing) {
@@ -788,8 +571,36 @@
         document.getElementById('ecoDefinition').style.display = 'block';
     }
 
-    function openVisualSearch() {
-        alert('Visual search coming soon!');
+    // Modal HTML for custom alert
+    const modalHTML = `
+    <div id="customAlertModal" class="custom-modal" style="display:none;">
+        <div class="custom-modal-content">
+            <span class="custom-close-btn" id="customAlertClose">&times;</span>
+            <p>Visual search coming soon!</p>
+        </div>
+    </div>
+    `;
+
+    // Append modal HTML to body
+    document.addEventListener('DOMContentLoaded', () => {
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+        // Close button event
+        document.getElementById('customAlertClose').addEventListener('click', () => {
+            document.getElementById('customAlertModal').style.display = 'none';
+        });
+
+        // Close modal on outside click
+        window.addEventListener('click', (event) => {
+            const modal = document.getElementById('customAlertModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+    });
+
+function openVisualSearch() {
+        document.getElementById('customAlertModal').style.display = 'flex';
     }
 
     function searchProducts() {
@@ -814,7 +625,10 @@
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         let count = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
         const badge = document.getElementById('cart-count');
-        if (badge) badge.textContent = count;
+        if (badge) {
+            badge.textContent = count;
+            console.log("Cart count updated to:", count);
+        }
     }
 
     // Navbar shrink effect

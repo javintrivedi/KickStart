@@ -124,6 +124,20 @@
                 font-size: 1.5rem;
                 margin: 2rem 0 1.5rem 0;
             }
+            .hero-nav {
+                height: 48px;
+            }
+            .hero-nav .logo {
+                font-size: 1.1rem;
+                margin-right: 12px;
+            }
+            #nav-menu {
+                gap: 10px;
+            }
+            #nav-menu li a {
+                font-size: 0.95rem;
+                padding-bottom: 2px;
+            }
         }
         @media (max-width: 600px) {
             .cart-section {
@@ -141,15 +155,15 @@
     </style>
 </head>
 <body>
-    <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
-        <div class="logo" aria-label="KickStart logo">KickStart</div>
-        <ul>
+     <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
+        <div class="logo" aria-label="KickStart logo">KICKSTART</div>
+        <ul id="nav-menu">
             <li><a href="index.html"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
             <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
             <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
             <li><a href="ai-analyzer.html"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI Analyzer</span></a></li>
             <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
-            <li><a href="cart.html" aria-current="page"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span></a></li>
+            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span></a></li>
         </ul>
     </nav>
     <main>

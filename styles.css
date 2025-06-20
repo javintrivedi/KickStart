@@ -216,10 +216,10 @@
 .cta-btn {
     background: #000000;
     color: #ffffff;
-    padding: 1rem 2.5rem;
+    padding: 0.6rem 1.5rem; /* reduced padding */
     border: none;
     border-radius: 2rem;
-    font-size: 1.2rem;
+    font-size: 1rem; /* reduced font size */
     font-weight: 800;
     cursor: pointer;
     text-decoration: none;
@@ -381,8 +381,71 @@ html, body {
     margin: 0;
     padding: 0;
 }
-.hero-main {
+
+/* Shop page specific improvements */
+.shop-hero, .shop-section {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.shop-actions .cta-btn {
+    min-width: 140px;
+    justify-content: center;
+}
+
+.shop-filters input[type="text"], .shop-filters select {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border-radius: 1rem;
+    border: 1.5px solid #ddd;
+    max-width: 280px;
     width: 100%;
-    max-width: 100vw;
-    overflow-x: hidden;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.shop-filters input[type="text"]:focus, .shop-filters select:focus {
+    border-color: #ff6600;
+    outline: none;
+}
+
+.brand-link {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+.brand-logo {
+    width: 80px;
+    height: 30px;
+    object-fit: contain;
+    filter: grayscale(100%);
+    transition: filter 0.3s ease;
+}
+
+.brand-link:hover .brand-logo {
+    filter: grayscale(0%);
+}
+
+@media (max-width: 600px) {
+    .shop-hero, .shop-section {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+    .shop-actions {
+        gap: 1rem;
+    }
+    .shop-actions .cta-btn {
+        min-width: 120px;
+        font-size: 0.95rem;
+        padding: 0.6rem 1.2rem;
+    }
+    .shop-filters {
+        max-width: 100%;
+        margin-left: 0.5rem;
+        margin-right: 0.5rem;
+    }
 }
