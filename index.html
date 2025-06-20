@@ -65,7 +65,7 @@
             height: 48px; /* reduced height */
             padding: 0 20px;
             z-index: 100;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(6px);
             transition: height 0.3s, padding 0.3s;
          }
@@ -109,6 +109,7 @@
             padding: 0;
             margin-left: 0;
             margin-right: auto;
+            color: #181818;
         }
         .hero-nav li a {
             color: #181818;
@@ -555,17 +556,18 @@
             window.addEventListener('scroll', revealOnScroll);
             revealOnScroll();
         });
-        document.addEventListener('DOMContentLoaded', function() {
-            const nav = document.querySelector('.hero-nav');
-            const shrinkOn = 60;
-            window.addEventListener('scroll', function() {
-                if(window.scrollY > shrinkOn) {
-                    nav.classList.add('shrunk');
-                } else {
-                    nav.classList.remove('shrunk');
-                }
-            });
-        });
+        // Removed scroll event listener to prevent navbar shrinking on scroll
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     const nav = document.querySelector('.hero-nav');
+        //     const shrinkOn = 60;
+        //     window.addEventListener('scroll', function() {
+        //         if(window.scrollY > shrinkOn) {
+        //             nav.classList.add('shrunk');
+        //         } else {
+        //             nav.classList.remove('shrunk');
+        //         }
+        //     });
+        // });
 
         // Burger menu toggle
         document.addEventListener('DOMContentLoaded', function() {

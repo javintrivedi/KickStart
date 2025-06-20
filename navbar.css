@@ -48,7 +48,7 @@ a:focus, button:focus {
     color: #ff6600;
 }
 .hero-nav.shrunk {
-    padding: 0.5rem 2vw;
+    padding: 1.2rem 3vw; /* Keep same padding as normal state */
     box-shadow: 0 2px 12px rgba(0,0,0,0.07);
 }
 .hero-nav.shrunk .logo {
@@ -62,12 +62,26 @@ a:focus, button:focus {
     font-size: 0;
     min-width: 2.5rem;
     justify-content: center;
+    transition: padding 0.3s ease, font-size 0.3s ease;
 }
 .hero-nav.shrunk li a .nav-text {
-    display: none;
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+    display: inline-block;
+    transition: opacity 0.3s ease, width 0.3s ease;
+}
+.hero-nav li a .nav-text {
+    opacity: 1;
+    width: auto;
+    transition: opacity 0.3s ease, width 0.3s ease;
 }
 .hero-nav li a i {
     display: inline-block !important;
+    transition: transform 0.3s ease;
+}
+.hero-nav.shrunk li a i {
+    transform: scale(1.3);
 }
 .hero-nav li a .fa-home,
 .hero-nav li a .fa-store,
