@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cart | KickStart</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Collections | KickStart</title>
     <link rel="icon" type="image/x-icon" href="favicon.png" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="collections-fix.css" />
-    <link rel="stylesheet" href="navbar.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="navbar.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 <body>
     <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
@@ -23,64 +23,1042 @@
         </ul>
     </nav>
     <main>
-        <section class="collections-section">
-            <div class="collections-header">
-                <h1>Discover Our Versatile Collections</h1>
-                <p>
-                    At <strong>KickStart</strong>, we believe in shoes that fit every mood, every move, and every moment. Our curated collections bring together the best in style, comfort, and innovation—so you can step up your game, wherever life takes you.
-                </p>
-            </div>
-            <div class="collections-features">
-                <div class="collections-feature">
-                    <span aria-hidden="true">🌈</span>
-                    <h3>All-Occasion Styles</h3>
-                    <p>From street to sport, find sneakers for every event and every personality.</p>
+        <div class="collections-container" style="display: flex; gap: 20px;">
+            <aside class="filter-sidebar" aria-label="Filter products" style="flex: 0 0 250px;">
+                <h2>Filters</h2>
+                <div class="filter-group">
+                    <h3>Size</h3>
+                    <label><input type="checkbox" name="size" value="6" /> 6</label>
+                    <label><input type="checkbox" name="size" value="7" /> 7</label>
+                    <label><input type="checkbox" name="size" value="8" /> 8</label>
+                    <label><input type="checkbox" name="size" value="9" /> 9</label>
+                    <label><input type="checkbox" name="size" value="10" /> 10</label>
                 </div>
-                <div class="collections-feature">
-                    <span aria-hidden="true">🦶</span>
-                    <h3>Custom Fit Comfort</h3>
-                    <p>Adaptive insoles and ergonomic designs for all-day support.</p>
+                <div class="filter-group">
+                    <h3>Price</h3>
+                    <label><input type="checkbox" name="price" value="0-40" /> Under ₹3000</label>
+                    <label><input type="checkbox" name="price" value="41-100" /> ₹3001 - ₹7500</label>
+                    <label><input type="checkbox" name="price" value="101-200" /> ₹7501 - ₹15000</label>
+                    <label><input type="checkbox" name="price" value="201-500" /> Above ₹15000</label>
                 </div>
-                <div class="collections-feature">
-                    <span aria-hidden="true">🌱</span>
-                    <h3>Eco-Friendly Choices</h3>
-                    <p>Made with recycled and sustainable materials for a greener tomorrow.</p>
+                <div class="filter-group">
+                    <h3>Color</h3>
+                    <label><input type="checkbox" name="color" value="black" /> Black</label>
+                    <label><input type="checkbox" name="color" value="white" /> White</label>
+                    <label><input type="checkbox" name="color" value="red" /> Red</label>
+                    <label><input type="checkbox" name="color" value="blue" /> Blue</label>
+                    <label><input type="checkbox" name="color" value="green" /> Green</label>
                 </div>
-                <div class="collections-feature">
-                    <span aria-hidden="true">💧</span>
-                    <h3>Weather Ready</h3>
-                    <p class="collection-desc">Sustainable styles made with recycled and planet-friendly materials.</p>
-                    <a href="shop.html" class="view-collection-btn" aria-label="Shop Eco-Friendly">Shop Now</a>
+                <div class="filter-group">
+                    <h3>Category</h3>
+                    <label><input type="checkbox" name="category" value="sneakers" /> Sneakers</label>
+                    <label><input type="checkbox" name="category" value="running" /> Running</label>
+                    <label><input type="checkbox" name="category" value="casual" /> Casual</label>
+                    <label><input type="checkbox" name="category" value="sports" /> Sports</label>
                 </div>
-                <div class="collection-card" tabindex="0">
-                    <img class="collection-img" src="https://via.placeholder.com/400x180?text=Limited+Editions" alt="Limited Editions">
-                    <div class="collection-title">Limited Editions</div>
-                    <p class="collection-desc">Rare finds and exclusive collabs you won’t see anywhere else.</p>
-                    <a href="shop.html" class="view-collection-btn" aria-label="Shop Limited Editions">Shop Now</a>
+            </aside>
+            <section class="collections-main" style="flex: 1; display: flex; flex-wrap: wrap; gap: 20px;">
+                <div class="sort-bar" style="flex-basis: 100%; margin-bottom: 10px;">
+                    <label for="sort-select">Sort by:</label>
+                    <select id="sort-select" aria-label="Sort products">
+                        <option value="popularity" selected>Bestsellers</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                        <option value="latest">Latest</option>
+                    </select>
                 </div>
-                <div class="collection-card" tabindex="0">
-                    <img class="collection-img" src="https://via.placeholder.com/400x180?text=Everyday+Essentials" alt="Everyday Essentials">
-                    <div class="collection-title">Everyday Essentials</div>
-                    <p class="collection-desc">Minimalist, versatile, and built for your daily hustle.</p>
-                    <a href="shop.html" class="view-collection-btn" aria-label="Shop Everyday Essentials">Shop Now</a>
+                <div class="product-grid" id="product-grid" aria-live="polite" aria-label="Product grid">
+                    <!-- Product cards will be rendered here -->
                 </div>
-            </div>
-        </section>
+            </section>
+        </div>
     </main>
+
+    <!-- Quick View Modal -->
+    <div id="quick-view-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="quick-view-title">
+        <div class="modal-content">
+            <button class="modal-close" aria-label="Close quick view">&times;</button>
+            <h2 id="quick-view-title">Product Quick View</h2>
+            <div class="modal-body">
+                <img id="quick-view-image" src="" alt="" />
+                <div class="modal-details">
+                    <h3 id="quick-view-name"></h3>
+                    <p id="quick-view-price"></p>
+                    <p id="quick-view-rating"></p>
+                    <p id="quick-view-description"></p>
+                    <p id="quick-view-fit-advice"></p>
+                    <p id="quick-view-delivery-time"></p>
+                    <button id="quick-view-wishlist" class="wishlist-btn">Add to Wishlist</button>
+                    <button id="quick-view-add-cart" class="add-cart-btn">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2025 KickStart. All rights reserved.</p>
     </footer>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const nav = document.querySelector('.hero-nav');
-            const shrinkOn = 60;
-            window.addEventListener('scroll', function() {
-                if(window.scrollY > shrinkOn) {
-                    nav.classList.add('shrunk');
-                } else {
-                    nav.classList.remove('shrunk');
+        // Sample product data with discount, alternate image, fit advice, delivery time
+        const products = [
+            {
+                id: 1,
+                name: "Air Jordan 1 Low OG",
+                price: 12795,
+                rating: 4.8,
+                image: "https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/u_126ab356-44d8-4a06-89b4-fcdcc8df0245,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/183930d6-ec63-471a-8413-b094dae0e330/air-jordan-1-low-og-shoes-29tsx7.png",
+                altImage: "https://static.nike.com/a/images/t_PDP_864_v1,f_auto,q_auto:eco/air-jordan-1-low-og-shoes-29tsx7.png",
+                description: "Classic Air Jordan 1 Low OG sneakers with premium materials.",
+                category: "sneakers",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 10, // percent
+                fitAdvice: "True to size. Comfortable for all-day wear.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 2,
+                name: "Samba OG Shoes",
+                price: 109.99,
+                rating: 4.5,
+                image: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/07567ea7d2bb425b8651a8bf0117e4f1_9366/Samba_OG_Shoes_White_B75806_06_standard.jpg",
+                altImage: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/07567ea7d2bb425b8651a8bf0117e4f1_9366/Samba_OG_Shoes_White_B75806_06_standard.jpg",
+                description: "Iconic Adidas Samba OG shoes with timeless style.",
+                category: "casual",
+                color: "white",
+                size: [6,7,8,9],
+                discount: 0,
+                fitAdvice: "Runs slightly small, consider ordering a half size up.",
+                deliveryTime: "5-7 business days"
+            },
+            {
+                id: 3,
+                name: "Porsche Legacy RS-X Sneakers",
+                price: 56.39,
+                rating: 4.2,
+                image: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
+                altImage: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers-alt",
+                description: "Sporty and stylish Porsche Legacy RS-X sneakers.",
+                category: "sports",
+                color: "red",
+                size: [8,9,10],
+                discount: 15,
+                fitAdvice: "Fits true to size with good arch support.",
+                deliveryTime: "4-6 business days"
+            },
+            {
+                id: 4,
+                name: "Nike Air Max 270",
+                price: 149.99,
+                rating: 4.7,
+                image: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/air-max-270-mens-shoes.png",
+                altImage: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/air-max-270-mens-shoes-alt.png",
+                description: "Stylish and comfortable Nike Air Max 270 sneakers.",
+                category: "running",
+                color: "blue",
+                size: [7,8,9,10],
+                discount: 20,
+                fitAdvice: "True to size with excellent cushioning.",
+                deliveryTime: "2-4 business days"
+            },
+            {
+                id: 5,
+                name: "Adidas Ultraboost 21",
+                price: 179.99,
+                rating: 4.9,
+                image: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/Ultraboost_21_Shoes_Black_FY0370_06_standard.jpg",
+                altImage: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/Ultraboost_21_Shoes_Black_FY0370_06_standard-alt.jpg",
+                description: "High-performance Adidas Ultraboost 21 running shoes.",
+                category: "running",
+                color: "black",
+                size: [6,7,8,9,10],
+                discount: 5,
+                fitAdvice: "Fits snugly, great for long runs.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 6,
+                name: "New Balance 574 Core",
+                price: 89.99,
+                rating: 4.6,
+                image: "https://nb.scene7.com/is/image/NB/m574v2_nb_02_i?$pdp_hero$&wid=1200&hei=1200",
+                altImage: "https://nb.scene7.com/is/image/NB/m574v2_nb_02_i_alt?$pdp_hero$&wid=1200&hei=1200",
+                description: "Classic New Balance 574 Core sneakers with retro style.",
+                category: "casual",
+                color: "green",
+                size: [7,8,9,10],
+                discount: 0,
+                fitAdvice: "True to size with a comfortable fit.",
+                deliveryTime: "5-7 business days"
+            },
+            {
+                id: 7,
+                name: "Reebok Classic Leather",
+                price: 69.99,
+                rating: 4.4,
+                image: "https://assets.reebok.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/Classic_Leather_Shoes_White_FX5745_06_standard.jpg",
+                altImage: "https://assets.reebok.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/Classic_Leather_Shoes_White_FX5745_06_standard-alt.jpg",
+                description: "Timeless Reebok Classic Leather shoes with premium leather.",
+                category: "casual",
+                color: "white",
+                size: [6,7,8,9],
+                discount: 10,
+                fitAdvice: "Fits true to size with a classic silhouette.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 8,
+                name: "Puma RS-X Reinvent",
+                price: 89.99,
+                rating: 4.3,
+                image: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
+                altImage: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers-alt",
+                description: "Bold and colorful Puma RS-X Reinvent sneakers.",
+                category: "sports",
+                color: "blue",
+                size: [8,9,10],
+                discount: 15,
+                fitAdvice: "Fits snugly, great for street style.",
+                deliveryTime: "4-6 business days"
+            },
+            {
+                id: 9,
+                name: "Asics Gel-Kayano 27",
+                price: 159.99,
+                rating: 4.8,
+                image: "https://www.asics.com/on/demandware.static/-/Sites-asics-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.asics.com/on/demandware.static/-/Sites-asics-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "High-performance Asics Gel-Kayano 27 running shoes.",
+                category: "running",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 20,
+                fitAdvice: "True to size with excellent stability.",
+                deliveryTime: "2-4 business days"
+            },
+            {
+                id: 10,
+                name: "Hoka One One Bondi 7",
+                price: 159.99,
+                rating: 4.9,
+                image: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "Maximum cushioning Hoka One One Bondi 7 running shoes.",
+                category: "running",
+                color: "blue",
+                size: [6,7,8,9,10],
+                discount: 5,
+                fitAdvice: "Fits snugly, great for long runs.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 11,
+                name: "Vans Old Skool",
+                price: 59.99,
+                rating: 4.6,
+                image: "https://www.vans.com/on/demandware.static/-/Sites-vans-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.vans.com/on/demandware.static/-/Sites-vans-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "Classic Vans Old Skool sneakers with iconic style.",
+                category: "casual",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 0,
+                fitAdvice: "True to size with a comfortable fit.",
+                deliveryTime: "5-7 business days"
+            },
+            {
+                id: 12,
+                name: "Converse Chuck Taylor All Star",
+                price: 49.99,
+                rating: 4.4,
+                image: "https://www.converse.com/on/demandware.static/-/Sites-converse-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.converse.com/on/demandware.static/-/Sites-converse-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "Timeless Converse Chuck Taylor All Star sneakers.",
+                category: "casual",
+                color: "white",
+                size: [6,7,8,9],
+                discount: 10,
+                fitAdvice: "Fits true to size with a classic silhouette.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 13,
+                name: "Nike React Infinity Run Flyknit",
+                price: 159.99,
+                rating: 4.7,
+                image: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/react-infinity-run-flyknit-mens-shoes.png",
+                altImage: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/react-infinity-run-flyknit-mens-shoes-alt.png",
+                description: "Innovative Nike React Infinity Run Flyknit running shoes.",
+                category: "running",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 20,
+                fitAdvice: "True to size with excellent cushioning.",
+                deliveryTime: "2-4 business days"
+            },
+            {
+                id: 14,
+                name: "Adidas NMD_R1",
+                price: 139.99,
+                rating: 4.8,
+                image: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/NMD_R1_Shoes_Black_FY0370_06_standard.jpg",
+                altImage: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/NMD_R1_Shoes_Black_FY0370_06_standard-alt.jpg",
+                description: "Stylish and comfortable Adidas NMD_R1 sneakers.",
+                category: "casual",
+                color: "blue",
+                size: [6,7,8,9,10],
+                discount: 5,
+                fitAdvice: "Fits snugly, great for street style.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 15,
+                name: "Puma Future Rider",
+                price: 89.99,
+                rating: 4.3,
+                image: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
+                altImage: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers-alt",
+                description: "Retro-inspired Puma Future Rider sneakers.",
+                category: "sports",
+                color: "red",
+                size: [8,9,10],
+                discount: 15,
+                fitAdvice: "Fits snugly, great for street style.",
+                deliveryTime: "4-6 business days"
+            },
+            {
+                id: 16,
+                name: "Hoka One One Clifton 7",
+                price: 139.99,
+                rating: 4.9,
+                image: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "Lightweight and cushioned Hoka One One Clifton 7 running shoes.",
+                category: "running",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 20,
+                fitAdvice: "True to size with excellent cushioning.",
+                deliveryTime: "2-4 business days"
+            },
+            {
+                id: 17,
+                name: "New Balance Fresh Foam 1080v11",
+                price: 149.99,
+                rating: 4.8,
+                image: "https://nb.scene7.com/is/image/NB/m1080v11_nb_02_i?$pdp_hero$&wid=1200&hei=1200",
+                altImage: "https://nb.scene7.com/is/image/NB/m1080v11_nb_02_i_alt?$pdp_hero$&wid=1200&hei=1200",
+                description: "High-performance New Balance Fresh Foam 1080v11 running shoes.",
+                category: "running",
+                color: "blue",
+                size: [6,7,8,9,10],
+                discount: 5,
+                fitAdvice: "Fits snugly, great for long runs.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 18,
+                name: "Nike Air Zoom Pegasus 37",
+                price: 119.99,
+                rating: 4.7,
+                image: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/air-zoom-pegasus-37-mens-shoes.png",
+                altImage: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/air-zoom-pegasus-37-mens-shoes-alt.png",
+                description: "Versatile Nike Air Zoom Pegasus 37 running shoes.",
+                category: "running",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 20,
+                fitAdvice: "True to size with excellent cushioning.",
+                deliveryTime: "2-4 business days"
+            },
+            {
+                id: 19,
+                name: "Adidas Superstar",
+                price: 79.99,
+                rating: 4.6,
+                image: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/Superstar_Shoes_White_FX5745_06_standard.jpg",
+                altImage: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/Superstar_Shoes_White_FX5745_06_standard-alt.jpg",
+                description: "Iconic Adidas Superstar sneakers with classic shell toe.",
+                category: "casual",
+                color: "white",
+                size: [6,7,8,9],
+                discount: 10,
+                fitAdvice: "Fits true to size with a classic silhouette.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 20,
+                name: "Puma RS-Dreamer",
+                price: 109.99,
+                rating: 4.3,
+                image: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
+                altImage: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers-alt",
+                description: "Performance-driven Puma RS-Dreamer basketball sneakers.",
+                category: "sports",
+                color: "red",
+                size: [8,9,10],
+                discount: 15,
+                fitAdvice: "Fits snugly, great for on-court performance.",
+                deliveryTime: "4-6 business days"
+            },{
+                id: 21,
+                name: "Hoka One One Speedgoat 4",
+                price: 139.99,
+                rating: 4.9,
+                image: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "Trail-ready Hoka One One Speedgoat 4 running shoes.",
+                category: "running",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 20,
+                fitAdvice: "True to size with excellent traction.",
+                deliveryTime: "2-4 business days"
+            },
+            {
+                id: 22,
+                name: "Nike Air Zoom Pegasus 38",
+                price: 129.99,
+                rating: 4.7,
+                image: "https://www.nike.com/us/en_us/t/air-zoom-pegasus-38-mens-road-running-shoes-2f3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c",
+                altImage: "https://www.nike.com/us/en_us/t/air-zoom-pegasus-38-mens-road-running-shoes-alt",
+                description: "Updated Nike Air Zoom Pegasus 38 running shoes.",
+                category: "running",
+                color: "blue",
+                size: [6,7,8,9],
+                discount: 18,
+                fitAdvice: "Fits true to size with a comfortable ride.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 23,
+                name: "New Balance Fresh Foam 1080v11",
+                price: 149.99,
+                rating: 4.8,
+                image: "https://www.newbalance.com/pd/fresh-foam-1080v11/M1080V11-37082.html",
+                altImage: "https://www.newbalance.com/pd/fresh-foam-1080v11/M1080V11-37082.html",
+                description: "Cushioned New Balance Fresh Foam 1080v11 running shoes.",
+                category: "running",
+                color: "grey",
+                size: [7,8,9,10],
+                discount: 25,
+                fitAdvice: "True to size with plush cushioning.",
+                deliveryTime: "2-4 business days"
+            },
+            {
+                id: 24,
+                name: "Adidas Ultraboost 21",
+                price: 179.99,
+                rating: 4.9,
+                image: "https://www.adidas.com/us/ultraboost-21-shoes/FY0370.html",
+                altImage: "https://www.adidas.com/us/ultraboost-21-shoes/FY0370.html",
+                description: "High-performance Adidas Ultraboost 21 running shoes.",
+                category: "running",
+                color: "black",
+                size: [6,7,8,9,10],
+                discount: 5,
+                fitAdvice: "Fits snugly, great for long runs.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 25,
+                name: "Puma RS-X Reinvent",
+                price: 89.99,
+                rating: 4.3,
+                image: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
+                altImage: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers-alt",
+                description: "Bold and colorful Puma RS-X Reinvent sneakers.",
+                category: "sports",
+                color: "blue",
+                size: [8,9,10],
+                discount: 15,
+                fitAdvice: "Fits snugly, great for street style.",
+                deliveryTime: "4-6 business days"
+            },
+            {
+                id: 26,
+                name: "Asics Gel-Kayano 27",
+                price: 159.99,
+                rating: 4.8,
+                image: "https://www.asics.com/on/demandware.static/-/Sites-asics-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.asics.com/on/demandware.static/-/Sites-asics-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "High-performance Asics Gel-Kayano 27 running shoes.",
+                category: "running",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 20,
+                fitAdvice: "True to size with excellent stability.",
+                deliveryTime: "2-4 business days"
+            },
+            {
+                id: 27,
+                name: "Hoka One One Bondi 7",
+                price: 159.99,
+                rating: 4.9,
+                image: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "Maximum cushioning Hoka One One Bondi 7 running shoes.",
+                category: "running",
+                color: "blue",
+                size: [6,7,8,9,10],
+                discount: 5,
+                fitAdvice: "Fits snugly, great for long runs.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 28,
+                name: "Vans Old Skool",
+                price: 59.99,
+                rating: 4.6,
+                image: "https://www.vans.com/on/demandware.static/-/Sites-vans-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.vans.com/on/demandware.static/-/Sites-vans-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "Classic Vans Old Skool sneakers with iconic style.",
+                category: "casual",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 0,
+                fitAdvice: "True to size with a comfortable fit.",
+                deliveryTime: "5-7 business days"
+            },
+            {
+                id: 29,
+                name: "Converse Chuck Taylor All Star",
+                price: 49.99,
+                rating: 4.4,
+                image: "https://www.converse.com/on/demandware.static/-/Sites-converse-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.converse.com/on/demandware.static/-/Sites-converse-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "Timeless Converse Chuck Taylor All Star sneakers.",
+                category: "casual",
+                color: "white",
+                size: [6,7,8,9],
+                discount: 10,
+                fitAdvice: "Fits true to size with a classic silhouette.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 30,
+                name: "Nike React Infinity Run Flyknit",
+                price: 159.99,
+                rating: 4.7,
+                image: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/react-infinity-run-flyknit-mens-shoes.png",
+                altImage: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/react-infinity-run-flyknit-mens-shoes-alt.png",
+                description: "Innovative Nike React Infinity Run Flyknit running shoes.",
+                category: "running",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 20,
+                fitAdvice: "True to size with excellent cushioning.",
+                deliveryTime: "2-4 business days"
+            },
+            {
+                id: 31,
+                name: "Adidas NMD_R1",
+                price: 139.99,
+                rating: 4.8,
+                image: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/NMD_R1_Shoes_Black_FY0370_06_standard.jpg",
+                altImage: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/NMD_R1_Shoes_Black_FY0370_06_standard-alt.jpg",
+                description: "Stylish and comfortable Adidas NMD_R1 sneakers.",
+                category: "casual",
+                color: "blue",
+                size: [6,7,8,9,10],
+                discount: 5,
+                fitAdvice: "Fits snugly, great for street style.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 32,
+                name: "Puma Future Rider",
+                price: 89.99,
+                rating: 4.3,
+                image: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
+                altImage: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers-alt",
+                description: "Retro-inspired Puma Future Rider sneakers.",
+                category: "sports",
+                color: "red",
+                size: [8,9,10],
+                discount: 15,
+                fitAdvice: "Fits snugly, great for street style.",
+                deliveryTime: "4-6 business days"
+            },
+            {
+                id: 33,
+                name: "Hoka One One Clifton 7",
+                price: 139.99,
+                rating: 4.9,
+                image: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "Lightweight and cushioned Hoka One One Clifton 7 running shoes.",
+                category: "running",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 20,
+                fitAdvice: "True to size with excellent cushioning.",
+                deliveryTime: "2-4 business days"
+            },
+            {
+                id: 34,
+                name: "New Balance Fresh Foam 1080v11",
+                price: 149.99,
+                rating: 4.8,
+                image: "https://nb.scene7.com/is/image/NB/m1080v11_nb_02_i?$pdp_hero$&wid=1200&hei=1200",
+                altImage: "https://nb.scene7.com/is/image/NB/m1080v11_nb_02_i_alt?$pdp_hero$&wid=1200&hei=1200",
+                description: "Cushioned New Balance Fresh Foam 1080v11 running shoes.",
+                category: "running",
+                color: "grey",
+                size: [7,8,9,10],
+                discount: 25,
+                fitAdvice: "True to size with plush cushioning.",
+                deliveryTime: "2-4 business days"
+            },
+            {
+                id: 35,
+                name: "Adidas Ultraboost 21",
+                price: 179.99,
+                rating: 4.9,
+                image: "https://www.adidas.com/us/ultraboost-21-shoes/FY0370.html",
+                altImage: "https://www.adidas.com/us/ultraboost-21-shoes/FY0370.html",
+                description: "High-performance Adidas Ultraboost 21 running shoes.",
+                category: "running",
+                color: "black",
+                size: [6,7,8,9,10],
+                discount: 5,
+                fitAdvice: "Fits snugly, great for long runs.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 36,
+                name: "Puma RS-X Reinvent",
+                price: 89.99,
+                rating: 4.3,
+                image: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
+                altImage: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers-alt",
+                description: "Bold and colorful Puma RS-X Reinvent sneakers.",
+                category: "sports",
+                color: "blue",
+                size: [8,9,10],
+                discount: 15,
+                fitAdvice: "Fits snugly, great for street style.",
+                deliveryTime: "4-6 business days"
+            },
+            {
+                id: 37,
+                name: "Asics Gel-Kayano 27",
+                price: 159.99,
+                rating: 4.8,
+                image: "https://www.asics.com/on/demandware.static/-/Sites-asics-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.asics.com/on/demandware.static/-/Sites-asics-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "High-performance Asics Gel-Kayano 27 running shoes.",
+                category: "running",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 20,
+                fitAdvice: "True to size with excellent stability.",
+                deliveryTime: "2-4 business days"
+            },
+            {
+                id: 38,
+                name: "Hoka One One Bondi 7",
+                price: 159.99,
+                rating: 4.9,
+                image: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "Maximum cushioning Hoka One One Bondi 7 running shoes.",
+                category: "running",
+                color: "blue",
+                size: [6,7,8,9,10],
+                discount: 5,
+                fitAdvice: "Fits snugly, great for long runs.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 39,
+                name: "Vans Old Skool",
+                price: 59.99,
+                rating: 4.6,
+                image: "https://www.vans.com/on/demandware.static/-/Sites-vans-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.vans.com/on/demandware.static/-/Sites-vans-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "Classic Vans Old Skool sneakers with iconic style.",
+                category: "casual",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 0,
+                fitAdvice: "True to size with a comfortable fit.",
+                deliveryTime: "5-7 business days"
+            },
+            {
+                id: 40,
+                name: "Converse Chuck Taylor All Star",
+                price: 49.99,
+                rating: 4.4,
+                image: "https://www.converse.com/on/demandware.static/-/Sites-converse-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.converse.com/on/demandware.static/-/Sites-converse-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "Timeless Converse Chuck Taylor All Star sneakers.",
+                category: "casual",
+                color: "white",
+                size: [6,7,8,9],
+                discount: 10,
+                fitAdvice: "Fits true to size with a classic silhouette.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 41,
+                name: "Nike React Infinity Run Flyknit",
+                price: 159.99,
+                rating: 4.7,
+                image: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/react-infinity-run-flyknit-mens-shoes.png",
+                altImage: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/react-infinity-run-flyknit-mens-shoes-alt.png",
+                description: "Innovative Nike React Infinity Run Flyknit running shoes.",
+                category: "running",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 20,
+                fitAdvice: "True to size with excellent cushioning.",
+                deliveryTime: "2-4 business days"
+            },
+            {
+                id: 42,
+                name: "New Balance Fresh Foam 1080v11",
+                price: 149.99,
+                rating: 4.8,
+                image: "https://www.newbalance.com/on/demandware.static/-/Sites-newbalance-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.newbalance.com/on/demandware.static/-/Sites-newbalance-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "Cushioned New Balance Fresh Foam 1080v11 running shoes.",
+                category: "running",
+                color: "gray",
+                size: [7,8,9,10],
+                discount: 10,
+                fitAdvice: "True to size with plush cushioning.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 43,
+                name: "Adidas Ultraboost 21",
+                price: 179.99,
+                rating: 4.9,
+                image: "https://www.adidas.com/us/ultraboost-21-shoes/FY0370.html",
+                altImage: "https://www.adidas.com/us/ultraboost-21-shoes/FY0370.html",
+                description: "High-performance Adidas Ultraboost 21 running shoes.",
+                category: "running",
+                color: "black",
+                size: [6,7,8,9,10],
+                discount: 5,
+                fitAdvice: "Fits snugly, great for long runs.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 44,
+                name: "Puma RS-X Reinvent",
+                price: 89.99,
+                rating: 4.3,
+                image: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
+                altImage: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers-alt",
+                description: "Bold and colorful Puma RS-X Reinvent sneakers.",
+                category: "sports",
+                color: "blue",
+                size: [8,9,10],
+                discount: 15,
+                fitAdvice: "Fits snugly, great for street style.",
+                deliveryTime: "4-6 business days"
+            },
+            {
+                id: 45,
+                name: "Asics Gel-Kayano 27",
+                price: 159.99,
+                rating: 4.8,
+                image: "https://www.asics.com/on/demandware.static/-/Sites-asics-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.asics.com/on/demandware.static/-/Sites-asics-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "High-performance Asics Gel-Kayano 27 running shoes.",
+                category: "running",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 20,
+                fitAdvice: "True to size with excellent stability.",
+                deliveryTime: "2-4 business days"
+            },
+            {
+                id: 46,
+                name: "Hoka One One Bondi 7",
+                price: 159.99,
+                rating: 4.9,
+                image: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "Maximum cushioning Hoka One One Bondi 7 running shoes.",
+                category: "running",
+                color: "blue",
+                size: [6,7,8,9,10],
+                discount: 5,
+                fitAdvice: "Fits snugly, great for long runs.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 47,
+                name: "Vans Old Skool",
+                price: 59.99,
+                rating: 4.6,
+                image: "https://www.vans.com/on/demandware.static/-/Sites-vans-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.vans.com/on/demandware.static/-/Sites-vans-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "Classic Vans Old Skool sneakers with iconic style.",
+                category: "casual",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 0,
+                fitAdvice: "True to size with a comfortable fit.",
+                deliveryTime: "5-7 business days"
+            },
+            {
+                id: 48,
+                name: "Converse Chuck Taylor All Star",
+                price: 49.99,
+                rating: 4.4,
+                image: "https://www.converse.com/on/demandware.static/-/Sites-converse-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
+                altImage: "https://www.converse.com/on/demandware.static/-/Sites-converse-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
+                description: "Timeless Converse Chuck Taylor All Star sneakers.",
+                category: "casual",
+                color: "white",
+                size: [6,7,8,9],
+                discount: 10,
+                fitAdvice: "Fits true to size with a classic silhouette.",
+                deliveryTime: "3-5 business days"
+            },
+            {
+                id: 49,
+                name: "Nike React Infinity Run Flyknit",
+                price: 159.99,
+                rating: 4.7,
+                image: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/react-infinity-run-flyknit-mens-shoes.png",
+                altImage: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/react-infinity-run-flyknit-mens-shoes-alt.png",
+                description: "Innovative Nike React Infinity Run Flyknit running shoes.",
+                category: "running",
+                color: "black",
+                size: [7,8,9,10],
+                discount: 20,
+                fitAdvice: "True to size with excellent cushioning.",
+                deliveryTime: "2-4 business days"
+            },
+            {
+                id: 50,
+                name: "Adidas NMD_R1",
+                price: 139.99,
+                rating: 4.8,
+                image: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/NMD_R1_Shoes_Black_FY0370_06_standard.jpg",
+                altImage: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/NMD_R1_Shoes_Black_FY0370_06_standard-alt.jpg",
+                description: "Stylish and comfortable Adidas NMD_R1 sneakers.",
+                category: "casual",
+                color: "blue",
+                size: [6,7,8,9,10],
+                discount: 5,
+                fitAdvice: "Fits snugly, great for street style.",
+                deliveryTime: "3-5 business days"
+            }
+        ];
+
+        // Mock user login state
+        let isLoggedIn = false;
+
+        // Render products in grid with discount badge and hover alternate image
+        function renderProducts(productList) {
+            const grid = document.getElementById('product-grid');
+            grid.innerHTML = '';
+            if (productList.length === 0) {
+                grid.innerHTML = '<p>No products found.</p>';
+                return;
+            }
+                productList.forEach(product => {
+                    const card = document.createElement('div');
+                    card.className = 'product-card';
+                    card.tabIndex = 0;
+                    card.innerHTML = `
+                        <div class="product-content">
+                            <div class="image-container">
+                                <img src="${product.image}" alt="${product.name}" class="product-image" />
+                                ${product.discount > 0 ? `<span class="discount-badge">${product.discount}% OFF</span>` : ''}
+                            </div>
+                    <h3 class="product-name">${product.name}</h3>
+                    <p class="product-price">₹${(product.price / 1000).toFixed(2)}K</p>
+                    <p class="product-rating">Rating: ${product.rating} ⭐</p>
+                        </div>
+                        <button class="quick-view-btn" data-id="${product.id}">Quick View</button>
+                    `;
+                    // Hover effect for alternate image
+                    const img = card.querySelector('.product-image');
+                    img.addEventListener('mouseenter', () => {
+                        img.src = product.altImage;
+                    });
+                    img.addEventListener('mouseleave', () => {
+                        img.src = product.image;
+                    });
+                    // Show quick view button on hover
+                    card.addEventListener('mouseenter', () => {
+                        const quickViewBtn = card.querySelector('.quick-view-btn');
+                        quickViewBtn.style.display = 'block';
+                    });
+                    card.addEventListener('mouseleave', () => {
+                        const quickViewBtn = card.querySelector('.quick-view-btn');
+                        quickViewBtn.style.display = 'none';
+                    });
+                    // Quick view button click handler
+                    card.querySelector('.quick-view-btn').addEventListener('click', () => {
+                        openQuickView(product.id);
+                    });
+                    grid.appendChild(card);
+                });
+        }
+
+        // Filter products based on selected filters
+        function filterProducts() {
+            const selectedSizes = Array.from(document.querySelectorAll('input[name="size"]:checked')).map(input => parseInt(input.value));
+            const selectedColors = Array.from(document.querySelectorAll('input[name="color"]:checked')).map(input => input.value);
+            const selectedPrices = Array.from(document.querySelectorAll('input[name="price"]:checked')).map(input => input.value);
+            const selectedCategories = Array.from(document.querySelectorAll('input[name="category"]:checked')).map(input => input.value);
+
+            let filtered = products.filter(product => {
+                // Filter by size
+                if (selectedSizes.length > 0 && !product.size.some(s => selectedSizes.includes(s))) {
+                    return false;
                 }
+                // Filter by color
+                if (selectedColors.length > 0 && !selectedColors.includes(product.color)) {
+                    return false;
+                }
+                // Filter by price
+                if (selectedPrices.length > 0) {
+                    let priceMatch = false;
+                    for (const priceRange of selectedPrices) {
+                        const [min, max] = priceRange.split('-').map(Number);
+                        if (product.price >= min && product.price <= max) {
+                            priceMatch = true;
+                            break;
+                        }
+                    }
+                    if (!priceMatch) return false;
+                }
+                // Filter by category
+                if (selectedCategories.length > 0 && !selectedCategories.includes(product.category)) {
+                    return false;
+                }
+                return true;
             });
+            return filtered;
+        }
+
+        // Sort products based on selected sort option
+        function sortProducts(productList) {
+            const sortValue = document.getElementById('sort-select').value;
+            let sorted = [...productList];
+            if (sortValue === 'price-asc') {
+                sorted.sort((a, b) => a.price - b.price);
+            } else if (sortValue === 'price-desc') {
+                sorted.sort((a, b) => b.price - a.price);
+            } else if (sortValue === 'latest') {
+                sorted.sort((a, b) => b.id - a.id);
+            } else if (sortValue === 'popularity') {
+                sorted.sort((a, b) => b.rating - a.rating);
+            }
+            return sorted;
+        }
+
+        // Render filtered and sorted products
+        function updateProductGrid() {
+            const filtered = filterProducts();
+            const sorted = sortProducts(filtered);
+            renderProducts(sorted);
+        }
+
+        // Event listeners for filters and sort
+        document.querySelectorAll('.filter-sidebar input[type="checkbox"]').forEach(input => {
+            input.addEventListener('change', updateProductGrid);
+        });
+        document.getElementById('sort-select').addEventListener('change', updateProductGrid);
+
+        // Quick view modal functions
+        const modal = document.getElementById('quick-view-modal');
+        const modalCloseBtn = modal.querySelector('.modal-close');
+
+        function openQuickView(id) {
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+            modal.querySelector('#quick-view-image').src = product.image;
+            modal.querySelector('#quick-view-image').alt = product.name;
+            modal.querySelector('#quick-view-name').textContent = product.name;
+            modal.querySelector('#quick-view-price').textContent = '₹' + product.price.toFixed(2);
+            modal.querySelector('#quick-view-rating').textContent = 'Rating: ' + product.rating + ' ⭐';
+            modal.querySelector('#quick-view-description').textContent = product.description;
+            modal.querySelector('#quick-view-fit-advice').textContent = 'Fit Advice: ' + product.fitAdvice;
+            modal.querySelector('#quick-view-delivery-time').textContent = 'Delivery Time: ' + product.deliveryTime;
+            modal.setAttribute('aria-hidden', 'false');
+            modal.style.display = 'block';
+
+            // Attach wishlist and cart handlers for modal buttons
+            modal.querySelector('#quick-view-wishlist').onclick = () => addToWishlist(id);
+            modal.querySelector('#quick-view-add-cart').onclick = () => addToCart(id);
+        }
+
+        modalCloseBtn.addEventListener('click', () => {
+            modal.setAttribute('aria-hidden', 'true');
+            modal.style.display = 'none';
+        });
+
+        // Close modal on outside click
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.setAttribute('aria-hidden', 'true');
+                modal.style.display = 'none';
+            }
+        });
+
+        // Wishlist and cart functions with login check
+        function addToWishlist(id) {
+            if (!isLoggedIn) {
+                promptLoginOrGuest();
+                return;
+            }
+            alert('Added product ' + id + ' to wishlist!');
+        }
+
+        function addToCart(id) {
+            if (!isLoggedIn) {
+                promptLoginOrGuest();
+                return;
+            }
+            alert('Added product ' + id + ' to cart!');
+        }
+
+        // Prompt login or continue as guest
+        function promptLoginOrGuest() {
+            const proceed = confirm("You need to be logged in to perform this action. Click OK to log in or Cancel to continue as guest.");
+            if (proceed) {
+                // Redirect to login page (mock)
+                alert("Redirecting to login page...");
+                // window.location.href = "login.html"; // Uncomment if login page exists
+            } else {
+                alert("Continuing as guest.");
+            }
+        }
+
+        // Close modal on outside click
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.setAttribute('aria-hidden', 'true');
+                modal.style.display = 'none';
+            }
+        });
+
+        // Initial render with default filters and sorting
+        updateProductGrid();
+
+        // Ensure modal is hidden on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const modal = document.getElementById('quick-view-modal');
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
+        });
+
+        // Prevent modal from showing on page load or tab click
+        window.addEventListener('load', () => {
+            const modal = document.getElementById('quick-view-modal');
+            modal.style.display = 'none';
+            modal.setAttribute('aria-hidden', 'true');
         });
     </script>
 </body>

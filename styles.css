@@ -128,6 +128,16 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
+.product-image {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    margin: 0 auto 1rem auto;
+    border-radius: 0.8rem;
+    background: #f7f7f7;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
 .product-title {
     font-size: 1.1rem;
     font-weight: 700;
