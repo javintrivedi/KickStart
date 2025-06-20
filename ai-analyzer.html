@@ -214,5 +214,150 @@
         }
     };
     </script>
+    <!-- MediaPipe Libraries -->
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/pose"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/drawing_utils"></script>
+<script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils"></script>
+
+<script>
+    let pose;
+    let canvas, canvasCtx, resultText;
+
+    document.getElementById('open-ai-analyzer').onclick = function () {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            navigator.mediaDevices.getUserMedia({ video: true })
+                .then(function (stream) {
+                    // Modal setup
+                    let modal = document.createElement('div');
+                    modal.id = 'ai-video-modal';
+
+                    let content = document.createElement('div');
+                    content.id = 'ai-video-modal-content';
+
+                    let video = document.createElement('video');
+                    video.id = 'analyzer-video';
+                    video.autoplay = true;
+                    video.playsInline = true;
+                    video.srcObject = stream;
+
+                    resultText = document.createElement('p');
+                    resultText.id = 'measurement-result';
+                    resultText.style.margin = '1rem 0';
+                    resultText.style.fontWeight = '600';
+                    resultText.style.color = '#181818';
+                    resultText.textContent = "Measuring...";
+
+                    canvas = document.createElement('canvas');
+                    canvas.id = 'analyzer-canvas';
+                    canvas.width = 350;
+                    canvas.height = 350;
+                    canvas.style.position = 'absolute';
+                    canvas.style.top = '0';
+                    canvas.style.left = '0';
+
+                    let canvasWrapper = document.createElement('div');
+                    canvasWrapper.style.position = 'relative';
+                    canvasWrapper.appendChild(video);
+                    canvasWrapper.appendChild(canvas);
+
+                    let closeBtn = document.createElement('button');
+                    closeBtn.textContent = 'Close';
+                    closeBtn.className = 'close-btn';
+                    closeBtn.onclick = function () {
+                        stream.getTracks().forEach(track => track.stop());
+                        document.body.removeChild(modal);
+                    };
+
+                    content.appendChild(resultText);
+                    content.appendChild(canvasWrapper);
+                    content.appendChild(closeBtn);
+                    modal.appendChild(content);
+                    document.body.appendChild(modal);
+
+                    runPoseModel(video);
+                })
+                .catch(function () {
+                    alert('Camera access denied or not available.');
+                });
+        } else {
+            alert('Camera not supported on this device.');
+        }
+    };
+
+    function runPoseModel(video) {
+        canvasCtx = document.getElementById('analyzer-canvas').getContext('2d');
+
+        pose = new Pose({
+            locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`
+        });
+
+        pose.setOptions({
+            modelComplexity: 1,
+            smoothLandmarks: true,
+            enableSegmentation: false,
+            minDetectionConfidence: 0.5,
+            minTrackingConfidence: 0.5
+        });
+
+        pose.onResults(onPoseResults);
+
+        const camera = new Camera(video, {
+            onFrame: async () => {
+                await pose.send({ image: video });
+            },
+            width: 350,
+            height: 350
+        });
+
+        camera.start();
+    }
+
+    function onPoseResults(results) {
+    canvasCtx.save();
+    canvasCtx.clearRect(0, 0, canvas.width, canvas.height);
+    canvasCtx.drawImage(results.image, 0, 0, canvas.width, canvas.height);
+
+    if (results.poseLandmarks) {
+        drawConnectors(canvasCtx, results.poseLandmarks, POSE_CONNECTIONS, { color: '#FF6600' });
+
+        const landmarks = results.poseLandmarks;
+        const heel = landmarks[29];  // Left Heel
+        const toe = landmarks[31];   // Left Big Toe
+
+        // OPTIONAL: simulate card detection (replace with real logic later)
+        const card_pixel_width = 120;  // ⬅️ You can manually measure this using dev tools or write logic to detect a rectangle
+
+        const card_real_width_cm = 8.56;
+        const pixels_per_cm = card_pixel_width / card_real_width_cm;
+
+        if (heel && toe) {
+            const dx = (heel.x - toe.x) * canvas.width;
+            const dy = (heel.y - toe.y) * canvas.height;
+            const pixelDistance = Math.sqrt(dx * dx + dy * dy);
+
+            const length_cm = pixelDistance / pixels_per_cm;
+            const length_in = length_cm / 2.54;
+
+            resultText.innerHTML = `
+                <strong>Foot Length:</strong><br>
+                ${pixelDistance.toFixed(1)} px<br>
+                ${length_cm.toFixed(2)} cm<br>
+                ${length_in.toFixed(2)} inches
+            `;
+        }
+    }
+
+    canvasCtx.restore();
+}
+canvasCtx.strokeStyle = '#00bcd4';
+canvasCtx.lineWidth = 2;
+canvasCtx.strokeRect(20, canvas.height - 60, 120, 20); // card guide
+canvasCtx.fillStyle = '#00bcd4';
+canvasCtx.fillText('Place card here', 25, canvas.height - 65);
+const card_pixel_width = 220;  // for example
+const card_real_width_cm = 8.56;
+const pixels_per_cm = card_pixel_width / card_real_width_cm;
+document.getElementById('measurement-result').textContent = "Point your camera at your foot to measure length!";    
+</script>
 </body>
 </html>
