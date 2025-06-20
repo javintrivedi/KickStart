@@ -1,0 +1,147 @@
+.collections-section {
+    max-width: 1200px;
+    margin: 4rem auto 3rem auto;
+    padding: 0 2rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    background: #f9f9f9;
+    border-radius: 1.5rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+    margin-top: 8rem;
+}
+
+.collections-header h1 {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 2.8rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+    color: #222222;
+}
+
+.collections-header p {
+    font-size: 1.15rem;
+    color: #444444;
+    max-width: 700px;
+    margin-bottom: 3rem;
+}
+
+.collections-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.collections-feature {
+    flex: 1 1 220px;
+    background: #ffffff;
+    border-radius: 1rem;
+    padding: 1.5rem 1.8rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6rem;
+    min-width: 220px;
+}
+
+.collections-feature span {
+    font-size: 2.5rem;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+}
+
+.collections-feature h3 {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin: 0;
+    color: #111111;
+}
+
+.collections-feature p,
+.collections-feature .collection-desc {
+    font-size: 1rem;
+    color: #555555;
+    margin: 0;
+}
+
+.collection-card {
+    background: #ffffff;
+    border-radius: 1rem;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+    padding: 1rem;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+    transition: box-shadow 0.3s ease;
+}
+
+.collection-card:hover,
+.collection-card:focus {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    outline: none;
+}
+
+.collection-img {
+    width: 100%;
+    max-width: 300px;
+    height: 180px;
+    object-fit: cover;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.collection-title {
+    font-family: 'Montserrat', Arial, sans-serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: #222222;
+    margin: 0;
+}
+
+.collection-desc {
+    font-size: 1rem;
+    color: #555555;
+    margin: 0 0 1rem 0;
+}
+
+.view-collection-btn {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 0.6rem 1.5rem;
+    border-radius: 2rem;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+}
+
+.view-collection-btn:hover,
+.view-collection-btn:focus {
+    background-color: #ff6600;
+    color: #fff;
+    outline: none;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+    .collections-features {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    .collection-card {
+        max-width: 100%;
+        height: auto;
+    }
+    .collection-img {
+        height: 160px;
+    }
+}
