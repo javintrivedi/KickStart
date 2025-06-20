@@ -19,7 +19,7 @@
             <li><a href="collections.html" aria-current="page"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
             <li><a href="ai-analyzer.html"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI Analyzer</span></a></li>
             <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
-            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span></a></li>
+<li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span> <span id="cart-count" style="background:#ff6600; color:#fff; border-radius:50%; padding:0 7px; font-size:0.8rem; font-weight:bold; vertical-align:top; margin-left:4px;">0</span></a></li>
         </ul>
     </nav>
     <main>
@@ -1013,7 +1013,7 @@
                 promptLoginOrGuest();
                 return;
             }
-            alert('Added product ' + id + ' to wishlist!');
+            showMessage('Added product ' + id + ' to wishlist!');
         }
 
         function addToCart(id) {
@@ -1021,7 +1021,7 @@
                 promptLoginOrGuest();
                 return;
             }
-            alert('Added product ' + id + ' to cart!');
+            showMessage('Added product ' + id + ' to cart!');
         }
 
         // Prompt login or continue as guest
@@ -1029,10 +1029,10 @@
             const proceed = confirm("You need to be logged in to perform this action. Click OK to log in or Cancel to continue as guest.");
             if (proceed) {
                 // Redirect to login page (mock)
-                alert("Redirecting to login page...");
+                showMessage("Redirecting to login page...");
                 // window.location.href = "login.html"; // Uncomment if login page exists
             } else {
-                alert("Continuing as guest.");
+                showMessage("Continuing as guest.");
             }
         }
 
@@ -1059,6 +1059,33 @@
             const modal = document.getElementById('quick-view-modal');
             modal.style.display = 'none';
             modal.setAttribute('aria-hidden', 'true');
+        });
+    </script>
+<script>
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let count = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+        const badge = document.getElementById('cart-count');
+        if (badge) {
+            badge.textContent = count;
+            console.log("Cart count updated to:", count);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCartCount();
+    });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nav = document.querySelector('.hero-nav');
+            const shrinkOn = 60;
+            window.addEventListener('scroll', function() {
+                if(window.scrollY > shrinkOn) {
+                    nav.classList.add('shrunk');
+                } else {
+                    nav.classList.remove('shrunk');
+                }
+            });
         });
     </script>
 </body>

@@ -153,6 +153,60 @@
             }
         }
     </style>
+    <style>
+        /* Custom modal styles */
+        .custom-modal {
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease forwards;
+            text-align: center;
+        }
+        .custom-modal.show {
+            display: flex;
+        }
+        .custom-modal-content {
+            background-color: #1e1e1e;
+            color: #f0f0f0;
+            padding: 2rem 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 12px 36px rgba(0,0,0,0.8);
+            max-width: 400px;
+            width: 90%;
+            text-align: center;
+            font-size: 1.4rem;
+            font-weight: 700;
+            position: relative;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            user-select: none;
+        }
+        .custom-close-btn {
+            position: absolute;
+            top: 0.3rem;
+            right: 1rem;
+            color: #ff6600;
+            font-size: 2.4rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.3s ease;
+            user-select: none;
+        }
+        .custom-close-btn:hover {
+            color: #ffa64d;
+        }
+        @keyframes fadeIn {
+            from {opacity: 0;}
+            to {opacity: 1;}
+        }
+    </style>
 </head>
 <body>
      <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
@@ -163,7 +217,7 @@
             <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
             <li><a href="ai-analyzer.html"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI Analyzer</span></a></li>
             <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
-            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span></a></li>
+<li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span> <span id="cart-count" style="background:#ff6600; color:#fff; border-radius:50%; padding:0 7px; font-size:0.8rem; font-weight:bold; vertical-align:top; margin-left:4px;">0</span></a></li>
         </ul>
     </nav>
     <main>
@@ -194,6 +248,13 @@
     <footer>
         <p>&copy; 2025 KickStart. All rights reserved.</p>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <div id="customAlertModal" class="custom-modal" role="alert" aria-modal="true" aria-labelledby="customAlertMessage" tabindex="-1">
+        <div class="custom-modal-content">
+            <button class="custom-close-btn" id="customAlertClose" aria-label="Close alert">&times;</button>
+            <p id="customAlertMessage"></p>
+        </div>
+    </div>
     <script>
 function renderCart() {
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -233,12 +294,18 @@ function removeFromCart(idx) {
 function checkoutCart() {
     let cart = JSON.parse(localStorage.getItem('cart') || '[]');
     if (cart.length === 0) {
-        alert("Your cart is empty!");
+        showMessage("Your cart is empty!");
         return;
     }
     localStorage.removeItem('cart');
     renderCart();
-    alert("Thank you for shopping with KickStart!");
+    showMessage("Thank you for shopping with KickStart!");
+    // Confetti effect
+    confetti({
+        particleCount: 150,
+        spread: 70,
+        origin: { y: 0.6 }
+    });
 }
 document.addEventListener('DOMContentLoaded', function() {
     // Navbar shrink
@@ -255,7 +322,42 @@ document.addEventListener('DOMContentLoaded', function() {
     renderCart();
     // Checkout
     document.querySelector('.checkout-btn').onclick = checkoutCart;
+
+    // Modal alert setup
+    const modal = document.getElementById('customAlertModal');
+    const closeBtn = document.getElementById('customAlertClose');
+    const messagePara = document.getElementById('customAlertMessage');
+
+    closeBtn.addEventListener('click', () => {
+        modal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.style.display = 'none';
+        }
+    });
+
+    // Expose showMessage globally
+    window.showMessage = function(message) {
+        messagePara.textContent = message;
+        modal.style.display = 'flex';
+    };
 });
     </script>
+<script>
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let count = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+        const badge = document.getElementById('cart-count');
+        if (badge) {
+            badge.textContent = count;
+            console.log("Cart count updated to:", count);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCartCount();
+    });
+</script>
 </body>
 </html>

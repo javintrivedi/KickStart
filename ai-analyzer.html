@@ -148,7 +148,7 @@
             <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
             <li><a href="ai-analyzer.html"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI Analyzer</span></a></li>
             <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
-            <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span></a></li>
+<li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span> <span id="cart-count" style="background:#ff6600; color:#fff; border-radius:50%; padding:0 7px; font-size:0.8rem; font-weight:bold; vertical-align:top; margin-left:4px;">0</span></a></li>
         </ul>
     </nav>
     <main>
@@ -169,6 +169,41 @@
         <p>&copy; 2025 KickStart. All rights reserved.</p>
     </footer>
     <script>
+    // Modal HTML for custom alert
+    const modalHTML = `
+    <div id="customAlertModal" class="custom-modal" style="display:none;">
+        <div class="custom-modal-content">
+            <span class="custom-close-btn" id="customAlertClose">&times;</span>
+            <p id="customAlertMessage"></p>
+        </div>
+    </div>
+    `;
+
+    // Append modal HTML to body and setup modal functionality
+    document.addEventListener('DOMContentLoaded', () => {
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+
+        const modal = document.getElementById('customAlertModal');
+        const closeBtn = document.getElementById('customAlertClose');
+        const messagePara = document.getElementById('customAlertMessage');
+
+        closeBtn.addEventListener('click', () => {
+            modal.style.display = 'none';
+        });
+
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Expose showMessage globally
+        window.showMessage = function(message) {
+            messagePara.textContent = message;
+            modal.style.display = 'flex';
+        };
+    });
+
     document.getElementById('open-ai-analyzer').onclick = function() {
         if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
             navigator.mediaDevices.getUserMedia({ video: true })
@@ -207,10 +242,10 @@
                     document.body.appendChild(modal);
                 })
                 .catch(function() {
-                    alert('Camera access denied or not available.');
+                    showMessage('Camera access denied or not available.');
                 });
         } else {
-            alert('Camera not supported on this device.');
+            showMessage('Camera not supported on this device.');
         }
     };
     </script>
@@ -346,7 +381,6 @@
             `;
         }
     }
-
     canvasCtx.restore();
 }
 canvasCtx.strokeStyle = '#00bcd4';
@@ -358,6 +392,20 @@ const card_pixel_width = 220;  // for example
 const card_real_width_cm = 8.56;
 const pixels_per_cm = card_pixel_width / card_real_width_cm;
 document.getElementById('measurement-result').textContent = "Point your camera at your foot to measure length!";    
+</script>
+<script>
+    function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        let count = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+        const badge = document.getElementById('cart-count');
+        if (badge) {
+            badge.textContent = count;
+            console.log("Cart count updated to:", count);
+        }
+    }
+    document.addEventListener('DOMContentLoaded', function() {
+        updateCartCount();
+    });
 </script>
 </body>
 </html>
