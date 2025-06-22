@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="KickStart - User Login" />
+    <title>KickStart - Login</title>
+    <link rel="icon" type="image/x-icon" href="favicon.png" />
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="navbar.css" />
+    <style>
+        body {
+            background: #f6f7fb;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: #fff;
+            padding: 2rem 3rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: #181818;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: #333;
+        }
+        input[type="email"],
+        input[type="password"] {
+            padding: 0.7rem 1rem;
+            margin-bottom: 1.2rem;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        input[type="email"]:focus,
+        input[type="password"]:focus {
+            border-color: #ff6600;
+            outline: none;
+        }
+        button {
+            background: #ff6600;
+            color: #fff;
+            padding: 0.8rem 1rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 2rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover,
+        button:focus {
+            background: #e65c00;
+            outline: none;
+        }
+        .login-footer {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        .login-footer a {
+            color: #ff6600;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .login-footer a:hover,
+        .login-footer a:focus {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <main class="login-container" role="main" aria-label="User login form">
+        <h2>Login to KickStart</h2>
+        <form id="login-form" action="#" method="POST" novalidate>
+            <label for="email">Email address</label>
+            <input type="email" id="email" name="email" placeholder="you@example.com" required aria-required="true" />
+            
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required aria-required="true" />
+            
+            <button type="submit">Log In</button>
+        </form>
+        <div class="login-footer">
+            <p>Don't have an account? <a href="index.html">Return to Home</a></p>
+        </div>
+    </main>
+</body>
+</html>

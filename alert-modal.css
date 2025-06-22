@@ -1,0 +1,89 @@
+.custom-modal {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    animation: fadeIn 0.3s ease forwards;
+    text-align: center;
+}
+.custom-modal.show {
+    display: flex;
+}
+.custom-modal-content {
+    background-color: #1e1e1e;
+    color: #f0f0f0;
+    padding: 2rem 3rem 3rem 3rem;
+    border-radius: 1rem;
+    box-shadow: 0 12px 36px rgba(0,0,0,0.8);
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    position: relative;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    user-select: none;
+}
+.custom-close-btn {
+    position: absolute;
+    top: 0.3rem;
+    right: 1rem;
+    color: #ff6600;
+    font-size: 2.4rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    user-select: none;
+}
+.custom-close-btn:hover {
+    color: #ffa64d;
+}
+.custom-modal-buttons {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+}
+.custom-modal-button {
+    padding: 0.6rem 2.2rem;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 2rem;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    user-select: none;
+    min-width: 100px;
+}
+.custom-modal-button.ok {
+    background-color: #6acafc;
+    color: #1e1e1e;
+    box-shadow: 0 0 8px #6acafc88;
+}
+.custom-modal-button.ok:hover,
+.custom-modal-button.ok:focus {
+    background-color: #4bb0e9;
+    outline: none;
+}
+.custom-modal-button.cancel {
+    background-color: transparent;
+    color: #6acafc;
+    border: 2px solid #6acafc;
+}
+.custom-modal-button.cancel:hover,
+.custom-modal-button.cancel:focus {
+    background-color: #6acafc;
+    color: #1e1e1e;
+    outline: none;
+}
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}

@@ -260,12 +260,13 @@
         <section class="hero" role="banner" aria-label="Main hero section">
             <nav class="hero-nav navbar-collapsed" role="navigation" aria-label="Primary navigation">
                 <div class="logo" aria-label="KickStart logo">KickStart</div>
-                <ul id="nav-menu">
+<ul id="nav-menu">
                     <li><a href="index.html" aria-current="page"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
                     <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
                     <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
                     <li><a href="ai-analyzer.html"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI Analyzer</span></a></li>
                     <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
+                    <li><a href="index.html" id="login-link"><i class="fas fa-user"></i><span class="nav-text">Login</span></a></li>
 <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span> <span id="cart-count" style="background:#ff6600; color:#fff; border-radius:50%; padding:0 7px; font-size:0.8rem; font-weight:bold; vertical-align:top; margin-left:4px;">0</span></a></li>
                 </ul>
             </nav>
@@ -287,6 +288,15 @@
                 <i class="fas fa-angle-double-down"></i>
             </div>
         </section>
++        <!-- User Avatar and Details Popup -->
++        <div id="user-avatar-container" style="position: fixed; top: 10px; right: 10px; display: none; cursor: pointer;">
++            <img id="user-avatar" src="" alt="User Avatar" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid #ff6600;">
++        </div>
++        <div id="user-details-popup" style="display: none; position: fixed; top: 60px; right: 10px; background: white; border: 1px solid #ccc; border-radius: 8px; padding: 10px; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 1000;">
++            <div id="user-name" style="font-weight: bold; margin-bottom: 5px;"></div>
++            <div id="user-email" style="font-size: 0.9rem; color: #555; margin-bottom: 10px;"></div>
++            <button id="logout-btn" style="background: #ff6600; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Logout</button>
++        </div>
         <!-- Features Section -->
         <section class="features" id="features" role="region" aria-label="Extra features">
             <div class="feature" tabindex="0">
@@ -412,163 +422,110 @@
         </footer>
     </main>
     <script>
-        // Reveal features on scroll
-        document.addEventListener('DOMContentLoaded', function() {
-            const features = document.querySelectorAll('.feature');
-            function revealOnScroll() {
-                const trigger = window.innerHeight * 0.95;
-                features.forEach(f => {
-                    const rect = f.getBoundingClientRect();
-                    if(rect.top < trigger) {
-                        f.classList.add('visible');
+        // Login state and user info handling
+        document.addEventListener('DOMContentLoaded', () => {
+            const loginLink = document.getElementById('login-link');
+            const navMenu = document.getElementById('nav-menu');
+
+            // Function to fetch user info from backend
+            async function fetchUser() {
+                try {
+                    const res = await fetch('http://localhost:5000/api/user', {
+                        credentials: 'include'
+                    });
+                    if (res.ok) {
+                        const user = await res.json();
+                        return user;
+                    }
+                } catch (err) {
+                    console.error('Error fetching user:', err);
+                }
+                return null;
+            }
+
+            // Function to create user avatar element
+            function createUserAvatar(user) {
+                const li = document.createElement('li');
+                li.id = 'user-avatar-li';
+                const a = document.createElement('a');
+                a.href = '#';
+                a.id = 'user-avatar-link';
+                a.setAttribute('aria-haspopup', 'true');
+                a.setAttribute('aria-expanded', 'false');
+                a.style.position = 'relative';
+
+                const img = document.createElement('img');
+                img.src = user.image_url || 'https://via.placeholder.com/32';
+                img.alt = user.name || 'User avatar';
+                img.style.width = '32px';
+                img.style.height = '32px';
+                img.style.borderRadius = '50%';
+                img.style.objectFit = 'cover';
+                img.style.verticalAlign = 'middle';
+
+                a.appendChild(img);
+                li.appendChild(a);
+
+                // Create user details popup
+                const popup = document.createElement('div');
+                popup.id = 'user-popup';
+                popup.style.position = 'absolute';
+                popup.style.top = '40px';
+                popup.style.right = '0';
+                popup.style.background = '#fff';
+                popup.style.border = '1px solid #ccc';
+                popup.style.borderRadius = '8px';
+                popup.style.padding = '10px';
+                popup.style.boxShadow = '0 2px 8px rgba(0,0,0,0.15)';
+                popup.style.display = 'none';
+                popup.style.zIndex = '1000';
+                popup.style.minWidth = '180px';
+
+                popup.innerHTML = `
+                    <p><strong>${user.name || user.email}</strong></p>
+                    <button id="logout-btn" style="background:#ff6600;color:#fff;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;">Logout</button>
+                `;
+
+                li.appendChild(popup);
+
+                // Toggle popup on avatar click
+                a.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const expanded = a.getAttribute('aria-expanded') === 'true';
+                    a.setAttribute('aria-expanded', !expanded);
+                    popup.style.display = expanded ? 'none' : 'block';
+                });
+
+                // Logout button handler
+                popup.querySelector('#logout-btn').addEventListener('click', async () => {
+                    try {
+                        const res = await fetch('http://localhost:5000/api/logout', {
+                            method: 'POST',
+                            credentials: 'include'
+                        });
+                        if (res.ok) {
+                            location.reload();
+                        }
+                    } catch (err) {
+                        console.error('Logout error:', err);
                     }
                 });
+
+                return li;
             }
-            window.addEventListener('scroll', revealOnScroll);
-            revealOnScroll();
-        });
-        document.addEventListener('DOMContentLoaded', function() {
-            const nav = document.querySelector('.hero-nav');
-            const shrinkOn = 60;
-            window.addEventListener('scroll', function() {
-                if(window.scrollY > shrinkOn) {
-                    nav.classList.add('shrunk');
-                } else {
-                    nav.classList.remove('shrunk');
+
+            // Initialize login state
+            (async () => {
+                const user = await fetchUser();
+                if (user && !user.error) {
+                    // Remove login link
+                    if (loginLink) loginLink.parentElement.removeChild(loginLink);
+                    // Add user avatar
+                    const avatarLi = createUserAvatar(user);
+                    navMenu.appendChild(avatarLi);
                 }
-            });
+            })();
         });
-
-        // Burger menu toggle
-        document.addEventListener('DOMContentLoaded', function() {
-            const burger = document.querySelector('.burger-menu');
-            const navMenu = document.getElementById('nav-menu');
-            burger.addEventListener('click', function() {
-                const expanded = burger.getAttribute('aria-expanded') === 'true' || false;
-                burger.setAttribute('aria-expanded', !expanded);
-                navMenu.classList.toggle('nav-open');
-            });
-        });
-
-        // Newsletter subscribe mock
-        function subscribeNewsletter(e) {
-            e.preventDefault();
-            const email = document.getElementById('newsletter-email').value;
-            const msg = document.getElementById('newsletter-msg');
-            if(email && email.includes('@')) {
-                msg.textContent = "Thanks for subscribing! 🚀";
-                msg.style.color = "#ff6600";
-            } else {
-                msg.textContent = "Please enter a valid email address.";
-                msg.style.color = "#ff0000";
-            }
-        }
-
-        // Modal for personalized messages
-        const messageModal = document.createElement('div');
-        messageModal.id = 'message-modal';
-        messageModal.setAttribute('aria-hidden', 'true');
-        messageModal.innerHTML = `
-            <div class="modal-overlay" tabindex="-1"></div>
-            <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc">
-                <button id="modal-close" aria-label="Close message">&times;</button>
-                <div id="modal-message" tabindex="0"></div>
-            </div>
-        `;
-        document.body.appendChild(messageModal);
-
-        const modal = document.getElementById('message-modal');
-        const modalMessage = document.getElementById('modal-message');
-        const modalClose = document.getElementById('modal-close');
-        const modalOverlay = modal.querySelector('.modal-overlay');
-
-        function showMessage(message) {
-            modalMessage.textContent = message;
-            modal.setAttribute('aria-hidden', 'false');
-            modal.style.display = 'flex';
-            modalMessage.focus();
-        }
-
-        function hideMessage() {
-            modal.setAttribute('aria-hidden', 'true');
-            modal.style.display = 'none';
-        }
-
-        modalClose.addEventListener('click', hideMessage);
-        modalOverlay.addEventListener('click', hideMessage);
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && modal.getAttribute('aria-hidden') === 'false') {
-                hideMessage();
-            }
-        });
-
-        // AI Style Recommender (Mock)
-        function getAIRecommendations() {
-            showMessage("👟 AI Style Recommender: Based on your activity, we recommend the Nike Air Max, Adidas Samba OG, and Puma Neo Cat!");
-        }
-
-        // Visual Search (Mock)
-        function visualSearch() {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*';
-            input.onchange = () => {
-                showMessage("🔍 AI Visual Search: Searching for shoes similar to your uploaded photo...");
-                // Here you would send the image to your AI backend for processing
-            };
-            input.click();
-        }
-
-        // AI Fit Predictor (Mock)
-        function aiFitPredictor() {
-            // Navigate to AI Analyzer page
-            window.location.href = "ai-analyzer.html";
-        }
-
-        // AI Chat Assistant (Mock)
-        function openAIChat() {
-            console.log("openAIChat called");
-            // Open Botpress chatbot widget when ready
-            function tryOpenChat() {
-                if (window.botpressWebChat) {
-                    window.botpressWebChat.open();
-                    console.log("Botpress webchat opened");
-                } else {
-                    console.log("Botpress webchat not ready, retrying...");
-                    setTimeout(tryOpenChat, 200);
-                }
-            }
-            tryOpenChat();
-        }
-
-        // Optionally, add buttons or triggers for these features in your UI
-
-        // Scroll event to toggle rotated text container position and z-index
-        document.addEventListener('DOMContentLoaded', function() {
-            const rotatedTextContainer = document.querySelector('.rotated-text-container');
-            const nav = document.querySelector('.hero-nav');
-            const navbarHeight = nav.offsetHeight;
-
-            window.addEventListener('scroll', () => {
-                if(window.scrollY > navbarHeight) {
-                    rotatedTextContainer.classList.add('scrolled');
-                } else {
-                    rotatedTextContainer.classList.remove('scrolled');
-                }
-            });
-        });
-
-        window.addEventListener('resize', function() {
-            const nav = document.querySelector('.hero-nav');
-            if (window.innerWidth < 600) {
-                nav.classList.add('navbar-collapsed');
-            } else {
-                nav.classList.remove('navbar-collapsed');
-            }
-        });
-
-        // Trigger on load as well
-        window.dispatchEvent(new Event('resize'));
     </script>
 <script>
     function updateCartCount() {

@@ -153,60 +153,7 @@
             }
         }
     </style>
-    <style>
-        /* Custom modal styles */
-        .custom-modal {
-            position: fixed;
-            z-index: 9999;
-            left: 0;
-            top: 0;
-            width: 100vw;
-            height: 100vh;
-            overflow: hidden;
-            background-color: rgba(0,0,0,0.6);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            animation: fadeIn 0.3s ease forwards;
-            text-align: center;
-        }
-        .custom-modal.show {
-            display: flex;
-        }
-        .custom-modal-content {
-            background-color: #1e1e1e;
-            color: #f0f0f0;
-            padding: 2rem 3rem;
-            border-radius: 1rem;
-            box-shadow: 0 12px 36px rgba(0,0,0,0.8);
-            max-width: 400px;
-            width: 90%;
-            text-align: center;
-            font-size: 1.4rem;
-            font-weight: 700;
-            position: relative;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            user-select: none;
-        }
-        .custom-close-btn {
-            position: absolute;
-            top: 0.3rem;
-            right: 1rem;
-            color: #ff6600;
-            font-size: 2.4rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: color 0.3s ease;
-            user-select: none;
-        }
-        .custom-close-btn:hover {
-            color: #ffa64d;
-        }
-        @keyframes fadeIn {
-            from {opacity: 0;}
-            to {opacity: 1;}
-        }
-    </style>
+    <link rel="stylesheet" href="alert-modal.css" />
 </head>
 <body>
      <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
@@ -249,102 +196,9 @@
         <p>&copy; 2025 KickStart. All rights reserved.</p>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
-    <div id="customAlertModal" class="custom-modal" role="alert" aria-modal="true" aria-labelledby="customAlertMessage" tabindex="-1">
-        <div class="custom-modal-content">
-            <button class="custom-close-btn" id="customAlertClose" aria-label="Close alert">&times;</button>
-            <p id="customAlertMessage"></p>
-        </div>
-    </div>
-    <script>
-function renderCart() {
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    const tbody = document.getElementById('cart-body');
-    const totalSpan = document.getElementById('cart-total');
-    tbody.innerHTML = '';
-    let total = 0;
-    if (cart.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" class="cart-empty">Your cart is empty.</td></tr>`;
-        totalSpan.textContent = '₹0';
-        return;
-    }
-    cart.forEach((item, idx) => {
-        total += item.price * item.qty;
-        tbody.innerHTML += `
-            <tr>
-                <td><img class="cart-img" src="${item.img}" alt="${item.name}"></td>
-                <td>${item.name}</td>
-                <td>₹${item.price.toLocaleString()}</td>
-                <td>${item.qty}</td>
-                <td>
-                    <button class="cart-remove-btn" aria-label="Remove ${item.name}" onclick="removeFromCart(${idx})">
-                        <i class="fas fa-times"></i>
-                    </button>
-                </td>
-            </tr>
-        `;
-    });
-    totalSpan.textContent = '₹' + total.toLocaleString();
-}
-function removeFromCart(idx) {
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    cart.splice(idx, 1);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    renderCart();
-}
-function checkoutCart() {
-    let cart = JSON.parse(localStorage.getItem('cart') || '[]');
-    if (cart.length === 0) {
-        showMessage("Your cart is empty!");
-        return;
-    }
-    localStorage.removeItem('cart');
-    renderCart();
-    showMessage("Thank you for shopping with KickStart!");
-    // Confetti effect
-    confetti({
-        particleCount: 150,
-        spread: 70,
-        origin: { y: 0.6 }
-    });
-}
-document.addEventListener('DOMContentLoaded', function() {
-    // Navbar shrink
-    const nav = document.querySelector('.hero-nav');
-    const shrinkOn = 60;
-    window.addEventListener('scroll', function() {
-        if(window.scrollY > shrinkOn) {
-            nav.classList.add('shrunk');
-        } else {
-            nav.classList.remove('shrunk');
-        }
-    });
-    // Render cart
-    renderCart();
-    // Checkout
-    document.querySelector('.checkout-btn').onclick = checkoutCart;
-
-    // Modal alert setup
-    const modal = document.getElementById('customAlertModal');
-    const closeBtn = document.getElementById('customAlertClose');
-    const messagePara = document.getElementById('customAlertMessage');
-
-    closeBtn.addEventListener('click', () => {
-        modal.style.display = 'none';
-    });
-
-    window.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            modal.style.display = 'none';
-        }
-    });
-
-    // Expose showMessage globally
-    window.showMessage = function(message) {
-        messagePara.textContent = message;
-        modal.style.display = 'flex';
-    };
-});
-    </script>
+    <!-- Include shared alert modal -->
+    <div id="sharedAlertModalContainer"></div>
+    <script src="alert-modal.js"></script>
 <script>
     function updateCartCount() {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
