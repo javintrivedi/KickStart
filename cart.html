@@ -104,7 +104,8 @@
             float: right;
         }
         .checkout-btn:hover, .checkout-btn:focus {
-            background: #ff
+            background: #fff;
+            border: 2px solid #000;
             color: #fff;
             transform: scale(1.06);
             outline: none;
@@ -156,17 +157,24 @@
     <link rel="stylesheet" href="alert-modal.css" />
 </head>
 <body>
-     <nav class="hero-nav" role="navigation" aria-label="Primary navigation">
-        <div class="logo" aria-label="KickStart logo">KICKSTART</div>
-        <ul id="nav-menu">
-            <li><a href="index.html"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
-            <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
-            <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
-            <li><a href="ai-analyzer.html"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI Analyzer</span></a></li>
-            <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
+     <nav class="hero-nav navbar-collapsed" role="navigation" aria-label="Primary navigation">
+                <div class="logo" aria-label="KickStart logo">KickStart</div>
+<ul id="nav-menu">
+                    <li><a href="index.html" aria-current="page"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
+                    <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
+                    <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI</span> <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu" aria-label="submenu">
+                            <li><a href="ai-analyzer.html">AI Analyzer</a></li>
+                            <li><a href="ai-style-recommender.html">AI Style Recommender</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
+                    <li><a href="index.html" id="login-link"><i class="fas fa-user"></i><span class="nav-text">Login</span></a></li>
 <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span> <span id="cart-count" style="background:#ff6600; color:#fff; border-radius:50%; padding:0 7px; font-size:0.8rem; font-weight:bold; vertical-align:top; margin-left:4px;">0</span></a></li>
-        </ul>
-    </nav>
+                </ul>
+            </nav>
     <main>
         <section class="cart-section" aria-label="Shopping Cart">
             <h1 class="cart-title">Your Cart</h1>
@@ -209,8 +217,88 @@
             console.log("Cart count updated to:", count);
         }
     }
+
+    function renderCartItems() {
+        const cartBody = document.getElementById("cart-body");
+        const cartTotal = document.getElementById("cart-total");
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        cartBody.innerHTML = "";
+
+        if (cart.length === 0) {
+            cartBody.innerHTML =
+                '<tr><td colspan="5" class="cart-empty">Your cart is empty.</td></tr>';
+            cartTotal.textContent = "₹0";
+            return;
+        }
+
+        let total = 0;
+
+        cart.forEach((item, index) => {
+            const row = document.createElement("tr");
+
+            // Product image cell
+            const imgCell = document.createElement("td");
+            const img = document.createElement("img");
+            img.src = item.image || "favicon.png";
+            img.alt = item.name || "Product Image";
+            img.className = "cart-img";
+            imgCell.appendChild(img);
+            row.appendChild(imgCell);
+
+            // Product name cell
+            const nameCell = document.createElement("td");
+            nameCell.textContent = item.name || "Unnamed Product";
+            row.appendChild(nameCell);
+
+            // Price cell
+            const priceCell = document.createElement("td");
+            priceCell.textContent = `₹${item.price || 0}`;
+            row.appendChild(priceCell);
+
+            // Quantity cell
+            const qtyCell = document.createElement("td");
+            qtyCell.textContent = item.qty || 1;
+            row.appendChild(qtyCell);
+
+            // Remove button cell
+            const removeCell = document.createElement("td");
+            const removeBtn = document.createElement("button");
+            removeBtn.className = "cart-remove-btn";
+            removeBtn.innerHTML = "&times;";
+            removeBtn.addEventListener("click", () => {
+                removeCartItem(index);
+            });
+            removeCell.appendChild(removeBtn);
+            row.appendChild(removeCell);
+
+            cartBody.appendChild(row);
+
+            total += (item.price || 0) * (item.qty || 1);
+        });
+
+        cartTotal.textContent = `₹${total.toFixed(2)}`;
+    }
+
+    function removeCartItem(index) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCartItems();
+        updateCartCount();
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
         updateCartCount();
+        renderCartItems();
+
+        const checkoutBtn = document.querySelector('.checkout-btn');
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', () => {
+                // Redirect to payment page on checkout button click
+                window.location.href = 'payment.html';
+            });
+        }
     });
 </script>
 </body>

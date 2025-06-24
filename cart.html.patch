@@ -1,0 +1,100 @@
+<<<<<<<
+    <script>
+      function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let count = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+        const badge = document.getElementById("cart-count");
+        if (badge) {
+          badge.textContent = count;
+          console.log("Cart count updated to:", count);
+        }
+      }
+    </script>
+=======
+    <script>
+      function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let count = cart.reduce((sum, item) => sum + (item.qty || 1), 0);
+        const badge = document.getElementById("cart-count");
+        if (badge) {
+          badge.textContent = count;
+          console.log("Cart count updated to:", count);
+        }
+      }
+
+      function renderCartItems() {
+        const cartBody = document.getElementById("cart-body");
+        const cartTotal = document.getElementById("cart-total");
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        cartBody.innerHTML = "";
+
+        if (cart.length === 0) {
+          cartBody.innerHTML =
+            '<tr><td colspan="5" class="cart-empty">Your cart is empty.</td></tr>';
+          cartTotal.textContent = "₹0";
+          return;
+        }
+
+        let total = 0;
+
+        cart.forEach((item, index) => {
+          const row = document.createElement("tr");
+
+          // Product image cell
+          const imgCell = document.createElement("td");
+          const img = document.createElement("img");
+          img.src = item.image || "favicon.png";
+          img.alt = item.name || "Product Image";
+          img.className = "cart-img";
+          imgCell.appendChild(img);
+          row.appendChild(imgCell);
+
+          // Product name cell
+          const nameCell = document.createElement("td");
+          nameCell.textContent = item.name || "Unnamed Product";
+          row.appendChild(nameCell);
+
+          // Price cell
+          const priceCell = document.createElement("td");
+          priceCell.textContent = `₹${item.price || 0}`;
+          row.appendChild(priceCell);
+
+          // Quantity cell
+          const qtyCell = document.createElement("td");
+          qtyCell.textContent = item.qty || 1;
+          row.appendChild(qtyCell);
+
+          // Remove button cell
+          const removeCell = document.createElement("td");
+          const removeBtn = document.createElement("button");
+          removeBtn.className = "cart-remove-btn";
+          removeBtn.innerHTML = "&times;";
+          removeBtn.addEventListener("click", () => {
+            removeCartItem(index);
+          });
+          removeCell.appendChild(removeBtn);
+          row.appendChild(removeCell);
+
+          cartBody.appendChild(row);
+
+          total += (item.price || 0) * (item.qty || 1);
+        });
+
+        cartTotal.textContent = `₹${total.toFixed(2)}`;
+      }
+
+      function removeCartItem(index) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        renderCartItems();
+        updateCartCount();
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        updateCartCount();
+        renderCartItems();
+      });
+    </script>
+>>>>>>>

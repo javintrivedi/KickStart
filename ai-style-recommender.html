@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Style Recommender</title>
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: #f6f7fb;
+        }
+        h1 {
+            text-align: center;
+            color: #ff6600;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        label {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+        select, input[type="radio"] {
+            margin-right: 0.5rem;
+        }
+        .question {
+            background: #fff;
+            padding: 1rem;
+            border-radius: 0.8rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        button {
+            background: #ff6600;
+            color: white;
+            border: none;
+            padding: 0.8rem;
+            font-size: 1.1rem;
+            border-radius: 2rem;
+            cursor: pointer;
+            font-weight: 700;
+            transition: background 0.3s ease;
+        }
+        button:hover {
+            background: #e05500;
+        }
+        #result {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #fff3e0;
+            border-radius: 0.8rem;
+            font-weight: 700;
+            color: #b35c00;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <main>
+    <nav class="hero-nav navbar-collapsed" role="navigation" aria-label="Primary navigation">
+                <div class="logo" aria-label="KickStart logo">KickStart</div>
+<ul id="nav-menu">
+                    <li><a href="index.html" aria-current="page"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
+                    <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
+                    <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI</span> <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu" aria-label="submenu">
+                            <li><a href="ai-analyzer.html">AI Analyzer</a></li>
+                            <li><a href="ai-style-recommender.html">AI Style Recommender</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
+                    <li><a href="index.html" id="login-link"><i class="fas fa-user"></i><span class="nav-text">Login</span></a></li>
+<li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span> <span id="cart-count" style="background:#ff6600; color:#fff; border-radius:50%; padding:0 7px; font-size:0.8rem; font-weight:bold; vertical-align:top; margin-left:4px;">0</span></a></li>
+                </ul>
+            </nav>
+    <h1>AI Style Recommender</h1>
+    <form id="styleForm">
+        <div class="question">
+            <label for="clothingStyle">What kind of clothes do you usually wear?</label>
+            <select id="clothingStyle" name="clothingStyle" required>
+                <option value="">Select one</option>
+                <option value="casual">Casual</option>
+                <option value="formal">Formal</option>
+                <option value="sporty">Sporty</option>
+                <option value="trendy">Trendy</option>
+                <option value="classic">Classic</option>
+            </select>
+        </div>
+        <div class="question">
+            <label>Preferred shoe type:</label>
+            <label><input type="radio" name="shoeType" value="sneakers" required /> Sneakers</label>
+            <label><input type="radio" name="shoeType" value="boots" /> Boots</label>
+            <label><input type="radio" name="shoeType" value="loafers" /> Loafers</label>
+            <label><input type="radio" name="shoeType" value="sandals" /> Sandals</label>
+        </div>
+        <div class="question">
+            <label for="colorPreference">Favorite shoe color:</label>
+            <select id="colorPreference" name="colorPreference" required>
+                <option value="">Select one</option>
+                <option value="black">Black</option>
+                <option value="white">White</option>
+                <option value="brown">Brown</option>
+                <option value="colorful">Colorful</option>
+                <option value="neutral">Neutral</option>
+            </select>
+        </div>
+        <div class="question">
+            <label>Do you prefer eco-friendly materials?</label>
+            <label><input type="radio" name="ecoFriendly" value="yes" required /> Yes</label>
+            <label><input type="radio" name="ecoFriendly" value="no" /> No</label>
+        </div>
+        <div class="question">
+            <label>Do you want shoes for:</label>
+            <label><input type="radio" name="usage" value="daily" required /> Daily wear</label>
+            <label><input type="radio" name="usage" value="sports" /> Sports</label>
+            <label><input type="radio" name="usage" value="special" /> Special occasions</label>
+        </div>
+        <div class="question">
+            <label for="budget">Budget range:</label>
+            <select id="budget" name="budget" required>
+                <option value="">Select one</option>
+                <option value="low">Under $50</option>
+                <option value="medium">$50 - $150</option>
+                <option value="high">Above $150</option>
+            </select>
+        </div>
+        <button type="submit">Get Recommendation</button>
+    </form>
+    <div id="result"></div>
+    <footer>
+        <p>&copy; 2025 KickStart. All rights reserved.</p>
+    </footer>
+    </main>
+    <script>
+        document.getElementById('styleForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const clothingStyle = this.clothingStyle.value;
+            const shoeType = this.shoeType.value;
+            const colorPreference = this.colorPreference.value;
+            const ecoFriendly = this.ecoFriendly.value;
+            const usage = this.usage.value;
+            const budget = this.budget.value;
+
+            // Simple placeholder recommendation logic
+            let recommendation = `Based on your style (${clothingStyle}), preferred shoe type (${shoeType}), and color preference (${colorPreference}), `;
+            recommendation += ecoFriendly === 'yes' ? 'we recommend eco-friendly shoes. ' : 'we recommend our popular collection. ';
+            recommendation += `For ${usage} use within your budget (${budget}), check out our latest arrivals!`;
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = recommendation;
+            resultDiv.style.display = 'block';
+        });
+    </script>
+</body>
+</html>

@@ -128,19 +128,20 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            opacity: 0;
-            transform: translateY(20px);
+            opacity: 1;
+            transform: translateY(0);
             transition: opacity 0.6s, transform 0.6s;
         }
         .feature.visible {
             opacity: 1;
             transform: translateY(0);
         }
+        /* Removed hover and focus opacity and transform changes to keep features always visible */
         .feature:focus, .feature:hover {
             opacity: 1;
-            transform: scale(1.06) translateY(0);
+            transform: translateY(0);
             background: inherit;
-            transition: transform 0.3s cubic-bezier(.23,1.01,.32,1), opacity 0.3s;
+            transition: none;
         }
         .feature span {
             font-size: 2rem;
@@ -254,6 +255,53 @@
             }
         }
     </style>
+    <style>
+        /* Dropdown menu styles */
+        #nav-menu li.dropdown {
+            position: relative;
+        }
+        #nav-menu li.dropdown > a {
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        #nav-menu li.dropdown > a .fa-caret-down {
+            font-size: 0.7rem;
+        }
+        #nav-menu li.dropdown ul.dropdown-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 0.3rem;
+            min-width: 180px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+            z-index: 1000;
+            padding: 0.5rem 0;
+        }
+        #nav-menu li.dropdown ul.dropdown-menu li {
+            padding: 0;
+        }
+        #nav-menu li.dropdown ul.dropdown-menu li a {
+            display: block;
+            padding: 0.5rem 1rem;
+            color: #181818;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        #nav-menu li.dropdown ul.dropdown-menu li a:hover,
+        #nav-menu li.dropdown ul.dropdown-menu li a:focus {
+            background: #ff6600;
+            color: white;
+        }
+        #nav-menu li.dropdown:hover > ul.dropdown-menu,
+        #nav-menu li.dropdown:focus-within > ul.dropdown-menu {
+            display: block;
+        }
+    </style>
 </head>
 <body>
     <main>
@@ -264,7 +312,13 @@
                     <li><a href="index.html" aria-current="page"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
                     <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
                     <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
-                    <li><a href="ai-analyzer.html"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI Analyzer</span></a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI</span> <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu" aria-label="submenu">
+                            <li><a href="ai-analyzer.html">AI Analyzer</a></li>
+                            <li><a href="ai-style-recommender.html">AI Style Recommender</a></li>
+                        </ul>
+                    </li>
                     <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
                     <li><a href="index.html" id="login-link"><i class="fas fa-user"></i><span class="nav-text">Login</span></a></li>
 <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span> <span id="cart-count" style="background:#ff6600; color:#fff; border-radius:50%; padding:0 7px; font-size:0.8rem; font-weight:bold; vertical-align:top; margin-left:4px;">0</span></a></li>
@@ -288,15 +342,15 @@
                 <i class="fas fa-angle-double-down"></i>
             </div>
         </section>
-+        <!-- User Avatar and Details Popup -->
-+        <div id="user-avatar-container" style="position: fixed; top: 10px; right: 10px; display: none; cursor: pointer;">
-+            <img id="user-avatar" src="" alt="User Avatar" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid #ff6600;">
-+        </div>
-+        <div id="user-details-popup" style="display: none; position: fixed; top: 60px; right: 10px; background: white; border: 1px solid #ccc; border-radius: 8px; padding: 10px; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 1000;">
-+            <div id="user-name" style="font-weight: bold; margin-bottom: 5px;"></div>
-+            <div id="user-email" style="font-size: 0.9rem; color: #555; margin-bottom: 10px;"></div>
-+            <button id="logout-btn" style="background: #ff6600; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Logout</button>
-+        </div>
+        <!-- User Avatar and Details Popup -->
+        <div id="user-avatar-container" style="position: fixed; top: 10px; right: 10px; display: none; cursor: pointer;">
+            <img id="user-avatar" src="" alt="User Avatar" style="width: 40px; height: 40px; border-radius: 50%; border: 2px solid #ff6600;">
+        </div>
+        <div id="user-details-popup" style="display: none; position: fixed; top: 60px; right: 10px; background: white; border: 1px solid #ccc; border-radius: 8px; padding: 10px; width: 200px; box-shadow: 0 2px 8px rgba(0,0,0,0.2); z-index: 1000;">
+            <div id="user-name" style="font-weight: bold; margin-bottom: 5px;"></div>
+            <div id="user-email" style="font-size: 0.9rem; color: #555; margin-bottom: 10px;"></div>
+            <button id="logout-btn" style="background: #ff6600; color: white; border: none; padding: 5px 10px; border-radius: 4px; cursor: pointer;">Logout</button>
+       </div>
         <!-- Features Section -->
         <section class="features" id="features" role="region" aria-label="Extra features">
             <div class="feature" tabindex="0">
@@ -540,6 +594,39 @@
     document.addEventListener('DOMContentLoaded', function() {
         updateCartCount();
     });
-</script>
+    </script>
+    <script>
+        // Visual Search: open file input dialog to upload image
+        function visualSearch() {
+            const fileInput = document.getElementById('visual-search-file-input');
+            if (fileInput) {
+                fileInput.click();
+            }
+        }
+
+        // Handle file selection for Visual Search
+        function handleVisualSearchFile(event) {
+            const file = event.target.files[0];
+            if (file) {
+                alert(`Selected file: ${file.name}. Implement image processing to find matching shoes.`);
+                // TODO: Implement image upload and processing logic here
+            }
+        }
+
+        // AI Style Recommender: simple prompt-based interaction
+        function getAIRecommendations() {
+            // Redirect to AI Style Recommender page
+            window.location.href = "ai-style-recommender.html";
+        }
+
+        // AI Fit Predictor: placeholder alert or modal
+        function aiFitPredictor() {
+            // Redirect to AI Analyzer page
+            window.location.href = "ai-analyzer.html";
+        }
+    </script>
+
+    <!-- Hidden file input for Visual Search -->
+    <input type="file" id="visual-search-file-input" accept="image/*" style="display:none" onchange="handleVisualSearchFile(event)" />
 </body>
 </html>

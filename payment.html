@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Payment | KickStart</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="navbar.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+    <style>
+        body {
+            background: #f6f7fb;
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', Arial, sans-serif;
+        }
+        .hero-nav {
+            height: 56px;
+            background: #000;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            padding: 0 1rem;
+        }
+        .hero-nav .logo {
+            font-weight: 900;
+            font-size: 1.5rem;
+            letter-spacing: 1.5px;
+        }
+        main {
+            max-width: 600px;
+            margin: 4rem auto;
+            background: #fff;
+            padding: 2rem;
+            border-radius: 1rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-weight: 900;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #181818;
+            text-align: center;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        label {
+            font-weight: 700;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="tel"] {
+            padding: 0.6rem 0.8rem;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 0.5rem;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus,
+        input[type="tel"]:focus {
+            border-color: #000;
+        }
+        button.pay-btn {
+            background: #000;
+            color: #fff;
+            border: none;
+            border-radius: 2rem;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            align-self: center;
+            margin-top: 1rem;
+        }
+        button.pay-btn:hover {
+            background: #444;
+            transform: scale(1.05);
+        }
+        .message {
+            text-align: center;
+            margin-top: 1rem;
+            font-weight: 700;
+            color: green;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <nav class="hero-nav navbar-collapsed" role="navigation" aria-label="Primary navigation">
+                <div class="logo" aria-label="KickStart logo">KickStart</div>
+<ul id="nav-menu">
+                    <li><a href="index.html" aria-current="page"><i class="fas fa-home"></i><span class="nav-text">Home</span></a></li>
+                    <li><a href="shop.html"><i class="fas fa-store"></i><span class="nav-text">Shop</span></a></li>
+                    <li><a href="collections.html"><i class="fas fa-th-large"></i><span class="nav-text">Collections</span></a></li>
+                    <li class="dropdown">
+                        <a href="#" aria-haspopup="true" aria-expanded="false"><i class="fas fa-shoe-prints"></i><span class="nav-text">AI</span> <i class="fas fa-caret-down"></i></a>
+                        <ul class="dropdown-menu" aria-label="submenu">
+                            <li><a href="ai-analyzer.html">AI Analyzer</a></li>
+                            <li><a href="ai-style-recommender.html">AI Style Recommender</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
+                    <li><a href="index.html" id="login-link"><i class="fas fa-user"></i><span class="nav-text">Login</span></a></li>
+<li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span> <span id="cart-count" style="background:#ff6600; color:#fff; border-radius:50%; padding:0 7px; font-size:0.8rem; font-weight:bold; vertical-align:top; margin-left:4px;">0</span></a></li>
+                </ul>
+            </nav>
+    <main>
+        <h1>Payment</h1>
+        <form id="paymentForm">
+            <label for="amount">Amount (INR)</label>
+            <input type="number" id="amount" name="amount" value="12795" readonly />
+
+            <button type="submit" class="pay-btn">Pay Now</button>
+        </form>
+        <div id="message" class="message"></div>
+    </main>
+    <script>
+        const paymentForm = document.getElementById('paymentForm');
+        const messageDiv = document.getElementById('message');
+
+        paymentForm.addEventListener('submit', async function(event) {
+            event.preventDefault();
+            messageDiv.textContent = '';
+            const amount = parseFloat(document.getElementById('amount').value);
+            if (!amount || amount <= 0) {
+                messageDiv.textContent = 'Invalid amount';
+                messageDiv.classList.add('error');
+                return;
+            }
+
+            try {
+                // Create order on backend
+                const orderResponse = await fetch('/api/create_order', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ amount: amount, currency: 'INR' })
+                });
+                const orderData = await orderResponse.json();
+                if (orderResponse.status !== 200) {
+                    throw new Error(orderData.error || 'Failed to create order');
+                }
+
+                const options = {
+                    key: orderData.key_id, // Use key_id from backend response
+                    amount: orderData.amount * 100, // in paise
+                    currency: orderData.currency,
+                    name: 'KickStart',
+                    description: 'Shoe Purchase',
+                    order_id: orderData.order_id,
+                    handler: async function (response) {
+                        // Verify payment on backend
+                        const verifyResponse = await fetch('/api/verify_payment', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature
+                            })
+                        });
+                        const verifyData = await verifyResponse.json();
+                        if (verifyResponse.status === 200) {
+                            messageDiv.textContent
+                            messageDiv.classList.remove('error');
+                        } else {
+                            messageDiv.textContent = 'Payment verification failed: ' + (verifyData.error || '');
+                            messageDiv.classList.add('error');
+                        }
+                    },
+                    prefill: {
+                        name: '',
+                        email: '',
+                        contact: ''
+                    },
+                    theme: {
+                        color: '#000'
+                    }
+                };
+
+                const rzp = new Razorpay(options);
+                rzp.open();
+            } catch (error) {
+                messageDiv.textContent = 'Error: ' + error.message;
+                messageDiv.classList.add('error');
+            }
+        });
+    </script>
+</body>
+</html>

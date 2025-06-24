@@ -4,6 +4,10 @@ from flask_pymongo import PyMongo
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
 import os
+import razorpay
+import hmac
+import hashlib
+import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'supersecretkey')
@@ -18,6 +22,11 @@ app.config['MONGO_URI'] = os.environ.get('MONGO_URI', 'mongodb://localhost:27017
 db = SQLAlchemy(app)
 mongo = PyMongo(app)
 CORS(app, supports_credentials=True)
+
+# Razorpay client setup with placeholders for API keys
+RAZORPAY_KEY_ID = os.environ.get('RAZORPAY_KEY_ID', 'your_key_id')
+RAZORPAY_KEY_SECRET = os.environ.get('RAZORPAY_KEY_SECRET', 'your_key_secret')
+razorpay_client = razorpay.Client(auth=(RAZORPAY_KEY_ID, RAZORPAY_KEY_SECRET))
 
 # User model for PostgreSQL
 class User(db.Model):
@@ -88,6 +97,49 @@ def upload_image():
     image.save(f'uploads/{filename}')
     mongo.db.user_images.update_one({'user_id': user_id}, {'$set': {'url': f'/uploads/{filename}'}}, upsert=True)
     return jsonify({'message': 'Image uploaded successfully', 'url': f'/uploads/{filename}'})
+
+# Razorpay create order endpoint
+@app.route('/api/create_order', methods=['POST'])
+def create_order():
+    data = request.json
+    amount = data.get('amount')
+    currency = data.get('currency', 'INR')
+    if not amount:
+        return jsonify({'error': 'Amount is required'}), 400
+    try:
+        razorpay_order = razorpay_client.order.create(dict(amount=int(amount*100), currency=currency, payment_capture='1'))
+        return jsonify({
+            'order_id': razorpay_order['id'],
+            'amount': amount,
+            'currency': currency,
+            'key_id': RAZORPAY_KEY_ID
+        })
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# Razorpay payment verification endpoint
+@app.route('/api/verify_payment', methods=['POST'])
+def verify_payment():
+    data = request.json
+    razorpay_order_id = data.get('razorpay_order_id')
+    razorpay_payment_id = data.get('razorpay_payment_id')
+    razorpay_signature = data.get('razorpay_signature')
+
+    if not razorpay_order_id or not razorpay_payment_id or not razorpay_signature:
+        return jsonify({'error': 'Missing payment details'}), 400
+
+    # Verify signature
+    generated_signature = hmac.new(
+        bytes(RAZORPAY_KEY_SECRET, 'utf-8'),
+        bytes(razorpay_order_id + "|" + razorpay_payment_id, 'utf-8'),
+        hashlib.sha256
+    ).hexdigest()
+
+    if generated_signature == razorpay_signature:
+        # Payment is verified
+        return jsonify({'message': 'Payment verified successfully'})
+    else:
+        return jsonify({'error': 'Invalid payment signature'}), 400
 
 if __name__ == '__main__':
     app.run(debug=True)
