@@ -899,15 +899,18 @@ section[aria-label="Newsletter Signup"] .graphic-card {
 /* AI Dropdown styles */
 #nav-menu li.dropdown {
             position: relative;
+            padding: 10px 0;
         }
         #nav-menu li.dropdown > a {
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 0.3rem;
+            padding: auto;
         }
         #nav-menu li.dropdown > a .fa-caret-down {
             font-size: 0.7rem;
+            padding: auto;
         }
         #nav-menu li.dropdown ul.dropdown-menu {
             display: none;
@@ -916,14 +919,16 @@ section[aria-label="Newsletter Signup"] .graphic-card {
             left: 0;
             background: white;
             border: 1px solid #ccc;
-            border-radius: 0.3rem;
+            border-radius: 1.3rem;
             min-width: 180px;
             box-shadow: 0 2px 8px rgba(0,0,0,0.15);
             z-index: 1000;
             padding: 0.5rem 0;
+            
         }
         #nav-menu li.dropdown ul.dropdown-menu li {
-            padding: 0;
+            padding: 10px 1rem;
+            border-radius: 50%;
         }
         #nav-menu li.dropdown ul.dropdown-menu li a {
             display: block;
@@ -936,6 +941,7 @@ section[aria-label="Newsletter Signup"] .graphic-card {
         #nav-menu li.dropdown ul.dropdown-menu li a:focus {
             background: #ff6600;
             color: white;
+            border-radius: 0.9rem;
         }
         #nav-menu li.dropdown:hover > ul.dropdown-menu,
         #nav-menu li.dropdown:focus-within > ul.dropdown-menu {
