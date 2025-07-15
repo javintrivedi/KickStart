@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register | KickStart</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="navbar.css">
+    <link rel="icon" type="image/x-icon" href="favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <style>
+        body {
+            background: #f6f7fb;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+        .register-bg-center {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .register-container {
+            width: 100%;
+            max-width: 410px;
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 32px rgba(0,0,0,0.10);
+            padding: 2.5rem 2rem 2rem 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .register-container h2 {
+            margin-bottom: 1.7rem;
+            font-size: 2rem;
+            font-weight: 900;
+            color: #181818;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+        .register-container form {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 1.1rem;
+        }
+        .register-container label {
+            font-weight: 600;
+            color: #222;
+            margin-bottom: 0.2rem;
+        }
+        .register-container input[type="text"],
+        .register-container input[type="email"],
+        .register-container input[type="password"] {
+            padding: 0.7rem 1rem;
+            border-radius: 0.7rem;
+            border: 1.5px solid #e0e0e0;
+            font-size: 1rem;
+            background: #f6f7fb;
+            transition: border 0.2s;
+        }
+        .register-container input:focus {
+            border-color: #ff6600;
+            outline: none;
+        }
+        .register-container button[type="submit"] {
+            background: #ff6600;
+            color: #fff;
+            border: none;
+            border-radius: 2rem;
+            padding: 0.9rem 0;
+            font-size: 1.15rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            margin-top: 0.7rem;
+            width: 100%;
+        }
+        .register-container button[type="submit"]:hover,
+        .register-container button[type="submit"]:focus {
+            background: #e65c00;
+            outline: none;
+            transform: scale(1.05);
+        }
+        .register-footer {
+            margin-top: 1.2rem;
+            text-align: center;
+            font-size: 1rem;
+            color: #555;
+        }
+        .register-footer a {
+            color: #ff6600;
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .register-footer a:hover,
+        .register-footer a:focus {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="register-bg-center">
+        <main class="register-container" role="main" aria-label="User registration form">
+            <h2>Create Your Account</h2>
+            <form id="register-form" action="#" method="POST" novalidate>
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required autocomplete="username">
+
+                <label for="email">Email address</label>
+                <input type="email" id="email" name="email" required autocomplete="email">
+
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required autocomplete="new-password">
+
+                <button type="submit">Register</button>
+            </form>
+            <div class="register-footer">
+                <p>Already have an account? <a href="login.html">Log in here</a></p>
+                <p>Return to <a href="index.html">Home</a></p>
+            </div>
+        </main>
+    </div>
+    <script>
+        document.getElementById('register-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            // You can add form validation or registration logic here if needed
+            window.location.href = "index.html";
+        });
+    </script>
+</body>
+</html>

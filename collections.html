@@ -10,14 +10,294 @@
     <link rel="stylesheet" href="navbar.css" />
     <link rel ="stylesheet" href="alert-modal.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-</head>
-<body>
+    </head>
+    <body>
     <style>
         body {
-            background: #f6f7fb;
+            background: linear-gradient(120deg, #f6f7fb 60%, #fffbe6 100%);
             margin: 0;
             padding: 0;
             margin-top: 6rem;
+        }
+        .collections-container {
+            display: flex;
+            gap: 32px;
+            max-width: 1400px;
+            margin: 2rem auto 2rem auto;
+            padding: 2rem 1.5rem;
+            background: rgba(255,255,255,0.95);
+            border-radius: 1.5rem;
+            box-shadow: 0 8px 32px 0 rgba(0,0,0,0.10);
+        }
+        .filter-sidebar {
+            flex: 0 0 260px;
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.07);
+            padding: 2rem 1.2rem 1.2rem 1.2rem;
+            min-width: 220px;
+        }
+        .filter-sidebar h2 {
+            font-size: 1.4rem;
+            color: #ff6600;
+            margin-bottom: 1.2rem;
+            font-weight: 900;
+        }
+        .filter-group {
+            margin-bottom: 1.5rem;
+        }
+        .filter-group h3 {
+            font-size: 1.08rem;
+            color: #222;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+        }
+        .filter-group label {
+            display: block;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+            color: #444;
+            cursor: pointer;
+            padding-left: 0.2rem;
+        }
+        .filter-group input[type="checkbox"] {
+            accent-color: #ff6600;
+            margin-right: 0.5rem;
+            transform: scale(1.1);
+        }
+        .collections-main {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            flex-direction: column;
+        }
+        .sort-bar {
+            flex-basis: 100%;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .sort-bar label {
+            font-weight: 700;
+            color: #222;
+        }
+        .sort-bar select {
+            padding: 0.5rem 1rem;
+            border-radius: 0.7rem;
+            border: 1.5px solid #e0e0e0;
+            font-size: 1rem;
+            background: #fff;
+            transition: border 0.2s;
+        }
+        .sort-bar select:focus {
+            border: 1.5px solid #ff6600;
+            outline: none;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+            width: 100%;
+        }
+        .product-card {
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+            padding: 1.2rem 1rem 1.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            transition: box-shadow 0.2s, transform 0.2s;
+            position: relative;
+            min-height: 420px;
+        }
+        .product-card:hover {
+            box-shadow: 0 8px 32px rgba(255,102,0,0.13);
+            transform: translateY(-4px) scale(1.03);
+            z-index: 2;
+        }
+        .image-container {
+            width: 100%;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        .product-image {
+            max-width: 90%;
+            max-height: 170px;
+            border-radius: 0.7rem;
+            background: #f6f7fb;
+            transition: box-shadow 0.2s;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .discount-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: #ff6600;
+            color: #fff;
+            font-size: 0.95rem;
+            font-weight: 700;
+            border-radius: 1rem;
+            padding: 0.3rem 0.8rem;
+            box-shadow: 0 2px 8px rgba(255,102,0,0.13);
+        }
+        .product-name {
+            font-size: 1.13rem;
+            font-weight: 800;
+            color: #222;
+            margin: 0.5rem 0 0.2rem 0;
+            text-align: center;
+            min-height: 2.5em;
+        }
+        .product-price {
+            color: #ff6600;
+            font-size: 1.15rem;
+            font-weight: 700;
+            margin: 0.2rem 0;
+        }
+        .product-rating {
+            color: #b35c00;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .quick-view-btn {
+            display: none;
+            background: #ff6600;
+            color: #fff;
+            border: none;
+            border-radius: 2rem;
+            padding: 0.7rem 1.5rem;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, transform 0.15s;
+            box-shadow: 0 2px 8px rgba(255,102,0,0.08);
+
+            /* Center the button absolutely */
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            margin: 0;
+            z-index: 3;
+        }
+        /* Show the button on hover */
+        .product-card:hover .quick-view-btn {
+            display: block;
+            transform: translate(-50%, -50%) scale(1.04);
+        }
+        /* Modal styling */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1002;
+            left: 0;
+            top: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: auto;
+            background: rgba(0,0,0,0.25);
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-content {
+            background: #fff;
+            margin: 5% auto;
+            padding: 2rem 2.5rem;
+            border-radius: 1.2rem;
+            width: 95%;
+            max-width: 540px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+            position: relative;
+        }
+        .modal-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.2rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            color: #ff6600;
+            cursor: pointer;
+            font-weight: 900;
+        }
+        .modal-body {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+        }
+        .modal-body img {
+            max-width: 180px;
+            border-radius: 0.7rem;
+            background: #f6f7fb;
+        }
+        .modal-details {
+            flex: 1;
+        }
+        .modal-details h3 {
+            margin-top: 0;
+            color: #ff6600;
+            font-size: 1.2rem;
+            font-weight: 800;
+        }
+        .wishlist-btn, .add-cart-btn {
+            background: #ff6600;
+            color: #fff;
+            border: none;
+            border-radius: 2rem;
+            padding: 0.7rem 1.5rem;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 0.5rem 0.5rem 0 0;
+            transition: background 0.2s, color 0.2s;
+        }
+        .wishlist-btn:hover, .add-cart-btn:hover {
+            background: #000;
+            color: #fff;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2.5rem;
+            color: #888;
+            font-size: 1rem;
+            padding-bottom: 1.5rem;
+        }
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .collections-container {
+                flex-direction: column;
+                gap: 0;
+                padding: 1rem 0.5rem;
+            }
+            .filter-sidebar {
+                margin-bottom: 2rem;
+                min-width: 0;
+            }
+        }
+        @media (max-width: 700px) {
+            .collections-container {
+                padding: 0.5rem 0.2rem;
+            }
+            .filter-sidebar {
+                padding: 1rem 0.5rem;
+            }
+            .product-grid {
+                gap: 14px;
+            }
+            .modal-content {
+                padding: 1rem 0.5rem;
+            }
+            .modal-body {
+                flex-direction: column;
+                gap: 0.7rem;
+            }
         }
     </style>
     <nav class="hero-nav navbar-collapsed" role="navigation" aria-label="Primary navigation">
@@ -34,61 +314,61 @@
                         </ul>
                     </li>
                     <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
-                    <li><a href="index.html" id="login-link"><i class="fas fa-user"></i><span class="nav-text">Login</span></a></li>
+                    <li><a href="login.html" id="login-link"><i class="fas fa-user"></i><span class="nav-text">Login</span></a></li>
 <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span> <span id="cart-count" style="background:#ff6600; color:#fff; border-radius:50%; padding:0 7px; font-size:0.8rem; font-weight:bold; vertical-align:top; margin-left:4px;">0</span></a></li>
                 </ul>
             </nav>
     <main>
-        <div class="collections-container" style="display: flex; gap: 20px;">
-            <aside class="filter-sidebar" aria-label="Filter products" style="flex: 0 0 250px;">
-                <h2>Filters</h2>
-                <div class="filter-group">
-                    <h3>Size</h3>
-                    <label><input type="checkbox" name="size" value="6" /> 6</label>
-                    <label><input type="checkbox" name="size" value="7" /> 7</label>
-                    <label><input type="checkbox" name="size" value="8" /> 8</label>
-                    <label><input type="checkbox" name="size" value="9" /> 9</label>
-                    <label><input type="checkbox" name="size" value="10" /> 10</label>
-                </div>
-                <div class="filter-group">
-                    <h3>Price</h3>
-                    <label><input type="checkbox" name="price" value="0-40" /> Under ₹3000</label>
-                    <label><input type="checkbox" name="price" value="41-100" /> ₹3001 - ₹7500</label>
-                    <label><input type="checkbox" name="price" value="101-200" /> ₹7501 - ₹15000</label>
-                    <label><input type="checkbox" name="price" value="201-500" /> Above ₹15000</label>
-                </div>
-                <div class="filter-group">
-                    <h3>Color</h3>
-                    <label><input type="checkbox" name="color" value="black" /> Black</label>
-                    <label><input type="checkbox" name="color" value="white" /> White</label>
-                    <label><input type="checkbox" name="color" value="red" /> Red</label>
-                    <label><input type="checkbox" name="color" value="blue" /> Blue</label>
-                    <label><input type="checkbox" name="color" value="green" /> Green</label>
-                </div>
-                <div class="filter-group">
-                    <h3>Category</h3>
-                    <label><input type="checkbox" name="category" value="sneakers" /> Sneakers</label>
-                    <label><input type="checkbox" name="category" value="running" /> Running</label>
-                    <label><input type="checkbox" name="category" value="casual" /> Casual</label>
-                    <label><input type="checkbox" name="category" value="sports" /> Sports</label>
-                </div>
-            </aside>
-            <section class="collections-main" style="flex: 1; display: flex; flex-wrap: wrap; gap: 20px;">
-                <div class="sort-bar" style="flex-basis: 100%; margin-bottom: 10px;">
-                    <label for="sort-select">Sort by:</label>
-                    <select id="sort-select" aria-label="Sort products">
-                        <option value="popularity" selected>Bestsellers</option>
-                        <option value="price-asc">Price: Low to High</option>
-                        <option value="price-desc">Price: High to Low</option>
-                        <option value="latest">Latest</option>
-                    </select>
-                </div>
-                <div class="product-grid" id="product-grid" aria-live="polite" aria-label="Product grid">
-                    <!-- Product cards will be rendered here -->
-                </div>
-            </section>
+    <div class="collections-container">
+    <aside class="filter-sidebar" aria-label="Filter products">
+        <div class="sort-bar" style="margin-bottom: 2rem;">
+            <label for="sort-select">Sort by:</label>
+            <select id="sort-select" aria-label="Sort products">
+                <option value="popularity" selected>Bestsellers</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="latest">Latest</option>
+            </select>
         </div>
-    </main>
+        <h2>Filters</h2>
+        <div class="filter-group">
+            <h3>Size</h3>
+            <label><input type="checkbox" name="size" value="6" /> 6</label>
+            <label><input type="checkbox" name="size" value="7" /> 7</label>
+            <label><input type="checkbox" name="size" value="8" /> 8</label>
+            <label><input type="checkbox" name="size" value="9" /> 9</label>
+            <label><input type="checkbox" name="size" value="10" /> 10</label>
+        </div>
+        <div class="filter-group">
+            <h3>Price</h3>
+            <label><input type="checkbox" name="price" value="0-3000" /> Under ₹3000</label>
+            <label><input type="checkbox" name="price" value="3001-7500" /> ₹3001 - ₹7500</label>
+            <label><input type="checkbox" name="price" value="7501-15000" /> ₹7501 - ₹15000</label>
+            <label><input type="checkbox" name="price" value="15001-100000" /> Above ₹15000</label>
+        </div>
+        <div class="filter-group">
+            <h3>Color</h3>
+            <label><input type="checkbox" name="color" value="black" /> Black</label>
+            <label><input type="checkbox" name="color" value="white" /> White</label>
+            <label><input type="checkbox" name="color" value="red" /> Red</label>
+            <label><input type="checkbox" name="color" value="blue" /> Blue</label>
+            <label><input type="checkbox" name="color" value="green" /> Green</label>
+        </div>
+        <div class="filter-group">
+            <h3>Category</h3>
+            <label><input type="checkbox" name="category" value="sneakers" /> Sneakers</label>
+            <label><input type="checkbox" name="category" value="running" /> Running</label>
+            <label><input type="checkbox" name="category" value="casual" /> Casual</label>
+            <label><input type="checkbox" name="category" value="sports" /> Sports</label>
+        </div>
+    </aside>
+    <section class="collections-main">
+        <div class="product-grid" id="product-grid" aria-live="polite" aria-label="Product grid">
+            <!-- Product cards will be rendered here -->
+        </div>
+    </section>
+</div>
+</main>
 
     <!-- Quick View Modal -->
     <div id="quick-view-modal" class="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="quick-view-title">
@@ -136,7 +416,7 @@
             {
                 id: 2,
                 name: "Samba OG Shoes",
-                price: 109.99,
+                price: 10999, // changed from 109.99 to 10999
                 rating: 4.5,
                 image: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/07567ea7d2bb425b8651a8bf0117e4f1_9366/Samba_OG_Shoes_White_B75806_06_standard.jpg",
                 altImage: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/07567ea7d2bb425b8651a8bf0117e4f1_9366/Samba_OG_Shoes_White_B75806_06_standard.jpg",
@@ -151,7 +431,7 @@
             {
                 id: 3,
                 name: "Porsche Legacy RS-X Sneakers",
-                price: 56.39,
+                price: 5639, // changed from 56.39 to 5639
                 rating: 4.2,
                 image: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
                 altImage: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers-alt",
@@ -166,7 +446,7 @@
             {
                 id: 4,
                 name: "Nike Air Max 270",
-                price: 149.99,
+                price: 14999, // changed from 149.99 to 14999
                 rating: 4.7,
                 image: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/air-max-270-mens-shoes.png",
                 altImage: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/air-max-270-mens-shoes-alt.png",
@@ -181,7 +461,7 @@
             {
                 id: 5,
                 name: "Adidas Ultraboost 21",
-                price: 179.99,
+                price: 12940,
                 rating: 4.9,
                 image: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/Ultraboost_21_Shoes_Black_FY0370_06_standard.jpg",
                 altImage: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/Ultraboost_21_Shoes_Black_FY0370_06_standard-alt.jpg",
@@ -196,7 +476,7 @@
             {
                 id: 6,
                 name: "New Balance 574 Core",
-                price: 89.99,
+                price: 8999,
                 rating: 4.6,
                 image: "https://nb.scene7.com/is/image/NB/m574v2_nb_02_i?$pdp_hero$&wid=1200&hei=1200",
                 altImage: "https://nb.scene7.com/is/image/NB/m574v2_nb_02_i_alt?$pdp_hero$&wid=1200&hei=1200",
@@ -211,7 +491,7 @@
             {
                 id: 7,
                 name: "Reebok Classic Leather",
-                price: 69.99,
+                price: 6999, // changed from 69.99 to 6999
                 rating: 4.4,
                 image: "https://assets.reebok.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/Classic_Leather_Shoes_White_FX5745_06_standard.jpg",
                 altImage: "https://assets.reebok.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/Classic_Leather_Shoes_White_FX5745_06_standard-alt.jpg",
@@ -226,7 +506,7 @@
             {
                 id: 8,
                 name: "Puma RS-X Reinvent",
-                price: 89.99,
+                price: 8999, // changed from 89.99 to 8999
                 rating: 4.3,
                 image: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
                 altImage: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers-alt",
@@ -241,7 +521,7 @@
             {
                 id: 9,
                 name: "Asics Gel-Kayano 27",
-                price: 159.99,
+                price: 15999, // changed from 159.99 to 15999
                 rating: 4.8,
                 image: "https://www.asics.com/on/demandware.static/-/Sites-asics-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.asics.com/on/demandware.static/-/Sites-asics-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -256,7 +536,7 @@
             {
                 id: 10,
                 name: "Hoka One One Bondi 7",
-                price: 159.99,
+                price: 15999, // changed from 159.99 to 15999
                 rating: 4.9,
                 image: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -271,7 +551,7 @@
             {
                 id: 11,
                 name: "Vans Old Skool",
-                price: 59.99,
+                price: 5999, // changed from 59.99 to 5999
                 rating: 4.6,
                 image: "https://www.vans.com/on/demandware.static/-/Sites-vans-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.vans.com/on/demandware.static/-/Sites-vans-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -286,7 +566,7 @@
             {
                 id: 12,
                 name: "Converse Chuck Taylor All Star",
-                price: 49.99,
+                price: 5999, // changed from 49.99 to 5999
                 rating: 4.4,
                 image: "https://www.converse.com/on/demandware.static/-/Sites-converse-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.converse.com/on/demandware.static/-/Sites-converse-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -301,7 +581,7 @@
             {
                 id: 13,
                 name: "Nike React Infinity Run Flyknit",
-                price: 159.99,
+                price: 15999, // changed from 159.99 to 15999
                 rating: 4.7,
                 image: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/react-infinity-run-flyknit-mens-shoes.png",
                 altImage: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/react-infinity-run-flyknit-mens-shoes-alt.png",
@@ -316,7 +596,7 @@
             {
                 id: 14,
                 name: "Adidas NMD_R1",
-                price: 139.99,
+                price: 13999, // changed from 139.99 to 13999
                 rating: 4.8,
                 image: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/NMD_R1_Shoes_Black_FY0370_06_standard.jpg",
                 altImage: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/NMD_R1_Shoes_Black_FY0370_06_standard-alt.jpg",
@@ -331,7 +611,7 @@
             {
                 id: 15,
                 name: "Puma Future Rider",
-                price: 89.99,
+                price: 8999, // changed from 89.99 to 8999
                 rating: 4.3,
                 image: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
                 altImage: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers-alt",
@@ -346,7 +626,7 @@
             {
                 id: 16,
                 name: "Hoka One One Clifton 7",
-                price: 139.99,
+                price: 13999, // changed from 139.99 to 13999
                 rating: 4.9,
                 image: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -361,7 +641,7 @@
             {
                 id: 17,
                 name: "New Balance Fresh Foam 1080v11",
-                price: 149.99,
+                price: 14999, // changed from 149.99 to 14999
                 rating: 4.8,
                 image: "https://nb.scene7.com/is/image/NB/m1080v11_nb_02_i?$pdp_hero$&wid=1200&hei=1200",
                 altImage: "https://nb.scene7.com/is/image/NB/m1080v11_nb_02_i_alt?$pdp_hero$&wid=1200&hei=1200",
@@ -376,7 +656,7 @@
             {
                 id: 18,
                 name: "Nike Air Zoom Pegasus 37",
-                price: 119.99,
+                price: 11999, // changed from 119.99 to 11999
                 rating: 4.7,
                 image: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/air-zoom-pegasus-37-mens-shoes.png",
                 altImage: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/air-zoom-pegasus-37-mens-shoes-alt.png",
@@ -391,7 +671,7 @@
             {
                 id: 19,
                 name: "Adidas Superstar",
-                price: 79.99,
+                price: 7999, // changed from 79.99 to 7999
                 rating: 4.6,
                 image: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/Superstar_Shoes_White_FX5745_06_standard.jpg",
                 altImage: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/Superstar_Shoes_White_FX5745_06_standard-alt.jpg",
@@ -406,7 +686,7 @@
             {
                 id: 20,
                 name: "Puma RS-Dreamer",
-                price: 109.99,
+                price: 10999, // changed from 109.99 to 10999
                 rating: 4.3,
                 image: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
                 altImage: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers-alt",
@@ -420,7 +700,7 @@
             },{
                 id: 21,
                 name: "Hoka One One Speedgoat 4",
-                price: 139.99,
+                price: 13999, // changed from 139.99 to 13999
                 rating: 4.9,
                 image: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -435,7 +715,7 @@
             {
                 id: 22,
                 name: "Nike Air Zoom Pegasus 38",
-                price: 129.99,
+                price: 12999, // changed from 129.99 to 12999
                 rating: 4.7,
                 image: "https://www.nike.com/us/en_us/t/air-zoom-pegasus-38-mens-road-running-shoes-2f3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c",
                 altImage: "https://www.nike.com/us/en_us/t/air-zoom-pegasus-38-mens-road-running-shoes-alt",
@@ -450,7 +730,7 @@
             {
                 id: 23,
                 name: "New Balance Fresh Foam 1080v11",
-                price: 149.99,
+                price: 14999, // changed from 149.99 to 14999
                 rating: 4.8,
                 image: "https://www.newbalance.com/pd/fresh-foam-1080v11/M1080V11-37082.html",
                 altImage: "https://www.newbalance.com/pd/fresh-foam-1080v11/M1080V11-37082.html",
@@ -465,7 +745,7 @@
             {
                 id: 24,
                 name: "Adidas Ultraboost 21",
-                price: 179.99,
+                price: 17999, // changed from 179.99 to 17999
                 rating: 4.9,
                 image: "https://www.adidas.com/us/ultraboost-21-shoes/FY0370.html",
                 altImage: "https://www.adidas.com/us/ultraboost-21-shoes/FY0370.html",
@@ -480,7 +760,7 @@
             {
                 id: 25,
                 name: "Puma RS-X Reinvent",
-                price: 89.99,
+                price: 8999, // changed from 89.99 to 8999
                 rating: 4.3,
                 image: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
                 altImage: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers-alt",
@@ -495,7 +775,7 @@
             {
                 id: 26,
                 name: "Asics Gel-Kayano 27",
-                price: 159.99,
+                price: 15999, // changed from 159.99 to 15999
                 rating: 4.8,
                 image: "https://www.asics.com/on/demandware.static/-/Sites-asics-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.asics.com/on/demandware.static/-/Sites-asics-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -510,7 +790,7 @@
             {
                 id: 27,
                 name: "Hoka One One Bondi 7",
-                price: 159.99,
+                price: 15999, // changed from 159.99 to 15999
                 rating: 4.9,
                 image: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -525,7 +805,7 @@
             {
                 id: 28,
                 name: "Vans Old Skool",
-                price: 59.99,
+                price: 5999, // changed from 59.99 to 5999
                 rating: 4.6,
                 image: "https://www.vans.com/on/demandware.static/-/Sites-vans-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.vans.com/on/demandware.static/-/Sites-vans-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -540,7 +820,7 @@
             {
                 id: 29,
                 name: "Converse Chuck Taylor All Star",
-                price: 49.99,
+                price: 5999, // changed from 49.99 to 5999
                 rating: 4.4,
                 image: "https://www.converse.com/on/demandware.static/-/Sites-converse-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.converse.com/on/demandware.static/-/Sites-converse-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -555,7 +835,7 @@
             {
                 id: 30,
                 name: "Nike React Infinity Run Flyknit",
-                price: 159.99,
+                price: 15999, // changed from 159.99 to 15999
                 rating: 4.7,
                 image: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/react-infinity-run-flyknit-mens-shoes.png",
                 altImage: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/react-infinity-run-flyknit-mens-shoes-alt.png",
@@ -570,7 +850,7 @@
             {
                 id: 31,
                 name: "Adidas NMD_R1",
-                price: 139.99,
+                price: 13999, // changed from 139.99 to 13999
                 rating: 4.8,
                 image: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/NMD_R1_Shoes_Black_FY0370_06_standard.jpg",
                 altImage: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/NMD_R1_Shoes_Black_FY0370_06_standard-alt.jpg",
@@ -585,7 +865,7 @@
             {
                 id: 32,
                 name: "Puma Future Rider",
-                price: 89.99,
+                price: 8999, // changed from 89.99 to 8999
                 rating: 4.3,
                 image: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
                 altImage: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers-alt",
@@ -600,7 +880,7 @@
             {
                 id: 33,
                 name: "Hoka One One Clifton 7",
-                price: 139.99,
+                price: 13999, // changed from 139.99 to 13999
                 rating: 4.9,
                 image: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -615,7 +895,7 @@
             {
                 id: 34,
                 name: "New Balance Fresh Foam 1080v11",
-                price: 149.99,
+                price: 14999, // changed from 149.99 to 14999
                 rating: 4.8,
                 image: "https://nb.scene7.com/is/image/NB/m1080v11_nb_02_i?$pdp_hero$&wid=1200&hei=1200",
                 altImage: "https://nb.scene7.com/is/image/NB/m1080v11_nb_02_i_alt?$pdp_hero$&wid=1200&hei=1200",
@@ -630,7 +910,7 @@
             {
                 id: 35,
                 name: "Adidas Ultraboost 21",
-                price: 179.99,
+                price: 17999, // changed from 179.99 to 17999
                 rating: 4.9,
                 image: "https://www.adidas.com/us/ultraboost-21-shoes/FY0370.html",
                 altImage: "https://www.adidas.com/us/ultraboost-21-shoes/FY0370.html",
@@ -645,7 +925,7 @@
             {
                 id: 36,
                 name: "Puma RS-X Reinvent",
-                price: 89.99,
+                price: 8999, // changed from 89.99 to 8999
                 rating: 4.3,
                 image: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
                 altImage: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers-alt",
@@ -660,7 +940,7 @@
             {
                 id: 37,
                 name: "Asics Gel-Kayano 27",
-                price: 159.99,
+                price: 15999, // changed from 159.99 to 15999
                 rating: 4.8,
                 image: "https://www.asics.com/on/demandware.static/-/Sites-asics-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.asics.com/on/demandware.static/-/Sites-asics-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -675,7 +955,7 @@
             {
                 id: 38,
                 name: "Hoka One One Bondi 7",
-                price: 159.99,
+                price: 15999, // changed from 159.99 to 15999
                 rating: 4.9,
                 image: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -690,7 +970,7 @@
             {
                 id: 39,
                 name: "Vans Old Skool",
-                price: 59.99,
+                price: 5999, // changed from 59.99 to 5999
                 rating: 4.6,
                 image: "https://www.vans.com/on/demandware.static/-/Sites-vans-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.vans.com/on/demandware.static/-/Sites-vans-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -705,7 +985,7 @@
             {
                 id: 40,
                 name: "Converse Chuck Taylor All Star",
-                price: 49.99,
+                price: 5999, // changed from 49.99 to 5999
                 rating: 4.4,
                 image: "https://www.converse.com/on/demandware.static/-/Sites-converse-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.converse.com/on/demandware.static/-/Sites-converse-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -720,7 +1000,7 @@
             {
                 id: 41,
                 name: "Nike React Infinity Run Flyknit",
-                price: 159.99,
+                price: 15999, // changed from 159.99 to 15999
                 rating: 4.7,
                 image: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/react-infinity-run-flyknit-mens-shoes.png",
                 altImage: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/react-infinity-run-flyknit-mens-shoes-alt.png",
@@ -735,7 +1015,7 @@
             {
                 id: 42,
                 name: "New Balance Fresh Foam 1080v11",
-                price: 149.99,
+                price: 14999, // changed from 149.99 to 14999
                 rating: 4.8,
                 image: "https://www.newbalance.com/on/demandware.static/-/Sites-newbalance-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.newbalance.com/on/demandware.static/-/Sites-newbalance-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -750,7 +1030,7 @@
             {
                 id: 43,
                 name: "Adidas Ultraboost 21",
-                price: 179.99,
+                price: 17999, // changed from 179.99 to 17999
                 rating: 4.9,
                 image: "https://www.adidas.com/us/ultraboost-21-shoes/FY0370.html",
                 altImage: "https://www.adidas.com/us/ultraboost-21-shoes/FY0370.html",
@@ -765,7 +1045,7 @@
             {
                 id: 44,
                 name: "Puma RS-X Reinvent",
-                price: 89.99,
+                price: 8999, // changed from 89.99 to 8999
                 rating: 4.3,
                 image: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers",
                 altImage: "https://images.puma.com/image/upload/f_auto,q_auto,b_rgb:fafafa,w_750,h_750/global/307835/03/sv01/fnd/IND/fmt/png/Porsche-Legacy-RS-X-Sneakers-alt",
@@ -780,7 +1060,7 @@
             {
                 id: 45,
                 name: "Asics Gel-Kayano 27",
-                price: 159.99,
+                price: 15999, // changed from 159.99 to 15999
                 rating: 4.8,
                 image: "https://www.asics.com/on/demandware.static/-/Sites-asics-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.asics.com/on/demandware.static/-/Sites-asics-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -795,7 +1075,7 @@
             {
                 id: 46,
                 name: "Hoka One One Bondi 7",
-                price: 159.99,
+                price: 15999, // changed from 159.99 to 15999
                 rating: 4.9,
                 image: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.hoka.com/on/demandware.static/-/Sites-hoka-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -810,7 +1090,7 @@
             {
                 id: 47,
                 name: "Vans Old Skool",
-                price: 59.99,
+                price: 5999, // changed from 59.99 to 5999
                 rating: 4.6,
                 image: "https://www.vans.com/on/demandware.static/-/Sites-vans-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.vans.com/on/demandware.static/-/Sites-vans-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -825,7 +1105,7 @@
             {
                 id: 48,
                 name: "Converse Chuck Taylor All Star",
-                price: 49.99,
+                price: 5999, // changed from 49.99 to 5999
                 rating: 4.4,
                 image: "https://www.converse.com/on/demandware.static/-/Sites-converse-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE.png",
                 altImage: "https://www.converse.com/on/demandware.static/-/Sites-converse-master-catalog/default/dw3b0f5c1d/images/1011B004_001/1011B004_001_ANGLE-alt.png",
@@ -840,7 +1120,7 @@
             {
                 id: 49,
                 name: "Nike React Infinity Run Flyknit",
-                price: 159.99,
+                price: 15999, // changed from 159.99 to 15999
                 rating: 4.7,
                 image: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/react-infinity-run-flyknit-mens-shoes.png",
                 altImage: "https://static.nike.com/a/images/t_default/1c3b2f0d-8a5e-4c6b-9f0d-3f8e1c2b5a7c/react-infinity-run-flyknit-mens-shoes-alt.png",
@@ -855,7 +1135,7 @@
             {
                 id: 50,
                 name: "Adidas NMD_R1",
-                price: 139.99,
+                price: 13999, // changed from 139.99 to 13999
                 rating: 4.8,
                 image: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/NMD_R1_Shoes_Black_FY0370_06_standard.jpg",
                 altImage: "https://assets.adidas.com/images/h_2000,f_auto,q_auto,fl_lossy,c_fill,g_auto/3c8f1b2d6c7e4a2b8f1a8bf0117e4f1_9366/NMD_R1_Shoes_Black_FY0370_06_standard-alt.jpg",
@@ -890,9 +1170,9 @@
                                 <img src="${product.image}" alt="${product.name}" class="product-image" />
                                 ${product.discount > 0 ? `<span class="discount-badge">${product.discount}% OFF</span>` : ''}
                             </div>
-                    <h3 class="product-name">${product.name}</h3>
-                    <p class="product-price">₹${(product.price / 1000).toFixed(2)}K</p>
-                    <p class="product-rating">Rating: ${product.rating} ⭐</p>
+                            <h3 class="product-name">${product.name}</h3>
+                            <p class="product-price">₹${product.price}</p>
+                            <p class="product-rating">Rating: ${product.rating} ⭐</p>
                         </div>
                         <button class="quick-view-btn" data-id="${product.id}">Quick View</button>
                     `;
@@ -991,6 +1271,7 @@
         const modal = document.getElementById('quick-view-modal');
         const modalCloseBtn = modal.querySelector('.modal-close');
 
+
         function openQuickView(id) {
             const product = products.find(p => p.id === id);
             if (!product) return;
@@ -1037,16 +1318,37 @@
                 promptLoginOrGuest();
                 return;
             }
-            showMessage('Added product ' + id + ' to cart!');
+            const product = products.find(p => p.id === id);
+            if (!product) return;
+
+            // Get cart from localStorage or create new
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Check if product already in cart
+            const existing = cart.find(item => item.id === product.id);
+            if (existing) {
+                existing.qty = (existing.qty || 1) + 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    qty: 1,
+                    image: product.image // <-- This is the key part!
+                });
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+            showMessage('Added product ' + product.name + ' to cart!');
         }
 
         // Prompt login or continue as guest
         function promptLoginOrGuest() {
             const proceed = confirm("You need to be logged in to perform this action. Click OK to log in or Cancel to continue as guest.");
             if (proceed) {
-                // Redirect to login page (mock)
-                showMessage("Redirecting to login page...");
-                // window.location.href = "login.html"; // Uncomment if login page exists
+                // Redirect to login page
+                window.location.href = "login.html";
             } else {
                 showMessage("Continuing as guest.");
             }

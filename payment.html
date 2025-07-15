@@ -12,26 +12,16 @@
             background: #f6f7fb;
             margin: 0;
             padding: 0;
-            font-family: 'Montserrat', Arial, sans-serif;
-        }
-        .hero-nav {
-            height: 56px;
-            background: #000;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            padding: 0 1rem;
-        }
-        .hero-nav .logo {
-            font-weight: 900;
-            font-size: 1.5rem;
-            letter-spacing: 1.5px;
         }
         main {
             max-width: 600px;
-            margin: 4rem auto;
+            margin: 10rem auto 4rem auto; /* Increased top margin for more space above */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
             background: #fff;
-            padding: 2rem;
+            padding: 2.5rem 2rem 2rem 2rem; /* More padding inside the box */
             border-radius: 1rem;
             box-shadow: 0 4px 24px rgba(0,0,0,0.1);
         }
@@ -46,6 +36,7 @@
             display: flex;
             flex-direction: column;
             gap: 1rem;
+            margin-top: 50px
         }
         label {
             font-weight: 700;
@@ -112,7 +103,7 @@
                         </ul>
                     </li>
                     <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
-                    <li><a href="index.html" id="login-link"><i class="fas fa-user"></i><span class="nav-text">Login</span></a></li>
+                    <li><a href="login.html" id="login-link"><i class="fas fa-user"></i><span class="nav-text">Login</span></a></li>
 <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span> <span id="cart-count" style="background:#ff6600; color:#fff; border-radius:50%; padding:0 7px; font-size:0.8rem; font-weight:bold; vertical-align:top; margin-left:4px;">0</span></a></li>
                 </ul>
             </nav>
@@ -127,6 +118,13 @@
         <div id="message" class="message"></div>
     </main>
     <script>
+        // Get cart total from localStorage and set it as the payment amount
+        document.addEventListener('DOMContentLoaded', function() {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            let total = cart.reduce((sum, item) => sum + (item.price || 0) * (item.qty || 1), 0);
+            document.getElementById('amount').value = total;
+        });
+
         const paymentForm = document.getElementById('paymentForm');
         const messageDiv = document.getElementById('message');
 
@@ -141,11 +139,11 @@
             }
 
             try {
-                // Create order on backend
+                // Send amount in paise to backend
                 const orderResponse = await fetch('/api/create_order', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ amount: amount, currency: 'INR' })
+                    body: JSON.stringify({ amount: Math.round(amount * 100), currency: 'INR' })
                 });
                 const orderData = await orderResponse.json();
                 if (orderResponse.status !== 200) {
@@ -153,8 +151,8 @@
                 }
 
                 const options = {
-                    key: orderData.key_id, // Use key_id from backend response
-                    amount: orderData.amount * 100, // in paise
+                    key: orderData.key_id,
+                    amount: orderData.amount, // already in paise
                     currency: orderData.currency,
                     name: 'KickStart',
                     description: 'Shoe Purchase',
@@ -172,7 +170,7 @@
                         });
                         const verifyData = await verifyResponse.json();
                         if (verifyResponse.status === 200) {
-                            messageDiv.textContent
+                            messageDiv.textContent = 'Payment successful!';
                             messageDiv.classList.remove('error');
                         } else {
                             messageDiv.textContent = 'Payment verification failed: ' + (verifyData.error || '');

@@ -17,9 +17,15 @@
         .hero {
             padding-top: 5.5rem;
         }
-        .cart-section {
-            max-width: 800px;
+        .cart-main-container {
+            display: flex;
+            gap: 2.5rem;
+            max-width: 1200px;
             margin: 6rem auto 2.5rem auto;
+            align-items: flex-start;
+        }
+        .cart-section {
+            flex: 2;
             background: #fff;
             border-radius: 1.2rem;
             box-shadow: 0 4px 24px rgba(0,0,0,0.08);
@@ -29,39 +35,60 @@
             gap: 1.5rem;
         }
         .cart-title {
-            font-family: 'Montserrat', Arial, sans-serif;
             font-size: 2.1rem;
             font-weight: 900;
-            letter-spacing: 1.5px;
             color: #181818;
-            margin: 2.5rem 0 2.2rem 0;
-            text-align: center;
+            margin: 0 0 2.2rem 0;
+            text-align: left;
+            letter-spacing: 1.5px;
         }
         .cart-table {
             width: 100%;
-            border-collapse: collapse;
-            margin-bottom: 1.5rem;
+            border-collapse: separate;
+            border-spacing: 0 1.2rem;
+            background: none;
         }
         .cart-table th, .cart-table td {
-            padding: 0.9rem 0.6rem;
+            background: #fff;
+            padding: 1.1rem 0.7rem;
+            border: none;
             text-align: left;
+            font-size: 1.08rem;
         }
         .cart-table th {
-            background: #f6f7fb;
+            color: #888;
             font-weight: 700;
-            color: #222;
-            border-bottom: 2px solid #eee;
+            font-size: 1.02rem;
+            background: #f6f7fb;
+            border-radius: 0.7rem 0.7rem 0 0;
         }
         .cart-table td {
-            border-bottom: 1px solid #f0f0f0;
             vertical-align: middle;
+            border-radius: 0.7rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
         .cart-img {
-            width: 56px;
-            height: 56px;
+            width: 64px;
+            height: 64px;
             object-fit: contain;
-            border-radius: 0.5rem;
+            border-radius: 0.7rem;
             background: #f7f7f7;
+            margin-right: 0.7rem;
+        }
+        .cart-product-info {
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+        }
+        .cart-product-name {
+            font-weight: 700;
+            color: #222;
+            font-size: 1.1rem;
+        }
+        .cart-product-brand {
+            color: #888;
+            font-size: 0.98rem;
+            margin-top: 0.2rem;
         }
         .cart-remove-btn {
             background: #ff6600;
@@ -82,62 +109,63 @@
             transform: scale(1.1);
             outline: none;
         }
-        .cart-summary {
-            text-align: right;
-            font-size: 1.15rem;
-            font-weight: 700;
+        .cart-summary-box {
+            flex: 1;
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+            padding: 2rem 2rem 2rem 2rem;
+            min-width: 320px;
+            margin-top: 0.5rem;
+        }
+        .summary-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: #222;
+            margin-bottom: 1.2rem;
+        }
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.7rem;
+            font-size: 1.05rem;
+        }
+        .summary-total {
+            font-size: 1.18rem;
+            font-weight: 800;
             color: #181818;
             margin-top: 1.2rem;
+            margin-bottom: 1.2rem;
         }
-        .checkout-btn {
-            background: #000;
+        .summary-checkout-btn {
+            width: 100%;
+            background: #2563eb;
             color: #fff;
             border: none;
             border-radius: 2rem;
-            padding: 0.7rem 2.2rem;
+            padding: 0.9rem 0;
             font-size: 1.08rem;
             font-weight: 700;
             letter-spacing: 0.5px;
             cursor: pointer;
             transition: background 0.2s, transform 0.2s;
             margin-top: 1.5rem;
-            float: right;
         }
-        .checkout-btn:hover, .checkout-btn:focus {
-            background: #fff;
-            border: 2px solid #000;
-            color: #fff;
-            transform: scale(1.06);
+        .summary-checkout-btn:hover, .summary-checkout-btn:focus {
+            background: #1e40af;
+            transform: scale(1.04);
             outline: none;
         }
-        .cart-empty {
-            text-align: center;
-            color: #888;
-            font-size: 1.15rem;
-            margin: 2.5rem 0;
-        }
         @media (max-width: 900px) {
-            .cart-section {
-                margin-top: 4.5rem;
-                padding: 1.5rem 1rem 1.2rem 1rem;
+            .cart-main-container {
+                flex-direction: column;
+                gap: 1.5rem;
+                margin-top: 3rem;
             }
-            .cart-title {
-                font-size: 1.5rem;
-                margin: 2rem 0 1.5rem 0;
-            }
-            .hero-nav {
-                height: 48px;
-            }
-            .hero-nav .logo {
-                font-size: 1.1rem;
-                margin-right: 12px;
-            }
-            #nav-menu {
-                gap: 10px;
-            }
-            #nav-menu li a {
-                font-size: 0.95rem;
-                padding-bottom: 2px;
+            .cart-summary-box {
+                min-width: 0;
+                width: 100%;
+                margin-top: 0;
             }
         }
         @media (max-width: 600px) {
@@ -171,35 +199,47 @@
                         </ul>
                     </li>
                     <li><a href="about.html"><i class="fas fa-info-circle"></i><span class="nav-text">About</span></a></li>
-                    <li><a href="index.html" id="login-link"><i class="fas fa-user"></i><span class="nav-text">Login</span></a></li>
+                    <li><a href="login.html" id="login-link"><i class="fas fa-user"></i><span class="nav-text">Login</span></a></li>
 <li><a href="cart.html"><i class="fas fa-shopping-cart"></i><span class="nav-text">Cart</span> <span id="cart-count" style="background:#ff6600; color:#fff; border-radius:50%; padding:0 7px; font-size:0.8rem; font-weight:bold; vertical-align:top; margin-left:4px;">0</span></a></li>
                 </ul>
             </nav>
     <main>
-        <section class="cart-section" aria-label="Shopping Cart">
-            <h1 class="cart-title">Your Cart</h1>
-            <!-- Example cart table, replace with dynamic content as needed -->
-            <table class="cart-table">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th> </th>
-                        <th>Price</th>
-                        <th>Qty</th>
-                        <th>Remove</th>
-                    </tr>
-                </thead>
-                <tbody id="cart-body"></tbody>
-            </table>
-            <div class="cart-summary">
-                Total: <span id="cart-total">₹12,795</span>
-            </div>
-            <button class="checkout-btn">Checkout</button>
-            <!-- If cart is empty, show this instead:
-            <div class="cart-empty">Your cart is empty.</div>
-            -->
-        </section>
-    </main>
+  <div class="cart-main-container">
+    <section class="cart-section" aria-label="Shopping Cart">
+      <h1 class="cart-title">Your Cart</h1>
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th colspan="2">Product</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Remove</th>
+          </tr>
+        </thead>
+        <tbody id="cart-body"></tbody>
+      </table>
+    </section>
+    <aside class="cart-summary-box">
+      <div class="summary-title">Order Summary</div>
+      <div class="summary-row">
+        <span>Subtotal (<span id="summary-items">0</span> items)</span>
+        <span id="summary-subtotal">₹0</span>
+      </div>
+      <div class="summary-row">
+        <span>Shipping</span>
+        <span id="summary-shipping">Free</span>
+      </div>
+      <div class="summary-row">
+        <span>Tax</span>
+        <span id="summary-tax">₹0</span>
+      </div>
+      <div class="summary-total">
+        Total: <span id="cart-total">₹0</span>
+      </div>
+      <button class="summary-checkout-btn">Proceed to Checkout</button>
+    </aside>
+  </div>
+</main>
     <footer>
         <p>&copy; 2025 KickStart. All rights reserved.</p>
     </footer>
@@ -221,6 +261,9 @@
     function renderCartItems() {
         const cartBody = document.getElementById("cart-body");
         const cartTotal = document.getElementById("cart-total");
+        const summaryItems = document.getElementById("summary-items");
+        const summarySubtotal = document.getElementById("summary-subtotal");
+        const summaryTax = document.getElementById("summary-tax");
         const cart = JSON.parse(localStorage.getItem("cart")) || [];
 
         cartBody.innerHTML = "";
@@ -229,27 +272,37 @@
             cartBody.innerHTML =
                 '<tr><td colspan="5" class="cart-empty">Your cart is empty.</td></tr>';
             cartTotal.textContent = "₹0";
+            summaryItems.textContent = "0";
+            summarySubtotal.textContent = "₹0";
+            summaryTax.textContent = "₹0";
             return;
         }
 
         let total = 0;
+        let itemCount = 0;
 
         cart.forEach((item, index) => {
             const row = document.createElement("tr");
 
-            // Product image cell
+            // Product image and info cell
             const imgCell = document.createElement("td");
+            imgCell.colSpan = 1;
+            const infoDiv = document.createElement("div");
+            infoDiv.className = "cart-product-info";
             const img = document.createElement("img");
-            img.src = item.image || "favicon.png";
+            img.src = item.image || "product-image.png";
             img.alt = item.name || "Product Image";
             img.className = "cart-img";
-            imgCell.appendChild(img);
-            row.appendChild(imgCell);
+            infoDiv.appendChild(img);
+            imgCell.appendChild(infoDiv);
 
-            // Product name cell
+            // Product name and brand
             const nameCell = document.createElement("td");
-            nameCell.textContent = item.name || "Unnamed Product";
-            row.appendChild(nameCell);
+            nameCell.innerHTML = `<div class="cart-product-name">${item.name || "Unnamed Product"}</div>
+                ${item.brand ? `<div class="cart-product-brand">${item.brand}</div>` : ""}`;
+            infoDiv.appendChild(nameCell);
+
+            row.appendChild(imgCell);
 
             // Price cell
             const priceCell = document.createElement("td");
@@ -275,9 +328,13 @@
             cartBody.appendChild(row);
 
             total += (item.price || 0) * (item.qty || 1);
+            itemCount += item.qty || 1;
         });
 
         cartTotal.textContent = `₹${total.toFixed(2)}`;
+        summaryItems.textContent = itemCount;
+        summarySubtotal.textContent = `₹${total.toFixed(2)}`;
+        summaryTax.textContent = "₹0";
     }
 
     function removeCartItem(index) {
