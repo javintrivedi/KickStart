@@ -1,5 +1,3 @@
-</head>
-<body>
 
   <h1>👟 Kickstart Shoe Website</h1>
   <p><strong>Status:</strong> 🚧  Under Development</p>
