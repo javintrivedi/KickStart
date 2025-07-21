@@ -1,4 +1,3 @@
-
 <h1>👟 Kickstart Shoe Website</h1>  <p><strong>Status:</strong> 🚧  Under Development</p>
 
   <p>This project aims to create a modern, responsive e-commerce website for shoes. It's still in progress, but the foundation is being laid with HTML, CSS, and JavaScript.</p>
