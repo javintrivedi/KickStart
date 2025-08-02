@@ -90,6 +90,12 @@
             font-size: 0.98rem;
             margin-top: 0.2rem;
         }
+        .cart-product-size {
+            color: #ff6600;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-top: 0.2rem;
+        }
         .cart-remove-btn {
             background: #ff6600;
             color: #fff;
@@ -299,7 +305,8 @@
             // Product name and brand
             const nameCell = document.createElement("td");
             nameCell.innerHTML = `<div class="cart-product-name">${item.name || "Unnamed Product"}</div>
-                ${item.brand ? `<div class="cart-product-brand">${item.brand}</div>` : ""}`;
+                ${item.brand ? `<div class="cart-product-brand">${item.brand}</div>` : ""}
+                ${item.size ? `<div class="cart-product-size">Size: ${item.size}</div>` : ""}`;
             infoDiv.appendChild(nameCell);
 
             row.appendChild(imgCell);

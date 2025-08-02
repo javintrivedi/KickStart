@@ -8,15 +8,34 @@
     <link rel="stylesheet" href="navbar.css">
     <link rel="icon" type="image/x-icon" href="favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/2.0.3/p5.min.js" integrity="sha512-MEJlueLeKQYY9TnRetcjxs4c\u002FkrtaVFB0a\u002F6aVR\u002FoduU7iKNuCfRdADVx9m9Ddvw5GvE1ffXzyj12v8dVxD1Aw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.topology.min.js" integrity="sha512-QE776VQ5Pa4vC0pQXbZF4DKGG4QzYYKF4kPv1V4AFGco1uzMXqOsYaKU5YS5DdTNT4X3T1hQedRn\u002Fj1eOTjcFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        VANTA.TOPOLOGY({
+            el: "body",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0xff6000,
+            backgroundColor: 0xf6f7fb
+        })
+    })
+    </script>
     <style>
         body {
-            background: #f6f7fb;
             margin: 0;
             padding: 0;
             min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
         .register-bg-center {
-            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -115,7 +134,9 @@
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" required autocomplete="new-password">
 
-                <button type="submit">Register</button>
+                <button type="submit">
+                    <a href="login.html" style="text-decoration: none; color: #fff;">Register</a> 
+                </button>
             </form>
             <div class="register-footer">
                 <p>Already have an account? <a href="login.html">Log in here</a></p>

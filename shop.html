@@ -165,12 +165,62 @@
             transition: background 0.3s, transform 0.3s;
             cursor: pointer;
             text-decoration: none;
+            position: relative;
         }
         .add-cart-btn:hover, .add-cart-btn:focus {
             background: #ff6600;
             color: #fff;
             transform: scale(1.1);
             outline: none;
+        }
+        /* Size selection popup */
+        .size-popup {
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            padding: 1rem;
+            display: none;
+            z-index: 100;
+            width: 180px;
+            margin-bottom: 0.5rem;
+        }
+        .size-popup.show {
+            display: block;
+        }
+        .size-popup h4 {
+            margin: 0 0 0.5rem 0;
+            font-size: 1rem;
+            color: #181818;
+            text-align: center;
+        }
+        .size-options {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+        .size-option {
+            background: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 0.5rem;
+            padding: 0.4rem;
+            text-align: center;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        .size-option:hover {
+            background: #ff6600;
+            color: #fff;
+            border-color: #ff6600;
+        }
+        .size-option.selected {
+            background: #181818;
+            color: #fff;
+            border-color: #181818;
         }
         .product-card .product-actions {
             margin-top: 1.4rem;
@@ -532,35 +582,98 @@
                 </div>
                 <div class="product-actions">
                     <a class="view-btn" href="${product.link}" target="_blank">View</a>
-                    <button class="add-cart-btn" onclick="addToCart('${product.name}')"><i class="fas fa-cart-plus"></i> Add</button>
+                    <button class="add-cart-btn" onclick="showSizePopup(this, '${product.name}')">
+                        <i class="fas fa-cart-plus"></i> Add
+                        <div class="size-popup">
+                            <h4>Select Size</h4>
+                            <div class="size-options">
+                                <div class="size-option" onclick="selectSize(event, '6')">6</div>
+                                <div class="size-option" onclick="selectSize(event, '7')">7</div>
+                                <div class="size-option" onclick="selectSize(event, '8')">8</div>
+                                <div class="size-option" onclick="selectSize(event, '9')">9</div>
+                                <div class="size-option" onclick="selectSize(event, '10')">10</div>
+                                <div class="size-option" onclick="selectSize(event, '11')">11</div>
+                            </div>
+                        </div>
+                    </button>
                 </div>
             </div>
         `).join('');
     }
 
-    function addToCart(name) {
-        console.log("addToCart called with:", name);
+    function showSizePopup(button, name) {
+        // Hide all other popups
+        document.querySelectorAll('.size-popup').forEach(popup => {
+            popup.classList.remove('show');
+        });
+        
+        // Show this popup
+        const popup = button.querySelector('.size-popup');
+        popup.classList.add('show');
+        
+        // Store product name in the popup for later use
+        popup.dataset.productName = name;
+        
+        // Close popup when clicking outside
+        const closePopup = (e) => {
+            if (!popup.contains(e.target) && e.target !== button) {
+                popup.classList.remove('show');
+                document.removeEventListener('click', closePopup);
+            }
+        };
+        
+        setTimeout(() => {
+            document.addEventListener('click', closePopup);
+        }, 100);
+    }
+    
+    function selectSize(event, size) {
+        event.stopPropagation();
+        const popup = event.target.closest('.size-popup');
+        const name = popup.dataset.productName;
+        
+        // Remove selected class from all options
+        popup.querySelectorAll('.size-option').forEach(option => {
+            option.classList.remove('selected');
+        });
+        
+        // Add selected class to clicked option
+        event.target.classList.add('selected');
+        
+        // Add to cart with selected size
+        addToCart(name, size);
+        
+        // Hide popup
+        popup.classList.remove('show');
+    }
+    
+    function addToCart(name, size = null) {
+        console.log("addToCart called with:", name, size);
         const product = products.find(p => p.name === name);
         if (!product) {
             console.error("Product not found:", name);
             return;
         }
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
-        const existing = cart.find(item => item.name === name);
+        const cartId = size ? `${name}-Size-${size}` : name;
+        const existing = cart.find(item => item.cartId === cartId);
         if (existing) {
             existing.qty += 1;
         } else {
             cart.push({
+                cartId: cartId,
                 name: product.name,
                 price: product.price,
-                image: product.img, // <-- Use 'image' key, not 'img'
+                image: product.img,
                 brand: product.brand,
-                qty: 1
+                qty: 1,
+                size: size
             });
         }
         localStorage.setItem('cart', JSON.stringify(cart));
         updateCartCount();
-        showMessage(product.name + " added to cart!");
+        const message = size ? `${product.name} (Size ${size}) added to cart!` : `${product.name} added to cart!`;
+        showMessage(message);
     }
 
     function sortProducts(type) {

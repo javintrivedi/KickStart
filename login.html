@@ -8,9 +8,26 @@
     <link rel="icon" type="image/x-icon" href="favicon.png" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="stylesheet" href="navbar.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/2.0.3/p5.min.js" integrity="sha512-MEJlueLeKQYY9TnRetcjxs4c\u002FkrtaVFB0a\u002F6aVR\u002FoduU7iKNuCfRdADVx9m9Ddvw5GvE1ffXzyj12v8dVxD1Aw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanta/0.5.24/vanta.topology.min.js" integrity="sha512-QE776VQ5Pa4vC0pQXbZF4DKGG4QzYYKF4kPv1V4AFGco1uzMXqOsYaKU5YS5DdTNT4X3T1hQedRn\u002Fj1eOTjcFg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        VANTA.TOPOLOGY({
+            el: "body",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0xff6000,
+            backgroundColor: 0xf6f7fb
+        })
+    })
+    </script>
     <style>
         body {
-            background: #f6f7fb;
             font-family: Arial, sans-serif;
             display: flex;
             justify-content: center;
@@ -98,7 +115,9 @@
             <label for="password">Password</label>
             <input type="password" id="password" name="password" placeholder="Enter your password" required aria-required="true" />
             
-            <button type="submit">Log In</button>
+            <button type="submit">
+                <a href="index.html" style="text-decoration: none; color:#fff;">Log In</a>
+            </button>
         </form>
         <div class="login-footer">
             <p>Don't have an account? <a href="index.html">Return to Home</a></p>
